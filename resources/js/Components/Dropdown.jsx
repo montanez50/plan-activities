@@ -16,14 +16,14 @@ export default function Dropdown({ auth, isMobile }) {
     // define array links
     const links = [
         {
-            title : 'DASHBOARD',
+            title : 'INICIO',
             permissions: hasAnyPermission(['dashboard-access']),
             details : [
                 {title: 'Dashboard', href: '/apps/dashboard', icon: <IconLayout2 strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['dashboard-access'])},
             ]
         },
         {
-            title: 'USER MANAGEMENT',
+            title: 'GESTIÓN DE USUARIOS',
             permissions: hasAnyPermission(['users-access']) || hasAnyPermission(['roles-access']) || hasAnyPermission(['permissions-access']),
             details: [
                 {title: 'Users', href: '/apps/users', icon: <IconUsers strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['users-access'])},
