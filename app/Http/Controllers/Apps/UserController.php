@@ -8,6 +8,7 @@ use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Models\Dependency;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -30,7 +31,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         // get all users data
-            $users = User::query()
+        $users = User::query()
             ->with(['roles' => function($query){
                 $query->select('name')->with(['permissions' => function($query){
                     $query->select('name');
@@ -74,7 +75,7 @@ class UserController extends Controller
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'dependency_id' => ['required', 'integer'],
+            'dependency' => ['required', 'array'],
         ]);
 
         // create new user data
@@ -128,7 +129,7 @@ class UserController extends Controller
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
-            'dependency_id' => ['required', 'integer'],
+            'dependency' => ['required', 'array'],
         ]);
 
         // update user data by id

@@ -1,7 +1,7 @@
 import { Link } from '@inertiajs/react'
 import React from 'react'
 
-export default function Button({className, icon, label, type, href, added}) {
+export default function Button({className, icon, label, type, href, added, noSubmit, ...props}) {
   return (
     <>
         {type == 'link' ?
@@ -9,7 +9,7 @@ export default function Button({className, icon, label, type, href, added}) {
              {icon} <span className={`${added === true ? 'hidden lg:block' : '' }`}>{label}</span>
             </Link>
             :
-            <button className={`${className} px-4 py-2 flex items-center gap-1 rounded-lg text-sm font-semibold hover:scale-105 duration-300`}>
+            <button type={`${!noSubmit ? 'submit' : 'button' }`} className={`${className} px-4 py-2 flex items-center gap-1 rounded-lg text-sm font-semibold hover:scale-105 duration-300`} {...props}>
                 {icon} <span className={`${added === true ? 'hidden lg:block' : '' }`}>{label}</span>
             </button>
         }

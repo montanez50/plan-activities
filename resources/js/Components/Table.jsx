@@ -44,21 +44,42 @@ const Tbody = ({ className, children }) => {
     );
 };
 
-const Td = ({ className, children}) => {
+const Td = ({ className, children, ...props}) => {
     return (
         <td
-            className={`${className} whitespace-nowrap px-6 py-2 text-gray-700 rounded-b-lg text-sm`}
+            className={`${className} whitespace-nowrap px-6 py-2 text-gray-700 rounded-b-lg text-sm`} {...props}
         >
             {children}
         </td>
     );
 };
 
-const Th = ({ className, children }) => {
+const TdNumber = ({ className, children, ...props}) => {
+    return (
+        <td
+            className={`${className} whitespace-nowrap py-2 text-gray-700 rounded-b-lg text-sm text-center`} {...props}
+        >
+            {children}
+        </td>
+    );
+};
+
+const Th = ({ className, children, ...props }) => {
     return (
         <th
             scope="col"
-            className={`${className} whitespace-nowrap px-6 py-2 text-left text-sm font-semibold text-gray-700 bg-gray-100 border-t border-b`}
+            className={`${className} whitespace-nowrap px-6 py-2 text-left text-sm font-semibold text-gray-700 bg-gray-100 border-t border-b`} {...props}
+        >
+            {children}
+        </th>
+    );
+};
+
+const ThNumber = ({ className, children, ...props }) => {
+    return (
+        <th
+            scope="col"
+            className={`${className} whitespace-nowrap py-2 text-sm font-semibold text-gray-700 bg-gray-100 border-t border-b`} {...props}
         >
             {children}
         </th>
@@ -86,7 +107,9 @@ Table.Card = Card;
 Table.Thead = Thead;
 Table.Tbody = Tbody;
 Table.Td = Td;
+Table.TdNumber = TdNumber;
 Table.Th = Th;
+Table.ThNumber = ThNumber;
 Table.Empty = Empty;
 
 export default Table;

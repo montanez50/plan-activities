@@ -18,6 +18,25 @@ export default function Sidebar({ isSidebarOpen }) {
             ]
         },
         {
+            title: 'GESTIÓN DE PLANIFICACIÓN',
+            permissions: hasAnyPermission(['dashboard-access']),
+            details: [
+                {title: 'Crear Planificación', href: '/planification/create', icon: <IconUsers strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['users-access'])},
+                {title: 'Planificaciones', href: '/planification', icon: <IconUserCheck strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['roles-access'])},
+                {title: 'Ejecutar', href: '/apps/permissions', icon: <IconUserBolt strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['permissions-access'])},
+            ]
+        },
+        {
+            title: 'CONTROL DE PROCESOS',
+            permissions: hasAnyPermission(['dashboard-access']),
+            details: [
+                {title: 'Revisar Planificación', href: '/apps/users', icon: <IconUsers strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['users-access'])},
+                {title: 'Aprobar Planificación', href: '/apps/roles', icon: <IconUserCheck strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['roles-access'])},
+                {title: 'Cerrar Planificación', href: '/apps/permissions', icon: <IconUserBolt strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['permissions-access'])},
+                {title: 'Alertas', href: '/apps/permissions', icon: <IconUserBolt strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['permissions-access'])},
+            ]
+        },
+        {
             title: 'GESTIÓN DE USUARIOS',
             permissions: hasAnyPermission(['users-access']) || hasAnyPermission(['roles-access']) || hasAnyPermission(['permissions-access']),
             details: [

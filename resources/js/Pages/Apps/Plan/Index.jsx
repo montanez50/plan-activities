@@ -1,6 +1,7 @@
 import AppLayout from '@/Layouts/AppLayout'
 import { Head, usePage } from '@inertiajs/react'
-import { IconCheck, IconDatabaseOff, IconPlus, IconUsers } from '@tabler/icons-react'
+import moment from 'moment';
+import { IconDatabaseOff, IconPlus, IconUsers } from '@tabler/icons-react'
 import Table from '@/Components/Table'
 import Pagination from '@/Components/Pagination'
 import React from 'react'
@@ -10,73 +11,81 @@ import ActionButton from '@/Components/ActionButton'
 
 export default function Index() {
 
-    // destruct users from props
-    const { users } = usePage().props;
+    // destruct data from props
+    const { planifications, process } = usePage().props;
+
+    // Estatus
+    const status = {
+        "PR": {"color": "blue", "label": "Preparado"},
+        "RV": {"color": "yellow", "label": "Revisado"},
+        "AP": {"color": "green", "label": "Aprobado"},
+        "CR": {"color": "gray", "label": "Cerrado"},
+        "AN": {"color": "red", "label": "Anulado"},
+    };
 
     return (
         <>
-            <Head title='Usuarios'/>
+            <Head title='Planificaciones'/>
             <div className='mb-5'>
                 <div className='flex flex-row items-center md:justify-between gap-5'>
                     <div className='lg:w-2/6 xl:w-1/6'>
                         <Button
-                            label='Agregar Nuevo Usuario'
+                            label='Agregar Nueva Planificación'
                             type={'link'}
                             icon={<IconPlus size={'20'} strokeWidth={'1.5'}/>}
                             className={'bg-white text-gray-700 border hover:border-sky-500'}
-                            href={'/apps/users/create'}
+                            href={'/planification/create'}
                             added={true}
                         />
                     </div>
                     <div className='w-full'>
                         <Search
-                            url={'/apps/users'}
-                            placeholder={'Buscar usuarios por su nombre...'}
+                            url={'/planification'}
+                            placeholder={'Buscar planificación...'}
                         />
                     </div>
                 </div>
             </div>
-            <Table.Card title={'LISTADO DE USUARIOS'} icon={<IconUsers strokeWidth={'1.5'} size={'20'}/>}>
+            <Table.Card title={'LISTADO DE PLANIFICACIONES'} icon={<IconUsers strokeWidth={'1.5'} size={'20'}/>}>
                 <Table>
                     <Table.Thead>
                         <tr>
                             <Table.Th className={'w-10'}>#</Table.Th>
-                            <Table.Th>Nombre</Table.Th>
-                            <Table.Th>Correo</Table.Th>
-                            <Table.Th>Dependencia</Table.Th>
-                            <Table.Th>Roles</Table.Th>
+                            <Table.Th>Periodo</Table.Th>
+                            <Table.Th>Actividades</Table.Th>
+                            <Table.Th>Estado</Table.Th>
+                            <Table.Th>Usuario</Table.Th>
+                            <Table.Th>Creación</Table.Th>
                             <Table.Th>Acción</Table.Th>
                         </tr>
                     </Table.Thead>
                     <Table.Tbody>
-                        {users.data.length ?
-                            users.data.map((user, i) => (
+                        {planifications.data.length ?
+                            planifications.data.map((planification, i) => (
                             <tr key={i}>
-                                <Table.Td>{++i + (users.current_page-1) * users.per_page}</Table.Td>
-                                <Table.Td>{user.name} {user.last_name}</Table.Td>
-                                <Table.Td>{user.email}</Table.Td>
-                                <Table.Td>{user.dependency.name}</Table.Td>
+                                <Table.Td>{++i + (planifications.current_page-1) * planifications.per_page}</Table.Td>
+                                <Table.Td>{planification.period}</Table.Td>
+                                <Table.Td>{planification.details.length}</Table.Td>
                                 <Table.Td>
-                                    <div className='flex flex-wrap gap-x-3 gap-y-2 items-center'>
-                                        {user.roles.map((role, x) => (
-                                            <div className='flex items-center gap-2' key={x}>
-                                                <div className='border border-sky-100 bg-sky-100 text-sky-500'>
-                                                    <IconCheck size={'15'} strokeWidth={'2'}/>
-                                                </div>
-                                                <div>{role.name}</div>
-                                            </div>
-                                        ))}
+                                    <div className="flex items-center">
+                                        <div className={`h-2.5 w-2.5 rounded-full bg-${status[planification.status].color}-500 me-2`}></div>{status[planification.status].label}
                                     </div>
                                 </Table.Td>
+                                <Table.Td>{planification.user.name}</Table.Td>
+                                <Table.Td>{moment(planification.created_at).format('MMMM Do YYYY')}</Table.Td>
                                 <Table.Td>
                                     <div className='flex items-center gap-2'>
                                         <ActionButton
-                                            url={`/apps/users/${user.id}/edit`}
+                                            type={'view'}
+                                            url={`/planification/${planification.id}`}
+                                        />
+                                        <ActionButton
+                                            url={`/planification/${planification.id}/edit`}
                                         />
                                         <ActionButton
                                             type={'delete'}
-                                            url={`/apps/users`}
-                                            id={user.id}
+                                            url={`/planification`}
+                                            id={planification.id}
                                         />
                                     </div>
                                 </Table.Td>
@@ -94,7 +103,7 @@ export default function Index() {
                     </Table.Tbody>
                 </Table>
             </Table.Card>
-            {users.last_page !== 1 && (<Pagination links={users.links}/>)}
+            {planifications.last_page !== 1 && (<Pagination links={planifications.links}/>)}
         </>
     )
 }

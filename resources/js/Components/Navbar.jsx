@@ -39,11 +39,11 @@ export default function Navbar({ toggleSidebar }) {
             title : 'Dashboard',
             active: url.startsWith('/apps/dashboard') ? true : false,
             details : [
-                { title: 'Data Dashboard', href: '/apps/dashboard', active: url.startsWith('/apps/dashboard') ? true : false },
+                { title: 'Inicio', href: '/apps/dashboard', active: url.startsWith('/apps/dashboard') ? true : false },
             ]
         },
         {
-            title: 'User Management',
+            title: 'Gestión de Usuarios',
             active: url.startsWith('/apps/users') ? true : false || url.startsWith('/apps/roles') ? true : false || url.startsWith('/apps/permissions') ? true : false,
             details: [
                 { title: 'Data Users', href: '/apps/users', active: url.startsWith('/apps/users') ? true : false },
@@ -52,7 +52,14 @@ export default function Navbar({ toggleSidebar }) {
             ]
         },
         {
-            title: 'Other',
+            title : 'Planificaciones',
+            active: url.startsWith('/planification') ? true : false,
+            details : [
+                { title: 'Planificaciones', href: '/planification', active: url.startsWith('/apps/dashboard') ? true : false },
+            ]
+        },
+        {
+            title: 'Otros',
             active: url.startsWith('/apps/profile') ? true : false,
             details: [
                 { title: 'Profile', href: '/apps/profile', active: url.startsWith('/apps/profile') ? true : false },

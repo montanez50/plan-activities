@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Apps;
 
 use App\Http\Requests\Plan\StoreRequest;
 use App\Models\Planification;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -16,9 +17,13 @@ class PlanificationController extends Controller
     public function index(Request $request)
     {
         $userId = Auth::user()->id;
-        $planifications = Planification::with(['user', 'details'])->where('user_id', $userId)->paginate($request->per_page ?? 10);
+        $planifications = Planification::with(['user', 'details'])
+            ->where('user_id', $userId)
+            ->when($request->search, fn($query) => $query->where('period', 'like', '%'. $request->search . '%'))
+            ->latest()
+            ->paginate(10)->withQueryString();
 
-        return Inertia::render('Plan/Index', compact('planifications'));
+        return Inertia::render('Apps/Plan/Index', compact('planifications'));
     }
 
     /**
@@ -26,7 +31,8 @@ class PlanificationController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Plan/Create');
+        // TODO: crear parametros para los periodos
+        return Inertia::render('Apps/Plan/Create');
     }
 
     /**
@@ -55,7 +61,7 @@ class PlanificationController extends Controller
     public function show(Planification $planification)
     {
         $activities = $planification->details;
-        return Inertia::render('Plan/Show', compact('planification', 'activities'));
+        return Inertia::render('Apps/Plan/Show', compact('planification', 'activities'));
     }
 
     /**
@@ -64,7 +70,7 @@ class PlanificationController extends Controller
     public function edit(Planification $planification)
     {
         $activities = $planification->details;
-        return Inertia::render('Plan/Edit', compact('planification', 'activities'));
+        return Inertia::render('Apps/Plan/Edit', compact('planification', 'activities'));
     }
 
     /**
