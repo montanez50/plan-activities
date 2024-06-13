@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use App\Models\Dependency;
+use Illuminate\Validation\Rules;
 
 class UserController extends Controller
 {
@@ -33,7 +35,7 @@ class UserController extends Controller
                 $query->select('name')->with(['permissions' => function($query){
                     $query->select('name');
                 }]);
-            }])
+            }, 'dependency'])
             ->when($request->search, fn($query) => $query->where('name', 'like', '%'. $request->search . '%'))
             ->latest()
             ->paginate(7)->withQueryString();
@@ -55,10 +57,11 @@ class UserController extends Controller
             ->orderBy('name')
             ->get();
 
+        // get all dependencies
+        $dependencies = Dependency::select('id as value', 'name as label')->get();
+
         // render view
-        return inertia('Apps/Users/Create', [
-            'roles' => $roles,
-        ]);
+        return inertia('Apps/Users/Create', compact('roles', 'dependencies'));
     }
 
     /**
@@ -66,11 +69,21 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'dependency_id' => ['required', 'integer'],
+        ]);
+
         // create new user data
         $user = User::create([
             'name' => $request->name,
+            'last_name' => $request->last_name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'dependency_id' => $request->dependency['value'],
         ]);
 
          // assign a role to user
@@ -93,14 +106,16 @@ class UserController extends Controller
 
         // load relationship
         $user->load(['roles' => function($query){
-            $query->select('id', 'name');
-        }]);
+                $query->select('id', 'name');
+            },
+            'dependency'
+        ]);
+
+        // get all dependencies
+        $dependencies = Dependency::select('id as value', 'name as label')->get();
 
         // render view
-        return inertia('Apps/Users/Edit', [
-            'user' => $user,
-            'roles' => $roles,
-        ]);
+        return inertia('Apps/Users/Edit', compact('user', 'roles', 'dependencies'));
     }
 
     /**
@@ -108,14 +123,24 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        // update user data by id
-       $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-       ]);
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
+            'dependency_id' => ['required', 'integer'],
+        ]);
 
-       // do it when password is not empty string or null
-       if($request->password !== '' || $request->password !== null)
+        // update user data by id
+        $user->update([
+            'name' => $request->name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'dependency_id' => $request->dependency['value'],
+        ]);
+
+        // do it when password is not empty string or null
+        if($request->password !== '' || $request->password !== null)
             // update user password
             $user->update([
                 'password' => bcrypt($request->password),

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class User extends Authenticatable
 {
@@ -21,9 +22,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'last_name',
         'email',
         'password',
         'avatar',
+        'dependency_id',
     ];
 
     /**
@@ -69,5 +72,10 @@ class User extends Authenticatable
     public function getSuperAdmin()
     {
         return $this->hasRole('super-admin');
+    }
+
+    public function dependency(): BelongsTo
+    {
+        return $this->belongsTo(Dependency::class);
     }
 }

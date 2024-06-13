@@ -20,8 +20,10 @@ class UserSeeder extends Seeder
         // create new admin
         $user = User::create([
             'name' => 'Admin',
+            'last_name' => 'Admin',
             'email' => 'admin@dev.com',
             'password' => bcrypt('password'),
+            'dependency_id' => 1,
         ]);
 
         // assign a role to user

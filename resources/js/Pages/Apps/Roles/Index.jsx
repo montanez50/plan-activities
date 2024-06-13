@@ -15,12 +15,12 @@ export default function Index() {
 
     return (
         <>
-            <Head title='Data Roles'/>
+            <Head title='Roles'/>
             <div className='mb-5'>
                 <div className='flex flex-row items-center md:justify-between gap-5'>
                     <div className='lg:w-2/6 xl:w-1/6'>
                         <Button
-                            label='Add New Role'
+                            label='Agregar Nuevo Rol'
                             type={'link'}
                             icon={<IconCirclePlus size={'20'} strokeWidth={'1.5'}/>}
                             className={'bg-white text-gray-700 border hover:border-sky-500'}
@@ -31,19 +31,19 @@ export default function Index() {
                     <div className='w-full'>
                         <Search
                             url={'/apps/roles'}
-                            placeholder={'Search data roles by name...'}
+                            placeholder={'Buscar roles por su nombre...'}
                         />
                     </div>
                 </div>
             </div>
-            <Table.Card title={'LIST ROLES'} icon={<IconUserCheck strokeWidth={'1.5'} size={'20'}/>}>
+            <Table.Card title={'LISTA DE ROLES'} icon={<IconUserCheck strokeWidth={'1.5'} size={'20'}/>}>
                 <Table>
                     <Table.Thead>
                         <tr>
                             <Table.Th className={'w-10'}>#</Table.Th>
-                            <Table.Th>Role Name</Table.Th>
-                            <Table.Th>Permissions</Table.Th>
-                            <Table.Th>Action</Table.Th>
+                            <Table.Th>Nombre del Rol</Table.Th>
+                            <Table.Th>Permisos</Table.Th>
+                            <Table.Th>Acción</Table.Th>
                         </tr>
                     </Table.Thead>
                     <Table.Tbody>

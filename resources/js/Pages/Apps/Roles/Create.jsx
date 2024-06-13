@@ -49,15 +49,15 @@ export default function Create() {
 
     return (
         <>
-            <Head title='Create Role'/>
+            <Head title='Crear Rol'/>
             <Card
-                title='Add New Role'
+                title='Agregar Nuevo Rol'
                 icon={<IconUserCheck size={'20'} strokeWidth={'1.5'}/>}
             >
                 <form onSubmit={handleForm}>
                     <div className='mb-4'>
                         <Input
-                            label={'Name'}
+                            label={'Nombre'}
                             type={'text'}
                             value={data.name}
                             onChange={e => setData('name', e.target.value)}
@@ -66,7 +66,7 @@ export default function Create() {
                     </div>
                     <div className='mb-4'>
                         <MultiSelect
-                            label={'Permissions'}
+                            label={'Permisos'}
                             options={permissions}
                             value={data.permissionsData}
                             onChange={setPermissions}
@@ -75,12 +75,12 @@ export default function Create() {
                     </div>
                     <div className='flex items-center gap-4'>
                         <Button
-                            label={'Save Data'}
+                            label={'Guardar'}
                             icon={<IconPencilPlus strokeWidth={'1.5'} size={'20'}/>}
                             className={'bg-teal-200 text-teal-500 border border-teal-300 hover:border-teal-500'}
                         />
                         <Button
-                            label={'Cancel'}
+                            label={'Cancelar'}
                             icon={<IconPencilX strokeWidth={'1.5'} size={'20'}/>}
                             className={'bg-rose-200 text-rose-500 border border-rose-300 hover:border-rose-500'}
                             type={'link'}

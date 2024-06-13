@@ -1,6 +1,7 @@
 import AppLayout from '@/Layouts/AppLayout'
 import Card from '@/Components/Card'
 import Input from '@/Components/Input'
+import SelectInput from '@/Components/Select'
 import Button from '@/Components/Button'
 import { IconUsers, IconPencilPlus, IconPencilX, IconPointFilled } from '@tabler/icons-react'
 import { Head, usePage, useForm } from '@inertiajs/react'
@@ -10,15 +11,18 @@ import React from 'react'
 export default function Edit() {
 
     // destruct role and permissions from usePage props
-    const { user, roles } = usePage().props;
+    const { user, roles, dependencies } = usePage().props;
 
     // destruct data, setData, post, and errors from useForm
     const { data, setData, post, errors } = useForm({
         name: user.name,
+        last_name: user.last_name ?? '',
         email: user.email,
         rolesData: user.roles.map(role => role.name),
         password: '',
-        _method: 'put'
+        password_confirmation: '',
+        _method: 'put',
+        dependency: { value: user.dependency_id, label: user.dependency.name },
     });
 
     // define handle checkbox
@@ -53,38 +57,67 @@ export default function Edit() {
 
     return (
         <>
-            <Head title='Edit User'/>
+            <Head title='Editar Usuario'/>
             <Card
-                title='Edit User'
+                title='Editar Usuario'
                 icon={<IconUsers size={'20'} strokeWidth={'1.5'}/>}
             >
                 <form onSubmit={handleForm}>
-                    <div className='mb-4'>
-                        <Input
-                            label={'Name'}
-                            type={'text'}
-                            value={data.name}
-                            onChange={e => setData('name', e.target.value)}
-                            errors={errors.name}
-                        />
-                    </div>
-                    <div className='mb-4'>
-                        <Input
-                            label={'Email'}
-                            type={'email'}
-                            value={data.email}
-                            onChange={e => setData('email', e.target.value)}
-                            errors={errors.email}
-                        />
-                    </div>
-                    <div className='mb-4'>
-                        <Input
-                            label={'Password'}
-                            type={'password'}
-                            value={data.password}
-                            onChange={e => setData('password', e.target.value)}
-                            errors={errors.password}
-                        />
+                <div className='grid grid-cols-2 gap-2'>
+                        <div className='mb-4'>
+                            <Input
+                                label={'Nombre'}
+                                type={'text'}
+                                value={data.name}
+                                onChange={e => setData('name', e.target.value)}
+                                errors={errors.name}
+                            />
+                        </div>
+                        <div className='mb-4'>
+                            <Input
+                                label={'Apellido'}
+                                type={'text'}
+                                value={data.last_name}
+                                onChange={e => setData('last_name', e.target.value)}
+                                errors={errors.last_name}
+                            />
+                        </div>
+                        <div className='mb-4'>
+                            <Input
+                                label={'Email'}
+                                type={'email'}
+                                value={data.email}
+                                onChange={e => setData('email', e.target.value)}
+                                errors={errors.email}
+                            />
+                        </div>
+                        <div className='mb-4'>
+                            <SelectInput
+                                label={'Dependencia'}
+                                options={dependencies}
+                                value={data.dependency}
+                                onChange={e => setData('dependency', e)}
+                                errors={errors.dependency}
+                            />
+                        </div>
+                        <div className='mb-4'>
+                            <Input
+                                label={'Contraseña'}
+                                type={'password'}
+                                value={data.password}
+                                onChange={e => setData('password', e.target.value)}
+                                errors={errors.password}
+                            />
+                        </div>
+                        <div className='mb-4'>
+                            <Input
+                                label={'Confirmar Contraseña'}
+                                type={'password'}
+                                value={data.password_confirmation}
+                                onChange={e => setData('password_confirmation', e.target.value)}
+                                errors={errors.password_confirmation}
+                            />
+                        </div>
                     </div>
                     <div className='mb-4'>
                         <label className='text-gray-600 text-sm'>Roles</label>
@@ -121,12 +154,12 @@ export default function Edit() {
                     </div>
                     <div className='flex items-center gap-4'>
                         <Button
-                            label={'Save Data'}
+                            label={'Guardar'}
                             icon={<IconPencilPlus strokeWidth={'1.5'} size={'20'}/>}
                             className={'bg-teal-200 text-teal-500 border border-teal-300 hover:border-teal-500'}
                         />
                         <Button
-                            label={'Cancel'}
+                            label={'Cancelar'}
                             icon={<IconPencilX strokeWidth={'1.5'} size={'20'}/>}
                             className={'bg-rose-200 text-rose-500 border border-rose-300 hover:border-rose-500'}
                             type={'link'}

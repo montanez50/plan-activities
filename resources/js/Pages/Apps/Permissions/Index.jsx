@@ -13,18 +13,18 @@ export default function Index() {
 
     return (
         <>
-            <Head title='Data Permissions'/>
+            <Head title='Permisos'/>
             <div className='mb-5'>
                 <Search
                     url={'/apps/permissions'}
-                    placeholder={'Search data permissions by name...'}/>
+                    placeholder={'Buscar permisos por su nombre...'}/>
             </div>
-            <Table.Card title={'LIST PERMISSIONS'} icon={<IconUserBolt strokeWidth={'1.5'} size={'20'}/>}>
+            <Table.Card title={'LISTA DE PERMISOS'} icon={<IconUserBolt strokeWidth={'1.5'} size={'20'}/>}>
                 <Table>
                     <Table.Thead>
                         <tr>
                             <Table.Th className={'w-10'}>#</Table.Th>
-                            <Table.Th>Permission Name</Table.Th>
+                            <Table.Th>Nombre del Permiso</Table.Th>
                         </tr>
                     </Table.Thead>
                     <Table.Tbody>

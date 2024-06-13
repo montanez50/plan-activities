@@ -11,9 +11,9 @@ export default function Index() {
 
     return (
         <>
-            <Head title='Dashboard'/>
+            <Head title='Inicio'/>
             <div className='font-bold text-sky-600 text-xl mb-5'>
-                OVERVIEW
+                DESCRIPCIÓN GENERAL
             </div>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
                 <div className='col-span-12 lg:col-span-2'>
@@ -52,7 +52,7 @@ export default function Index() {
                         <div className='border-b px-6 py-3'>
                             <div className='flex items-center gap-2'>
                                 <IconUsers strokeWidth={'1.5'} size={'20'}/>
-                                <h1 className='font-semibold text-sm uppercase'>List Users</h1>
+                                <h1 className='font-semibold text-sm uppercase'>Lista de Usuarios</h1>
                             </div>
                         </div>
                         <div className='px-6 py-4'>
@@ -70,7 +70,7 @@ export default function Index() {
                         </div>
                         <div className='border-t px-6 py-3'>
                             <Link href='/apps/users' className='flex items-center gap-1 justify-center group font-semibold text-gray-600 hover:text-sky-500'>
-                                View all users <IconArrowRight size={'20'} strokeWidth={'1.5'} className='group-hover:text-sky-500 group-hover:translate-x-1 duration-300'/>
+                                Ver todos los usuarios <IconArrowRight size={'20'} strokeWidth={'1.5'} className='group-hover:text-sky-500 group-hover:translate-x-1 duration-300'/>
                             </Link>
                         </div>
                     </div>
