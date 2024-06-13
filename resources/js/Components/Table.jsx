@@ -57,7 +57,7 @@ const Td = ({ className, children, ...props}) => {
 const TdNumber = ({ className, children, ...props}) => {
     return (
         <td
-            className={`${className} whitespace-nowrap py-2 text-gray-700 rounded-b-lg text-sm text-center`} {...props}
+            className={`${className} whitespace-nowrap py-2 text-gray-700 text-sm text-center`} {...props}
         >
             {children}
         </td>

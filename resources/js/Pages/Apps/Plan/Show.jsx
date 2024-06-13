@@ -10,30 +10,6 @@ const MarkCell = ({ status, ...props }) => (
     <Table.TdNumber className={`px-2 ${status ? 'bg-green-600' : ''}`} {...props}></Table.TdNumber>
 );
 
-const ActivityInput = ({ id, changeActivity }) => {
-    const [text, setText] = useState('');
-    const handleChange = (event) => {
-        setText(event.target.value);
-    }
-
-    useEffect(() => {
-        changeActivity(id, 'text', text);
-    }, [id, text, changeActivity]);
-
-    return (
-        <>
-            <Input
-                id={`${id}-text`}
-                name={`${id}-text`}
-                value={text}
-                onChange={handleChange}
-                className="mt-1 block w-full"
-                required
-            />
-        </>
-    )
-}
-
 const Activity = ({ id, numbers, item }) => {
     return (
         <tr>

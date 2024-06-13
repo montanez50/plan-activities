@@ -125,9 +125,13 @@ class PlanificationController extends Controller
             ]
         ];
         $process = $processList[$status];
-        $planifications = Planification::with(['user', 'details'])->where('status', $status)->paginate($request->per_page ?? 10);
+        $planifications = Planification::with(['user', 'details'])
+            ->where('status', $status)
+            ->when($request->search, fn($query) => $query->where('period', 'like', '%'. $request->search . '%'))
+            ->latest()
+            ->paginate(10)->withQueryString();
 
-        return Inertia::render('Plan/Index', compact('planifications', 'process'));
+        return Inertia::render('Apps/Plan/ProcessList', compact('planifications', 'process'));
     }
 
     public function processForm(Planification $planification, $status)
@@ -143,7 +147,7 @@ class PlanificationController extends Controller
             'label' =>  Planification::STATUS[$status],
         ];
 
-        return Inertia::render('Plan/Process', compact('planification', 'activities', 'process'));
+        return Inertia::render('Apps/Plan/Process', compact('planification', 'activities', 'process'));
     }
 
     public function updateStatus(Request $request, Planification $planification)
