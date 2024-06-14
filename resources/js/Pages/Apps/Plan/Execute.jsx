@@ -1,6 +1,5 @@
 import Button from '@/Components/Button'
 import Input from '@/Components/Input'
-import SelectInput from '@/Components/Select'
 import AppLayout from '@/Layouts/AppLayout'
 import { Head, router, usePage } from '@inertiajs/react';
 import { IconPencilPlus, IconPencilCheck, IconPlus } from '@tabler/icons-react'
@@ -9,7 +8,7 @@ import React, { useState, useEffect } from 'react'
 import Table from '@/Components/Table'
 
 const MarkCell = ({ id, item, changeActivity, status, ...props }) => {
-    const [active, setActive] = useState(status);
+    const [active, setActive] = useState(status ?? false);
     const handleChange = () => {
         setActive(active ? false : true);
     }
@@ -19,7 +18,7 @@ const MarkCell = ({ id, item, changeActivity, status, ...props }) => {
     }, [id, item, active, changeActivity]);
 
     return (
-        <Table.TdNumber className={` ${active ? 'bg-cyan-400' : ''}`} onClick={() => handleChange()} {...props}>x</Table.TdNumber>
+        <Table.TdNumber className={` ${active ? 'bg-cyan-400' : ''}`} onClick={() => handleChange()} {...props}></Table.TdNumber>
     );
 }
 
@@ -47,6 +46,30 @@ const ActivityInput = ({ id, item, changeActivity }) => {
     )
 }
 
+const ActivityIdInput = ({ id, item, changeActivity }) => {
+    const [text, setText] = useState(item.id ?? '');
+    const handleChange = (event) => {
+        setText(event.target.value);
+    }
+
+    useEffect(() => {
+        changeActivity(id, 'id', text);
+    }, [id, text, changeActivity]);
+
+    return (
+        <>
+            <Input
+                id={`${id}-id`}
+                name={`${id}-id`}
+                value={text}
+                onChange={handleChange}
+                className="mt-1 block w-full"
+                type={'hidden'}
+            />
+        </>
+    )
+}
+
 const Activity = ({ id, numbers, item, handleRemove, changeActivity }) => {
     return (
         <>
@@ -55,9 +78,10 @@ const Activity = ({ id, numbers, item, handleRemove, changeActivity }) => {
                     {id + 1}
                 </Table.Td>
                 <Table.Td rowSpan={2}>
-                    {item.name}
+                    {item.name} <ActivityIdInput id={id} item={item} changeActivity={changeActivity} />
                 </Table.Td>
-                {numbers.map((data, i) =>  <Table.TdNumber key={i} className={` ${ (item.days ? item.days[data] : false) ? 'bg-green-600' : ''}`}>x</Table.TdNumber> )}
+                {numbers.map((data, i) =>  <Table.TdNumber key={i} className={` ${ (item.days ? item.days[data] : false) ? 'bg-green-600' : ''}`}></Table.TdNumber> )}
+                <Table.TdNumber rowSpan={2} className='py-4 text-white'>X</Table.TdNumber>
             </tr>
             <tr>
                 {numbers.map((data, i) =>  <MarkCell key={i} id={id} item={data} changeActivity={changeActivity} status={item.days_execute ? item.days_execute[data] : false} /> )}
@@ -102,16 +126,10 @@ export default function Execute() {
     const { planification, activities, errors } = usePage().props;
 
     const [data, setData] = useState([]);
-    const [month, setMonth] = useState(planification.period.split('-')[1]);
+    const month = planification.period.split('-')[1];
     const [activity, setActivity] = useState(activities);
     const {monthDays, colorDays, numbers, year} = parseInfo(month, planification.period.split('-')[0]);
     const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-    
-    // Cambia valor del mes
-    const handleChangeSelector = (e) => {
-        setMonth(e.value);
-        setData([]);
-    };
 
     // Remueve actividad
     const handleRemove = (id) => {
@@ -146,7 +164,7 @@ export default function Execute() {
         e.preventDefault();
 
         if (data.length !== 0) {
-            router.post(route('planification.update'), { period: `${year}-${month}`, activities: data}, {
+            router.post(route('planification.executePlan', planification), { activities: data }, {
                 onSuccess: () => {
                     toast.success('Planificación ejecutada correctamente!',{
                         icon: '👏',
@@ -191,6 +209,11 @@ export default function Execute() {
                                         {data}
                                     </Table.ThNumber>
                                 ))}
+                                <Table.ThNumber rowSpan={2} scope="col" className="py-3 bg-gray-100">
+                                    <svg className="h-5 w-5 text-red-500 m-auto"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </Table.ThNumber>
                             </tr>
                             <tr>
                                 {numbers.map((data, i) => (
@@ -215,7 +238,7 @@ export default function Execute() {
                                 <Table.Td className='bg-gray-100' colSpan={35}>ACTVIDIDADES NO PLANIFICADAS</Table.Td>
                             </tr>
                             <tr>
-                                <Table.Td className='text-center' colSpan={35}>No hay actividades no planificadas</Table.Td>
+                                <Table.Td className='text-center' colSpan={35}>No hay actividades</Table.Td>
                             </tr>
                         </Table.Tbody>
                     </Table>

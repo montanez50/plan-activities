@@ -6,6 +6,8 @@ use App\Http\Requests\Plan\StoreRequest;
 use App\Models\Planification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Plan\ExecuteRequest;
+use App\Models\PlanificationDetail;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -178,5 +180,25 @@ class PlanificationController extends Controller
 
         $activities = $planification->details;
         return Inertia::render('Apps/Plan/Execute', compact('planification', 'activities'));
+    }
+
+    public function execute(ExecuteRequest $request, Planification $planification)
+    {
+        $data = $request->only('period', 'activities');
+
+        $activities = collect($data['activities']);
+        $formatActivities = $activities->map(function($i) {
+            $id =  array_pop($i);
+
+            return [ 'id' => $id, 'days_execute' => $i ];
+        });
+
+        foreach ($formatActivities as $data) {
+            PlanificationDetail::where('id', $data['id'])->update([
+                'days_execute' => $data['days_execute']
+            ]);
+        }
+
+        return to_route('planification.execute')->with(['message' => 'Planificacion editada correctamente!']);
     }
 }

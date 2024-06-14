@@ -60,7 +60,7 @@ const Activity = ({ id, numbers, item, handleRemove, changeActivity }) => {
             <Table.TdNumber>
                 <Button
                     icon={<IconTrash strokeWidth={'1.5'} size={'20'}/>}
-                    className={'bg-rose-200 text-rose-500 border border-rose-300 hover:border-rose-500'}
+                    className={'bg-rose-200 text-rose-500 border border-rose-300 hover:border-rose-500 m-auto'}
                     noSubmit={1}
                     onClick={() => handleRemove(id)}
                 />

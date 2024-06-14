@@ -14,6 +14,7 @@ class PlanificationDetail extends Model
         'name',
         'planification_id',
         'days',
+        'days_execute',
     ];
 
     protected $casts = [
