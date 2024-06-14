@@ -1,7 +1,7 @@
 import Button from '@/Components/Button'
 import AppLayout from '@/Layouts/AppLayout'
 import { Head, usePage, router } from '@inertiajs/react';
-import { IconUsers, IconPencilPlus, IconPencilX } from '@tabler/icons-react'
+import { IconArrowBadgeUp, IconPencilPlus, IconPencilX } from '@tabler/icons-react'
 import Table from '@/Components/Table'
 import toast from 'react-hot-toast'
 
@@ -54,7 +54,7 @@ const parseInfo = (month, year = null) => {
     }
 }
 
-export default function Create() {
+export default function Process() {
     // get data
     const { planification, activities, process } = usePage().props;
 
@@ -104,7 +104,7 @@ export default function Create() {
                     </div>
                 </div>
             </div>
-            <Table.Card title={`${process.label} PLANIFICACIÓN`} icon={<IconUsers strokeWidth={'1.5'} size={'20'}/>}>
+            <Table.Card title={`${process.label} PLANIFICACIÓN`} icon={<IconArrowBadgeUp strokeWidth={'1.5'} size={'20'}/>}>
                 <form onSubmit={submit}>
                     <Table>
                         <Table.Thead>
@@ -156,4 +156,4 @@ export default function Create() {
     )
 }
 
-Create.layout = page => <AppLayout children={page}/>
+Process.layout = page => <AppLayout children={page}/>

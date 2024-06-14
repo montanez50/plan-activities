@@ -4,7 +4,7 @@ import Input from '@/Components/Input'
 import SelectInput from '@/Components/Select'
 import AppLayout from '@/Layouts/AppLayout'
 import { Head, useForm, usePage } from '@inertiajs/react'
-import { IconPencilPlus, IconPencilX, IconUsers, IconPointFilled } from '@tabler/icons-react'
+import { IconPencilPlus, IconPencilX, IconAugmentedReality, IconPointFilled } from '@tabler/icons-react'
 import toast from 'react-hot-toast'
 import React from 'react'
 
@@ -57,7 +57,7 @@ export default function Create() {
             <Head title='Crear Dependencia'/>
             <Card
                 title={'Crear Dependencia'}
-                icon={<IconUsers size={'20'} strokeWidth={'1.5'}/>}
+                icon={<IconAugmentedReality size={'20'} strokeWidth={'1.5'}/>}
             >
                 <form onSubmit={handleForm}>
                     <div className='grid grid-cols-2 gap-2'>

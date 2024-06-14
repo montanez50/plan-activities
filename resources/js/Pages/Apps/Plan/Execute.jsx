@@ -3,7 +3,7 @@ import Input from '@/Components/Input'
 import SelectInput from '@/Components/Select'
 import AppLayout from '@/Layouts/AppLayout'
 import { Head, router, usePage } from '@inertiajs/react';
-import { IconPencilPlus, IconUsers, IconPlus, IconTrash } from '@tabler/icons-react'
+import { IconPencilPlus, IconPencilCheck, IconPlus } from '@tabler/icons-react'
 import toast from 'react-hot-toast'
 import React, { useState, useEffect } from 'react'
 import Table from '@/Components/Table'
@@ -66,34 +66,6 @@ const Activity = ({ id, numbers, item, handleRemove, changeActivity }) => {
     );
 }
 
-const MonthSelector = ({ month, handleChange }) => {
-    const months = [
-        {value: 1, label: 'Enero'},
-        {value: 2, label: 'Febrero'},
-        {value: 3, label: 'Marzo'},
-        {value: 4, label: 'Abril'},
-        {value: 5, label: 'Mayo'},
-        {value: 6, label: 'Junio'},
-        {value: 7, label: 'Julio'},
-        {value: 8, label: 'Agosto'},
-        {value: 9, label: 'Septiembre'},
-        {value: 10, label: 'Octubre'},
-        {value: 11, label: 'Noviembre'},
-        {value: 12, label: 'Diciembre'},
-    ];
-
-    return (
-        <div className='my-2'>
-            <SelectInput
-                label={'Mes'}
-                options={months}
-                value={months.filter(data => data.value == month)[0]}
-                onChange={handleChange}
-            />
-        </div>
-    )
-}
-
 const parseInfo = (month, year = null) => { 
     const monthDays = [];
     const colorDays = [];
@@ -125,7 +97,7 @@ const parseInfo = (month, year = null) => {
     }
 }
 
-export default function Create() {
+export default function Execute() {
     // get data
     const { planification, activities, errors } = usePage().props;
 
@@ -207,7 +179,7 @@ export default function Create() {
                     </div>
                 </div>
             </div>
-            <Table.Card title={'EJECUTAR PLANIFICACIÓN'} icon={<IconUsers strokeWidth={'1.5'} size={'20'}/>}>
+            <Table.Card title={'EJECUTAR PLANIFICACIÓN'} icon={<IconPencilCheck strokeWidth={'1.5'} size={'20'}/>}>
                 <form onSubmit={submit}>
                     <Table>
                         <Table.Thead>
@@ -267,4 +239,4 @@ export default function Create() {
     )
 }
 
-Create.layout = page => <AppLayout children={page}/>
+Execute.layout = page => <AppLayout children={page}/>

@@ -3,7 +3,7 @@ import Input from '@/Components/Input'
 import SelectInput from '@/Components/Select'
 import AppLayout from '@/Layouts/AppLayout'
 import { Head, router, usePage } from '@inertiajs/react';
-import { IconPencilPlus, IconUsers, IconPlus, IconTrash } from '@tabler/icons-react'
+import { IconPencilPlus, IconPaperclip, IconPlus, IconTrash } from '@tabler/icons-react'
 import toast from 'react-hot-toast'
 import React, { useState, useEffect } from 'react'
 import Table from '@/Components/Table'
@@ -128,7 +128,7 @@ const parseInfo = (month, year = null) => {
     }
 }
 
-export default function Create() {
+export default function Edit() {
     // get data
     const { planification, activities, errors } = usePage().props;
 
@@ -209,7 +209,7 @@ export default function Create() {
                     </div>
                 </div>
             </div>
-            <Table.Card title={'EDITAR PLANIFICACIÓN'} icon={<IconUsers strokeWidth={'1.5'} size={'20'}/>}>
+            <Table.Card title={'EDITAR PLANIFICACIÓN'} icon={<IconPaperclip strokeWidth={'1.5'} size={'20'}/>}>
                 <form onSubmit={submit}>
                     <Table>
                         <Table.Thead>
@@ -268,4 +268,4 @@ export default function Create() {
     )
 }
 
-Create.layout = page => <AppLayout children={page}/>
+Edit.layout = page => <AppLayout children={page}/>

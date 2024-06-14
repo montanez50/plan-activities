@@ -3,7 +3,7 @@ import Card from '@/Components/Card'
 import Input from '@/Components/Input'
 import SelectInput from '@/Components/Select'
 import Button from '@/Components/Button'
-import { IconUsers, IconPencilPlus, IconPencilX, IconPointFilled } from '@tabler/icons-react'
+import { IconAugmentedReality, IconPencilPlus, IconPencilX, IconPointFilled } from '@tabler/icons-react'
 import { Head, usePage, useForm } from '@inertiajs/react'
 import toast from 'react-hot-toast'
 import React from 'react'
@@ -45,7 +45,7 @@ export default function Edit() {
             <Head title='Editar Dependencia'/>
             <Card
                 title='Editar Dependencia'
-                icon={<IconUsers size={'20'} strokeWidth={'1.5'}/>}
+                icon={<IconAugmentedReality size={'20'} strokeWidth={'1.5'}/>}
             >
                 <form onSubmit={handleForm}>
                     <div className='grid grid-cols-2 gap-2'>

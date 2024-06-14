@@ -1,6 +1,6 @@
 import AppLayout from '@/Layouts/AppLayout'
 import { Head, usePage } from '@inertiajs/react'
-import { IconCheck, IconDatabaseOff, IconPlus, IconUsers } from '@tabler/icons-react'
+import { IconCheck, IconDatabaseOff, IconPlus, IconAugmentedReality } from '@tabler/icons-react'
 import Table from '@/Components/Table'
 import Pagination from '@/Components/Pagination'
 import React from 'react'
@@ -36,7 +36,7 @@ export default function Index() {
                     </div>
                 </div>
             </div>
-            <Table.Card title={'LISTADO DE DEPENDENCIAS'} icon={<IconUsers strokeWidth={'1.5'} size={'20'}/>}>
+            <Table.Card title={'LISTADO DE DEPENDENCIAS'} icon={<IconAugmentedReality strokeWidth={'1.5'} size={'20'}/>}>
                 <Table>
                     <Table.Thead>
                         <tr>

@@ -1,15 +1,14 @@
 import AppLayout from '@/Layouts/AppLayout'
 import { Head, usePage } from '@inertiajs/react'
 import moment from 'moment';
-import { IconDatabaseOff, IconPlus, IconUsers } from '@tabler/icons-react'
+import { IconDatabaseOff, IconPencilCheck } from '@tabler/icons-react'
 import Table from '@/Components/Table'
 import Pagination from '@/Components/Pagination'
 import React from 'react'
 import Search from '@/Components/Search'
-import Button from '@/Components/Button'
 import ActionButton from '@/Components/ActionButton'
 
-export default function Index() {
+export default function ExecuteList() {
 
     // destruct data from props
     const { planifications } = usePage().props;
@@ -36,7 +35,7 @@ export default function Index() {
                     </div>
                 </div>
             </div>
-            <Table.Card title={'LISTADO DE PLANIFICACIONES POR EJECUTAR'} icon={<IconUsers strokeWidth={'1.5'} size={'20'}/>}>
+            <Table.Card title={'LISTADO DE PLANIFICACIONES POR EJECUTAR'} icon={<IconPencilCheck strokeWidth={'1.5'} size={'20'}/>}>
                 <Table>
                     <Table.Thead>
                         <tr>
@@ -90,4 +89,4 @@ export default function Index() {
     )
 }
 
-Index.layout = page => <AppLayout children={page}/>
+ExecuteList.layout = page => <AppLayout children={page}/>

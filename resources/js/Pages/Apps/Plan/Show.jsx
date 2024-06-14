@@ -2,8 +2,8 @@ import Button from '@/Components/Button'
 import Input from '@/Components/Input'
 import AppLayout from '@/Layouts/AppLayout'
 import { Head, usePage } from '@inertiajs/react';
-import { IconUsers, IconPlus, IconArrowBack } from '@tabler/icons-react'
-import React, { useState, useEffect } from 'react'
+import { IconUsers, IconArrowBack } from '@tabler/icons-react'
+import React from 'react'
 import Table from '@/Components/Table'
 
 const MarkCell = ({ status, ...props }) => (
@@ -55,7 +55,7 @@ const parseInfo = (month, year = null) => {
     }
 }
 
-export default function Create() {
+export default function Show() {
     // get data
     const { planification, activities } = usePage().props;
 
@@ -118,4 +118,4 @@ export default function Create() {
     )
 }
 
-Create.layout = page => <AppLayout children={page}/>
+Show.layout = page => <AppLayout children={page}/>
