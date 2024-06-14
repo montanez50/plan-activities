@@ -80,14 +80,14 @@ export default function Create() {
                             <Table.Th rowSpan={2} scope="col">#</Table.Th>
                             <Table.Th rowSpan={2} scope="col">Actividades</Table.Th>
                             {monthDays.map((data, i) => (
-                                <Table.ThNumber key={i} scope="col" className={` py-3 ${data === 'S' || data === 'D' ? 'bg-blue-600 dark:text-white' : ''}`}>
+                                <Table.ThNumber key={i} scope="col" className={` py-3 ${data === 'S' || data === 'D' ? 'bg-blue-600 dark:text-white' : 'bg-gray-100'}`}>
                                     {data}
                                 </Table.ThNumber>
                             ))}
                         </tr>
                         <tr>
                             {numbers.map((data, i) => (
-                                <Table.ThNumber key={i} scope="col" className={` py-3 ${colorDays.includes(data) ? 'bg-blue-600 dark:text-white' : ''}`}>
+                                <Table.ThNumber key={i} scope="col" className={` py-3 ${colorDays.includes(data) ? 'bg-blue-600 dark:text-white' : 'bg-gray-100'}`}>
                                     {data}
                                 </Table.ThNumber>
                             ))}
@@ -110,7 +110,7 @@ export default function Create() {
                         icon={<IconArrowBack strokeWidth={'1.5'} size={'20'}/>}
                         className={'bg-gray-200 text-gray-500 border border-gray-300 hover:border-gray-500'}
                         type={'link'}
-                        href={'/planification'}
+                        href={'/planification/list'}
                     />
                 </div>
             </Table.Card>

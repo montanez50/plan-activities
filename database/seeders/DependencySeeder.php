@@ -17,6 +17,7 @@ class DependencySeeder extends Seeder
             [
                 'id' => 1,
                 'name' => 'Dirección Técnica',
+                'internal_code' => '123',
                 'user_id' => null,
                 'created_at' => '2024-05-22 22:15:00',
                 'updated_at' => '2024-05-22 22:15:00',

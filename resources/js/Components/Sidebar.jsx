@@ -1,6 +1,20 @@
 import LinkItem from './LinkItem'
 import hasAnyPermission from '@/Utils/Permissions'
-import { IconComponents, IconLayout2, IconUserBolt, IconUserCheck, IconUsers } from '@tabler/icons-react'
+import { 
+    IconComponents, 
+    IconLayout2, 
+    IconUserBolt, 
+    IconUserCheck, 
+    IconUsers, 
+    IconPaperclip, 
+    IconWallpaper, 
+    IconPencilCheck ,
+    IconArrowBadgeDown,
+    IconBadges,
+    IconBadgesOff,
+    IconAlarm,
+    IconAugmentedReality
+} from '@tabler/icons-react'
 import { usePage } from '@inertiajs/react'
 import React from 'react'
 export default function Sidebar({ isSidebarOpen }) {
@@ -21,19 +35,19 @@ export default function Sidebar({ isSidebarOpen }) {
             title: 'GESTIÓN DE PLANIFICACIÓN',
             permissions: hasAnyPermission(['dashboard-access']),
             details: [
-                {title: 'Crear Planificación', href: '/planification/create', icon: <IconUsers strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['users-access'])},
-                {title: 'Planificaciones', href: '/planification', icon: <IconUserCheck strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['roles-access'])},
-                {title: 'Ejecutar', href: '/apps/permissions', icon: <IconUserBolt strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['permissions-access'])},
+                {title: 'Crear Planificación', href: '/planification/create', icon: <IconPaperclip strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['users-access'])},
+                {title: 'Planificaciones', href: '/planification/list', icon: <IconWallpaper strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['roles-access'])},
+                {title: 'Ejecutar', href: '/planification/process/execute', icon: <IconPencilCheck strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['permissions-access'])},
             ]
         },
         {
             title: 'CONTROL DE PROCESOS',
             permissions: hasAnyPermission(['dashboard-access']),
             details: [
-                {title: 'Revisar Planificación', href: '/planification/process-list/PR', icon: <IconUsers strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['users-access'])},
-                {title: 'Aprobar Planificación', href: '/planification/process-list/RV', icon: <IconUserCheck strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['roles-access'])},
-                {title: 'Cerrar Planificación', href: '/planification/process-list/AP', icon: <IconUserBolt strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['permissions-access'])},
-                {title: 'Alertas', href: '/apps/permissions', icon: <IconUserBolt strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['permissions-access'])},
+                {title: 'Revisar Planificación', href: '/planification/process-list/PR', icon: <IconArrowBadgeDown strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['users-access'])},
+                {title: 'Aprobar Planificación', href: '/planification/process-list/RV', icon: <IconBadges strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['roles-access'])},
+                {title: 'Cerrar Planificación', href: '/planification/process-list/AP', icon: <IconBadgesOff strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['permissions-access'])},
+                {title: 'Alertas', href: '/apps/permissions', icon: <IconAlarm strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['permissions-access'])},
             ]
         },
         {
@@ -43,6 +57,7 @@ export default function Sidebar({ isSidebarOpen }) {
                 {title: 'Usuarios', href: '/apps/users', icon: <IconUsers strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['users-access'])},
                 {title: 'Roles', href: '/apps/roles', icon: <IconUserCheck strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['roles-access'])},
                 {title: 'Permisos', href: '/apps/permissions', icon: <IconUserBolt strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['permissions-access'])},
+                {title: 'Dependencias', href: '/apps/dependencies', icon: <IconAugmentedReality strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['permissions-access'])},
             ]
         },
     ]
@@ -53,7 +68,7 @@ export default function Sidebar({ isSidebarOpen }) {
                 <>
                     <div className='flex justify-center items-center px-6 py-2 h-16'>
                         <div className='text-2xl font-bold text-gray-700 text-center leading-loose tracking-wider'>
-                            STARTER
+                            SPCCEM
                         </div>
                     </div>
                     <div className='w-full p-3 flex items-center gap-4 border-b bg-sky-50 border-sky-100 border-t'>

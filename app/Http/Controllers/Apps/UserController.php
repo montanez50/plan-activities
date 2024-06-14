@@ -39,7 +39,7 @@ class UserController extends Controller
             }, 'dependency'])
             ->when($request->search, fn($query) => $query->where('name', 'like', '%'. $request->search . '%'))
             ->latest()
-            ->paginate(7)->withQueryString();
+            ->paginate(10)->withQueryString();
 
         // render view
         return inertia('Apps/Users/Index', [

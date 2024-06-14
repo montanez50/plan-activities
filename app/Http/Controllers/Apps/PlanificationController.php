@@ -152,17 +152,22 @@ class PlanificationController extends Controller
 
     public function updateStatus(Request $request, Planification $planification)
     {
+        $oldStatus = $planification->status;
         $status = $request->input('status');
         $planification->status = $status;
         $planification->save();
-        return to_route('planification.index')->with(['message' => 'Planificacion procesada correctamente!']);
+        return to_route('planification.process-list', ['status' => $oldStatus])->with(['message' => 'Planificacion procesada correctamente!']);
     }
 
     public function executeList(Request $request)
     {
-        $planifications = Planification::with(['user', 'details'])->where('status', 'AP')->paginate($request->per_page ?? 10);
+        $planifications = Planification::with(['user', 'details'])
+            ->where('status', 'AP')
+            ->when($request->search, fn($query) => $query->where('period', 'like', '%'. $request->search . '%'))
+            ->latest()
+            ->paginate(10)->withQueryString();
 
-        return Inertia::render('Plan/ExecuteList', compact('planifications'));
+        return Inertia::render('Apps/Plan/ExecuteList', compact('planifications'));
     }
 
     public function executeForm(Planification $planification)
@@ -172,6 +177,6 @@ class PlanificationController extends Controller
         }
 
         $activities = $planification->details;
-        return Inertia::render('Plan/Execute', compact('planification', 'activities'));
+        return Inertia::render('Apps/Plan/Execute', compact('planification', 'activities'));
     }
 }

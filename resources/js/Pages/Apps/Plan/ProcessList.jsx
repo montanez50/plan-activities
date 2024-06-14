@@ -6,7 +6,6 @@ import Table from '@/Components/Table'
 import Pagination from '@/Components/Pagination'
 import React from 'react'
 import Search from '@/Components/Search'
-import Button from '@/Components/Button'
 import ActionButton from '@/Components/ActionButton'
 
 export default function Index() {
@@ -66,7 +65,7 @@ export default function Index() {
                                 <Table.Td>
                                     <div className='flex items-center gap-2'>
                                         <ActionButton
-                                            type={'view'}
+                                            type={'process'}
                                             url={route('planification.process', [planification, process.status])}
                                         />
                                     </div>

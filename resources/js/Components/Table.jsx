@@ -79,7 +79,7 @@ const ThNumber = ({ className, children, ...props }) => {
     return (
         <th
             scope="col"
-            className={`${className} whitespace-nowrap py-2 text-sm font-semibold text-gray-700 bg-gray-100 border-t border-b`} {...props}
+            className={`${className} whitespace-nowrap py-2 text-sm font-semibold text-gray-700 border-t border-b`} {...props}
         >
             {children}
         </th>

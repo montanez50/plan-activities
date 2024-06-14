@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Apps\DashboardController;
+use App\Http\Controllers\Apps\DependencyController;
 use App\Http\Controllers\Apps\PermissionController;
 use App\Http\Controllers\Apps\ProfileController;
 use App\Http\Controllers\Apps\RoleController;
@@ -38,6 +39,8 @@ Route::group(['as' => 'apps.', 'prefix' => 'apps', 'middleware' => ['auth']], fu
         Route::get('/profile', 'index');
         Route::put('/profile/{user}', 'update');
     });
+    // dependency route
+    Route::resource('/dependencies', DependencyController::class);
 });
 
 Route::prefix('planification')->middleware('auth')->group(function () {
@@ -46,7 +49,7 @@ Route::prefix('planification')->middleware('auth')->group(function () {
     Route::get('/process/execute/{planification}', [PlanificationController::class, 'executeForm'])->name('planification.executeForm');
     Route::post('/process/execute/{planification}', [PlanificationController::class, 'execute'])->name('planification.executePlan');
     // CRUD
-    Route::get('/', [PlanificationController::class, 'index'])->name('planification.index');
+    Route::get('list', [PlanificationController::class, 'index'])->name('planification.index');
     Route::get('create', [PlanificationController::class, 'create'])->name('planification.create');
     Route::post('/', [PlanificationController::class, 'store'])->name('planification.store');
     Route::get('/{planification}', [PlanificationController::class, 'show'])->name('planification.show');

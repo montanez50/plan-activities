@@ -28,16 +28,6 @@ export default function Index() {
             <Head title='Planificaciones'/>
             <div className='mb-5'>
                 <div className='flex flex-row items-center md:justify-between gap-5'>
-                    <div className='lg:w-2/6 xl:w-1/6'>
-                        <Button
-                            label='Agregar Nueva Planificación'
-                            type={'link'}
-                            icon={<IconPlus size={'20'} strokeWidth={'1.5'}/>}
-                            className={'bg-white text-gray-700 border hover:border-sky-500'}
-                            href={'/planification/create'}
-                            added={true}
-                        />
-                    </div>
                     <div className='w-full'>
                         <Search
                             url={'/planification'}
@@ -46,7 +36,7 @@ export default function Index() {
                     </div>
                 </div>
             </div>
-            <Table.Card title={'LISTADO DE PLANIFICACIONES'} icon={<IconUsers strokeWidth={'1.5'} size={'20'}/>}>
+            <Table.Card title={'LISTADO DE PLANIFICACIONES POR EJECUTAR'} icon={<IconUsers strokeWidth={'1.5'} size={'20'}/>}>
                 <Table>
                     <Table.Thead>
                         <tr>
@@ -76,21 +66,9 @@ export default function Index() {
                                 <Table.Td>
                                     <div className='flex items-center gap-2'>
                                         <ActionButton
-                                            type={'view'}
-                                            url={`/planification/${planification.id}`}
+                                            type={'process'}
+                                            url={route('planification.executeForm', [planification])}
                                         />
-                                        {(planification.status !== 'AP' && planification.status !== 'CR') && (
-                                            <>
-                                                <ActionButton
-                                                    url={`/planification/${planification.id}/edit`}
-                                                />
-                                                <ActionButton
-                                                    type={'delete'}
-                                                    url={`/planification`}
-                                                    id={planification.id}
-                                                />
-                                            </>
-                                        )}
                                     </div>
                                 </Table.Td>
                             </tr>

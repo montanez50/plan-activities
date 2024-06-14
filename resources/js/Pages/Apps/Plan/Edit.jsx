@@ -176,7 +176,7 @@ export default function Create() {
         e.preventDefault();
 
         if (data.length !== 0) {
-            router.post(route('planification.update'), { period: `${year}-${month}`, activities: data}, {
+            router.post(route('planification.update', planification), { period: `${year}-${month}`, activities: data}, {
                 onSuccess: () => {
                     toast.success('Planificación modificada correctamente!',{
                         icon: '👏',
@@ -217,11 +217,11 @@ export default function Create() {
                                 <Table.Th rowSpan={2} scope="col">#</Table.Th>
                                 <Table.Th rowSpan={2} scope="col">Actividades</Table.Th>
                                 {monthDays.map((data, i) => (
-                                    <Table.ThNumber key={i} scope="col" className={` py-3 ${data === 'S' || data === 'D' ? 'bg-blue-600 dark:text-white' : ''}`}>
+                                    <Table.ThNumber key={i} scope="col" className={` py-3 ${data === 'S' || data === 'D' ? 'bg-blue-600 dark:text-white' : 'bg-gray-100'}`}>
                                         {data}
                                     </Table.ThNumber>
                                 ))}
-                                <Table.ThNumber rowSpan={2} scope="col" className="py-3">
+                                <Table.ThNumber rowSpan={2} scope="col" className="py-3 bg-gray-100">
                                     <svg className="h-5 w-5 text-red-500 m-auto"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                     </svg>
@@ -229,7 +229,7 @@ export default function Create() {
                             </tr>
                             <tr>
                                 {numbers.map((data, i) => (
-                                    <Table.ThNumber key={i} scope="col" className={` py-3 ${colorDays.includes(data) ? 'bg-blue-600 dark:text-white' : ''}`}>
+                                    <Table.ThNumber key={i} scope="col" className={` py-3 ${colorDays.includes(data) ? 'bg-blue-600 dark:text-white' : 'bg-gray-100'}`}>
                                         {data}
                                     </Table.ThNumber>
                                 ))}

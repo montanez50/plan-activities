@@ -7,6 +7,7 @@ export default function LinkItem({ link, isSidebarOpen, logout, ...props }) {
 
     // destruct auth from usepage props
     const { auth } = usePage().props;
+    console.log(url);
 
     return (
         <>

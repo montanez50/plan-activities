@@ -3,6 +3,7 @@ import AppLayout from '@/Layouts/AppLayout'
 import { Head, usePage, router } from '@inertiajs/react';
 import { IconUsers, IconPencilPlus, IconPencilX } from '@tabler/icons-react'
 import Table from '@/Components/Table'
+import toast from 'react-hot-toast'
 
 const MarkCell = ({ status, ...props }) => (
     <Table.TdNumber className={`px-2 ${status ? 'bg-green-600' : ''}`} {...props}></Table.TdNumber>
