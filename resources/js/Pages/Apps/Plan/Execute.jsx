@@ -182,8 +182,9 @@ export default function Execute() {
 
     // Agrega actividad
     const addActivity = () => {
-        const num = noPlanActivity.length;
-        setNoPlanActivity([...noPlanActivity, num]);
+        const num = noPlanActivity[noPlanActivity.length - 1] ?? -1;
+        const realnum = num.id ?? num;
+        setNoPlanActivity([...noPlanActivity, realnum + 1]);
     }
 
     // Cambia el estado y lo almacena (Actividades planificadas)

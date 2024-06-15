@@ -153,8 +153,9 @@ export default function Edit() {
 
     // Agrega actividad
     const addActivity = () => {
-        const num = activity.length;
-        setActivity([...activity, num]);
+        const num = activity[activity.length - 1] ?? -1;
+        const realnum = num.id ?? num;
+        setActivity([...activity, realnum + 1]);
     }
 
     // Cambia el estado y lo almacena
