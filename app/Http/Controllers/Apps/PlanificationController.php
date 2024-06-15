@@ -62,7 +62,7 @@ class PlanificationController extends Controller
      */
     public function show(Planification $planification)
     {
-        $activities = $planification->details;
+        $activities = $planification->details()->where('type', 'P')->get();
         return Inertia::render('Apps/Plan/Show', compact('planification', 'activities'));
     }
 
@@ -167,7 +167,8 @@ class PlanificationController extends Controller
             ->where('status', 'AP')
             ->when($request->search, fn($query) => $query->where('period', 'like', '%'. $request->search . '%'))
             ->latest()
-            ->paginate(10)->withQueryString();
+            ->paginate(10)
+            ->withQueryString();
 
         return Inertia::render('Apps/Plan/ExecuteList', compact('planifications'));
     }
@@ -178,15 +179,19 @@ class PlanificationController extends Controller
             abort(404);
         }
 
-        $activities = $planification->details;
-        return Inertia::render('Apps/Plan/Execute', compact('planification', 'activities'));
+        $activities = $planification->details()->where('type', 'P')->get();
+        $noPlanActivities = $planification->details()->where('type', 'NP')->get();
+        return Inertia::render('Apps/Plan/Execute', compact('planification', 'activities', 'noPlanActivities'));
     }
 
     public function execute(ExecuteRequest $request, Planification $planification)
     {
-        $data = $request->only('period', 'activities');
+        $data = $request->only('period', 'activities', 'noPlanActivities');
 
         $activities = collect($data['activities']);
+        $noPlanActivities = collect($data['noPlanActivities']);
+
+        // Actividades planificadas
         $formatActivities = $activities->map(function($i) {
             $id =  array_pop($i);
 
@@ -199,6 +204,16 @@ class PlanificationController extends Controller
             ]);
         }
 
-        return to_route('planification.execute')->with(['message' => 'Planificacion editada correctamente!']);
+        // Actividades no planificadas
+        $formatNoPlanActivities = $noPlanActivities->map(function($i) {
+            $name =  array_pop($i);
+
+            return [ 'name' => $name, 'days_execute' => $i, 'type' => 'NP' ];
+        });
+
+        $planification->details()->where('type', 'NP')->delete();
+        $planification->details()->createMany($formatNoPlanActivities);        
+
+        return to_route('planification.execute')->with(['message' => 'Planificacion ejecutada correctamente!']);
     }
 }

@@ -19,10 +19,16 @@ class ExecuteRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
+    // TODO Agregar validación unico por periodo
     public function rules(): array
     {
         return [
-            //
+            'activities' => 'required|array|min:1',
+            'activities.*' => 'required|array|min:30|max:32',
+            'activities.*.id' => 'required',
+            'noPlanActivities' => 'nullable|array',
+            'noPlanActivities.*' => 'nullable|array|min:30|max:32',
+            'noPlanActivities.*.text' => 'nullable|string',
         ];
     }
 }

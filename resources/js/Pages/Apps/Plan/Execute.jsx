@@ -2,12 +2,13 @@ import Button from '@/Components/Button'
 import Input from '@/Components/Input'
 import AppLayout from '@/Layouts/AppLayout'
 import { Head, router, usePage } from '@inertiajs/react';
-import { IconPencilPlus, IconPencilCheck, IconPlus } from '@tabler/icons-react'
+import { IconPencilPlus, IconPencilCheck, IconPlus, IconTrash } from '@tabler/icons-react'
 import toast from 'react-hot-toast'
 import React, { useState, useEffect } from 'react'
 import Table from '@/Components/Table'
 
-const MarkCell = ({ id, item, changeActivity, status, ...props }) => {
+// Actividades no planificadas
+const NoPlanMarkCell = ({ id, item, changeActivity, status, ...props }) => {
     const [active, setActive] = useState(status ?? false);
     const handleChange = () => {
         setActive(active ? false : true);
@@ -44,6 +45,44 @@ const ActivityInput = ({ id, item, changeActivity }) => {
             />
         </>
     )
+}
+
+const NoPlanActivity = ({ id, numbers, item, handleRemove, changeActivity }) => {
+    return (
+        <tr>
+            <Table.Td scope="row">
+                {id + 1}
+            </Table.Td>
+            <Table.Td>
+                <ActivityInput id={id} item={item} changeActivity={changeActivity} />
+            </Table.Td>
+            {numbers.map((data, i) =>  <NoPlanMarkCell key={i} id={id} item={data} changeActivity={changeActivity} status={item.days_execute ? item.days_execute[data] : false} /> )}
+            <Table.TdNumber>
+                <Button
+                    icon={<IconTrash strokeWidth={'1.5'} size={'20'}/>}
+                    className={'bg-rose-200 text-rose-500 border border-rose-300 hover:border-rose-500 m-auto'}
+                    noSubmit={1}
+                    onClick={() => handleRemove(id)}
+                />
+            </Table.TdNumber>
+        </tr>
+    );
+}
+
+// Ejecución de actividades planificadas
+const MarkCell = ({ id, item, changeActivity, status, ...props }) => {
+    const [active, setActive] = useState(status ?? false);
+    const handleChange = () => {
+        setActive(active ? false : true);
+    }
+
+    useEffect(() => {
+        changeActivity(id, item, active);
+    }, [id, item, active, changeActivity]);
+
+    return (
+        <Table.TdNumber className={` ${active ? 'bg-cyan-400' : ''}`} onClick={() => handleChange()} {...props}></Table.TdNumber>
+    );
 }
 
 const ActivityIdInput = ({ id, item, changeActivity }) => {
@@ -123,31 +162,48 @@ const parseInfo = (month, year = null) => {
 
 export default function Execute() {
     // get data
-    const { planification, activities, errors } = usePage().props;
+    const { planification, activities, noPlanActivities, errors } = usePage().props;
 
     const [data, setData] = useState([]);
+    const [data2, setData2] = useState([]);
     const month = planification.period.split('-')[1];
     const [activity, setActivity] = useState(activities);
+    const [noPlanActivity, setNoPlanActivity] = useState(noPlanActivities);
     const {monthDays, colorDays, numbers, year} = parseInfo(month, planification.period.split('-')[0]);
     const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
     // Remueve actividad
     const handleRemove = (id) => {
-        const newList = activity.filter((item, i) => i !== id);
-        const newData = data.filter((item, i) => i !== id);
-        setData(newData);
-        setActivity(newList);
+        const newList = noPlanActivity.filter((item, i) => i !== id);
+        const newData = data2.filter((item, i) => i !== id);
+        setData2(newData);
+        setNoPlanActivity(newList);
     }
 
     // Agrega actividad
     const addActivity = () => {
-        const num = activity.length;
-        setActivity([...activity, num]);
+        const num = noPlanActivity.length;
+        setNoPlanActivity([...noPlanActivity, num]);
     }
 
-    // Cambia el estado y lo almacena
+    // Cambia el estado y lo almacena (Actividades planificadas)
     const handleChangeActivity = (activityId, itemId, value) => {
         setData((old) => {
+            let n = old;
+            if (!n[activityId]) {
+                n[activityId] = {};
+            }
+            if (!n[activityId][itemId]) {
+                n[activityId][itemId] = '';
+            }
+            n[activityId][itemId] = value;
+            return n;
+        });
+    }
+
+    // Cambia el estado y lo almacena (Actividades no planificadas)
+    const handleChangeNoPlanActivity = (activityId, itemId, value) => {
+        setData2((old) => {
             let n = old;
             if (!n[activityId]) {
                 n[activityId] = {};
@@ -164,7 +220,7 @@ export default function Execute() {
         e.preventDefault();
 
         if (data.length !== 0) {
-            router.post(route('planification.executePlan', planification), { activities: data }, {
+            router.post(route('planification.executePlan', planification), { activities: data, noPlanActivities: data2 }, {
                 onSuccess: () => {
                     toast.success('Planificación ejecutada correctamente!',{
                         icon: '👏',
@@ -235,11 +291,24 @@ export default function Execute() {
                                 />
                             ))}
                             <tr>
-                                <Table.Td className='bg-gray-100' colSpan={35}>ACTVIDIDADES NO PLANIFICADAS</Table.Td>
+                                <Table.Td className='bg-gray-100' colSpan={35}>ACTIVIDADES NO PLANIFICADAS</Table.Td>
                             </tr>
-                            <tr>
-                                <Table.Td className='text-center' colSpan={35}>No hay actividades</Table.Td>
-                            </tr>
+                            {noPlanActivity.length ? 
+                                noPlanActivity.map((item, i) => (
+                                    <NoPlanActivity
+                                        key={item.id ?? item}
+                                        id={i}
+                                        item={item}
+                                        numbers={numbers}
+                                        handleRemove={handleRemove}
+                                        changeActivity={handleChangeNoPlanActivity}
+                                    />
+                            ))
+                            :
+                                <tr>
+                                    <Table.Td className='text-center' colSpan={35}>No hay actividades</Table.Td>
+                                </tr>
+                            }
                         </Table.Tbody>
                     </Table>
                     <div className='flex items-center gap-4 mt-4 p-2'>

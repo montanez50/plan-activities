@@ -142,13 +142,15 @@ export default function Process() {
                             icon={<IconPencilPlus strokeWidth={'1.5'} size={'20'}/>}
                             className={'bg-teal-200 text-teal-500 border border-teal-300 hover:border-teal-500'}
                         />
-                        <Button
-                            label={'Anular'}
-                            icon={<IconPencilX strokeWidth={'1.5'} size={'20'}/>}
-                            className={'bg-rose-200 text-rose-500 border border-rose-300 hover:border-rose-500'}
-                            onClick={cancel}
-                            noSubmit={1}
-                        />
+                        {process.status !== 'CR' && (
+                            <Button
+                                label={'Anular'}
+                                icon={<IconPencilX strokeWidth={'1.5'} size={'20'}/>}
+                                className={'bg-rose-200 text-rose-500 border border-rose-300 hover:border-rose-500'}
+                                onClick={cancel}
+                                noSubmit={1}
+                            />
+                        )}
                     </div>
                 </form>
             </Table.Card>
