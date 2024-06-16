@@ -59,8 +59,8 @@ export default function Show() {
     // get data
     const { planification, activities } = usePage().props;
 
-    const month = planification.period.split('-')[1];
-    const {monthDays, colorDays, numbers, year} = parseInfo(month, planification.period.split('-')[0]);
+    const month = planification.month;
+    const {monthDays, colorDays, numbers, year} = parseInfo(month, planification.year);
     const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
     return (

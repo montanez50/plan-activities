@@ -19,10 +19,12 @@ class StoreRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
+    // TODO Agregar validación unico por periodo
     public function rules(): array
     {
         return [
-            'period' => 'required|string|min:6|max:7', //Agregar validación unico por periodo
+            'month' => 'required|integer|min:1|max:2',
+            'year' => 'required|integer|min:4',
             'activities' => 'required|array|min:1',
             'activities.*' => 'required|array|min:30|max:32',
             'activities.*.text' => 'required|string',

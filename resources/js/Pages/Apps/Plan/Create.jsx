@@ -172,7 +172,7 @@ export default function Create() {
         e.preventDefault();
 
         if (data.length !== 0) {
-            router.post(route('planification.store'), { period: `${year}-${month}`, activities: data}, {
+            router.post(route('planification.store'), { year: year, month: month, activities: data}, {
                 onSuccess: () => {
                     toast.success('Planificación creada correctamente!',{
                         icon: '👏',

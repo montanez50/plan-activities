@@ -17,7 +17,8 @@ class PlanificationFactory extends Factory
     public function definition(): array
     {
         return [
-            'period' => fake()->dateTime()->format('Y-m'),
+            'year' => fake()->dateTime()->format('Y'),
+            'month' => fake()->dateTime()->format('j'),
         ];
     }
 }

@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('planifications', function (Blueprint $table) {
             $table->id();
-            $table->string('period');
+            // $table->string('period');
+            $table->integer('month');
+            $table->integer('year');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

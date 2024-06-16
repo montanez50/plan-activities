@@ -133,9 +133,9 @@ export default function Edit() {
     const { planification, activities, errors } = usePage().props;
 
     const [data, setData] = useState([]);
-    const [month, setMonth] = useState(planification.period.split('-')[1]);
+    const [month, setMonth] = useState(planification.month);
     const [activity, setActivity] = useState(activities);
-    const {monthDays, colorDays, numbers, year} = parseInfo(month, planification.period.split('-')[0]);
+    const {monthDays, colorDays, numbers, year} = parseInfo(month, planification.year);
     
     // Cambia valor del mes
     const handleChangeSelector = (e) => {
@@ -177,7 +177,7 @@ export default function Edit() {
         e.preventDefault();
 
         if (data.length !== 0) {
-            router.post(route('planification.update', planification), { period: `${year}-${month}`, activities: data}, {
+            router.post(route('planification.update', planification), { year: year, month: month, activities: data}, {
                 onSuccess: () => {
                     toast.success('Planificación modificada correctamente!',{
                         icon: '👏',

@@ -166,10 +166,10 @@ export default function Execute() {
 
     const [data, setData] = useState([]);
     const [data2, setData2] = useState([]);
-    const month = planification.period.split('-')[1];
+    const month = planification.month;
     const [activity, setActivity] = useState(activities);
     const [noPlanActivity, setNoPlanActivity] = useState(noPlanActivities);
-    const {monthDays, colorDays, numbers, year} = parseInfo(month, planification.period.split('-')[0]);
+    const {monthDays, colorDays, numbers, year} = parseInfo(month, planification.year);
     const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
     // Remueve actividad

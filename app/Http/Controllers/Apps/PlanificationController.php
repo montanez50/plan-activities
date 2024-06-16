@@ -20,8 +20,9 @@ class PlanificationController extends Controller
     {
         $userId = Auth::user()->id;
         $planifications = Planification::with(['user', 'details'])
+            ->select(['*', \DB::raw('CONCAT(month, "-", year) as period')])
             ->where('user_id', $userId)
-            ->when($request->search, fn($query) => $query->where('period', 'like', '%'. $request->search . '%'))
+            ->when($request->search, fn($query) => $query->where('month', 'like', '%'. $request->search . '%')->orWhere('year', 'like', '%'. $request->search . '%'))
             ->latest()
             ->paginate(10)->withQueryString();
 
@@ -42,8 +43,12 @@ class PlanificationController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $data = $request->only('period', 'activities');
-        $planification = Planification::create(['period' => $data['period'], 'user_id' => Auth::user()->id]);
+        $data = $request->only('month', 'year', 'activities');
+        $planification = Planification::create([
+            'month' => $data['month'],
+            'year' => $data['year'],
+            'user_id' => Auth::user()->id
+        ]);
 
         $activities = collect($data['activities']);
         $formatActivities = $activities->map(function($i) {
@@ -80,8 +85,8 @@ class PlanificationController extends Controller
      */
     public function update(StoreRequest $request, Planification $planification)
     {
-        $data = $request->only('period', 'activities');
-        $planification->update([ 'period' => $data['period'] ]);
+        $data = $request->only('month', 'year', 'activities');
+        $planification->update([ 'month' => $data['month'], 'year' => $data['year'] ]);
 
         $activities = collect($data['activities']);
         $formatActivities = $activities->map(function($i) {
@@ -129,7 +134,7 @@ class PlanificationController extends Controller
         $process = $processList[$status];
         $planifications = Planification::with(['user', 'details'])
             ->where('status', $status)
-            ->when($request->search, fn($query) => $query->where('period', 'like', '%'. $request->search . '%'))
+            ->when($request->search, fn($query) => $query->where('month', 'like', '%'. $request->search . '%')->orWhere('year', 'like', '%'. $request->search . '%'))
             ->latest()
             ->paginate(10)->withQueryString();
 
@@ -165,7 +170,7 @@ class PlanificationController extends Controller
     {
         $planifications = Planification::with(['user', 'details'])
             ->where('status', 'AP')
-            ->when($request->search, fn($query) => $query->where('period', 'like', '%'. $request->search . '%'))
+            ->when($request->search, fn($query) => $query->where('month', 'like', '%'. $request->search . '%')->orWhere('year', 'like', '%'. $request->search . '%'))
             ->latest()
             ->paginate(10)
             ->withQueryString();
@@ -186,7 +191,7 @@ class PlanificationController extends Controller
 
     public function execute(ExecuteRequest $request, Planification $planification)
     {
-        $data = $request->only('period', 'activities', 'noPlanActivities');
+        $data = $request->only('activities', 'noPlanActivities');
 
         $activities = collect($data['activities']);
         $noPlanActivities = collect($data['noPlanActivities']);

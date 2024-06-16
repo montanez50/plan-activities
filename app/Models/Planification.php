@@ -19,7 +19,8 @@ class Planification extends Model
     ];
 
     protected $fillable = [
-        'period',
+        'year',
+        'month',
         'user_id',
         'status',
     ];
