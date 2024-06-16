@@ -22,9 +22,7 @@ ChartJS.register(
     Filler
 );
 
-var beneficios = [23, 12, 23, 5, 16, 34, 27, 15, 17, 19, 20, 13];
-var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-
+const  meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 var miOptions = {
     responsive: true,
     animation: true,
@@ -36,27 +34,27 @@ var miOptions = {
     scales: {
         y: {
             min: 0,
-            max: 50
         },
     }
 };
 
-var miData = {
-    labels: meses,
-    datasets: [
-        {
-            label: 'Actividades Planificadas',
-            data: beneficios,
-            backgroundColor: 'rgba(220, 252, 231, 0.5)'
-        },
-        {
-            label: 'Actividades no Planificadas',
-            data: beneficios,
-            backgroundColor: 'rgba(254, 249, 195, 0.5)'
-        }
-    ]
-}
+export default function Bars({ activities, noPlanActivities }) {
+    var miData = {
+        labels: meses,
+        datasets: [
+            {
+                label: 'Actividades Planificadas',
+                data: activities,
+                backgroundColor: 'rgba(220, 252, 231, 0.5)'
+            },
+            {
+                label: 'Actividades no Planificadas',
+                data: noPlanActivities,
+                backgroundColor: 'rgba(254, 249, 195, 0.5)'
+            }
+        ]
+    }
+    console.log(miData);
 
-export default function Bars() {
     return <Bar data={miData} options={miOptions}></Bar>
 }

@@ -18,8 +18,12 @@ export default function Index() {
         revised_plans,
         approved_plans,
         closed_plans,
-        anuled_plans
+        anuled_plans,
+        activities
     } = usePage().props;
+
+    const planActivites =  activities.map((data) => data.activities );
+    const noPlanActivities =  activities.map((data) => data.noPlanActivities );
 
     return (
         <>
@@ -137,7 +141,7 @@ export default function Index() {
                         title={'ACTIVIDADES EN EL AÑO'}
                         icon={<IconChartBar size={'20'} strokeWidth={'1.5'}/>}
                     >
-                        <Bars />
+                        <Bars activities={planActivites} noPlanActivities={noPlanActivities} />
                     </Card>
                 </div>
             </div>
