@@ -46,8 +46,14 @@ Route::group(['as' => 'apps.', 'prefix' => 'apps', 'middleware' => ['auth']], fu
     Route::get('/dependency/{dependency}/alert', [DependencyController::class, 'alertForm'])->name('alert.form');
     Route::post('/dependency/{dependency}/alert', [DependencyController::class, 'alertPost'])->name('alert.post');
 });
-
 Route::prefix('planification')->middleware('auth')->group(function () {
+    // Reportes
+    Route::get('/{planification}/pdf', [PlanificationController::class, 'planificationPdf'])->name('planification.pdf');
+    Route::get('/individual-reports', [PlanificationController::class, 'individualReports'])->name('planification.invidual.reports');
+    Route::get('/dependecy-reports', [PlanificationController::class, 'dependencyReports'])->name('planification.dependecy.reports');
+    Route::get('/individual-indicators', [PlanificationController::class, 'individualIndicators'])->name('planification.invidual.indicators');
+    Route::get('/dependency-indicators', [PlanificationController::class, 'dependencyIndicators'])->name('planification.dependecy.indicators');
+    Route::post('/get', [PlanificationController::class, 'getPlan'])->name('planification.get');
     // Ejecutar
     Route::get('/process/execute', [PlanificationController::class, 'executeList'])->name('planification.execute');
     Route::get('/process/execute/{planification}', [PlanificationController::class, 'executeForm'])->name('planification.executeForm');
@@ -64,8 +70,6 @@ Route::prefix('planification')->middleware('auth')->group(function () {
     Route::get('/process-list/{status}', [PlanificationController::class, 'processList'])->name('planification.process-list');
     Route::get('/process/{planification}/{status}', [PlanificationController::class, 'processForm'])->name('planification.process');
     Route::post('/process/{planification}', [PlanificationController::class, 'updateStatus'])->name('planification.update-status');
-    // Reportes
-    Route::get('/{planification}/pdf', [PlanificationController::class, 'planificationPdf'])->name('planification.pdf');
 });
 
 require __DIR__.'/auth.php';

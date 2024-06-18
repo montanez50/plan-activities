@@ -56,8 +56,8 @@ export default function Sidebar({ isSidebarOpen }) {
             title: 'ESTADÍSTICAS',
             permissions: hasAnyPermission(['dashboard-access']),
             details: [
-                {title: 'Reportes', href: '/planification/reports', icon: <IconReport strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['users-access'])},
-                {title: 'Indicadores', href: '/planification/indicators', icon: <IconChartDonut strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['roles-access'])},
+                {title: 'Reportes', href: '/planification/individual-reports', icon: <IconReport strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['users-access'])},
+                {title: 'Indicadores', href: '/planification/individual-indicators', icon: <IconChartDonut strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['roles-access'])},
             ]
         },
         {
@@ -65,8 +65,8 @@ export default function Sidebar({ isSidebarOpen }) {
             permissions: hasAnyPermission(['users-access']) || hasAnyPermission(['roles-access']) || hasAnyPermission(['permissions-access']),
             details: [
                 {title: 'Usuarios', href: '/apps/users', icon: <IconUsers strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['users-access'])},
-                {title: 'Roles', href: '/apps/roles', icon: <IconUserCheck strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['roles-access'])},
-                {title: 'Permisos', href: '/apps/permissions', icon: <IconUserBolt strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['permissions-access'])},
+                // {title: 'Roles', href: '/apps/roles', icon: <IconUserCheck strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['roles-access'])},
+                // {title: 'Permisos', href: '/apps/permissions', icon: <IconUserBolt strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['permissions-access'])},
                 {title: 'Dependencias', href: '/apps/dependencies', icon: <IconAugmentedReality strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['permissions-access'])},
             ]
         },

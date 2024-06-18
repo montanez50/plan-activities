@@ -40,7 +40,7 @@ export default function Index() {
                     </div>
                     <div className='w-full'>
                         <Search
-                            url={'/planification'}
+                            url={'/planification/list'}
                             placeholder={'Buscar planificación...'}
                         />
                     </div>

@@ -7,7 +7,9 @@ use App\Models\Planification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Plan\ExecuteRequest;
+use App\Models\Dependency;
 use App\Models\PlanificationDetail;
+use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -243,8 +245,85 @@ class PlanificationController extends Controller
 
         $pdf = Pdf::loadView('reports.planification', compact('planification', 'activities', 'noPlanActivities', 'days', 'totalDays'))
             ->setPaper('tabloid', 'landscape');
-        return $pdf->download('reporte_test.pdf');
+        return $pdf->stream("planificacion($mes-$anio).pdf");
         //return view('reports.planification', compact('planification', 'activities', 'noPlanActivities', 'days', 'totalDays'));
+    }
+
+    public function individualReports()
+    {
+        $years = Planification::select('year as value', 'year as label')
+            ->whereIn('status', ['AP', 'CR'])
+            ->groupBy('year')
+            ->orderBy('year', 'DESC')
+            ->get();
+
+        $users = User::select([
+                'id as value',
+                \DB::raw('CONCAT(name, " ", last_name) as label')
+            ])->get();
+
+        return Inertia::render('Apps/Plan/IndividualReport', compact('years', 'users'));
+    }
+
+    public function dependencyReports()
+    {
+        $years = Planification::select('year as value', 'year as label')
+            ->whereIn('status', ['AP', 'CR'])
+            ->groupBy('year')
+            ->orderBy('year', 'DESC')
+            ->get();
+
+        $dependencies = Dependency::select([
+                'id as value',
+                'name as label'
+            ])->get();
+
+        return Inertia::render('Apps/Plan/DependencyReport', compact('years', 'dependencies'));
+    }
+
+    public function getPlan(Request $request)
+    {
+        $data = $request->only('year', 'month', 'user');
+
+        $plan = Planification::where('year', $data['year'])
+            ->where('month', $data['month'])
+            ->where('user_id', $data['user'])
+            ->whereIn('status', ['AP', 'CR'])
+            ->first();
+
+        return response()->json(['data' => $plan ? $plan->id : false]);
+    }
+
+    public function individualIndicators()
+    {
+        $years = Planification::select('year as value', 'year as label')
+            ->whereIn('status', ['AP', 'CR'])
+            ->groupBy('year')
+            ->orderBy('year', 'DESC')
+            ->get();
+
+        $users = User::select([
+                'id as value',
+                \DB::raw('CONCAT(name, " ", last_name) as label')
+            ])->get();
+
+        return Inertia::render('Apps/Plan/IndividualIndicator', compact('years', 'users'));
+    }
+
+    public function dependencyIndicators()
+    {
+        $years = Planification::select('year as value', 'year as label')
+            ->whereIn('status', ['AP', 'CR'])
+            ->groupBy('year')
+            ->orderBy('year', 'DESC')
+            ->get();
+
+        $dependencies = Dependency::select([
+                'id as value',
+                'name as label'
+            ])->get();
+
+        return Inertia::render('Apps/Plan/DependencyIndicator', compact('years', 'dependencies'));
     }
 
 }
