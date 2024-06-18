@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Apps;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DependencyRequest;
+use App\Models\ConfigAlert;
 use App\Models\Dependency;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -126,6 +127,23 @@ class DependencyController extends Controller
     {
         $dependency->delete();
         return back();
+    }
+
+    public function alertForm(Dependency $dependency)
+    {
+        $config = ConfigAlert::where('dependency_id', $dependency->id)->first();
+        return Inertia::render('Apps/Dependencies/Alert', compact('config', 'dependency'));
+    }
+
+    public function alertPost(Request $request, Dependency $dependency)
+    {
+        ConfigAlert::updateOrCreate([ 'dependency_id' => $dependency->id ], $request->all());
+
+        if(auth()->user()->hasRole('super-admin')) {
+            return to_route('apps.dependencies.index');
+        }
+
+        return redirect()->back();
     }
 
 }

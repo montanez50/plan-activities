@@ -23,10 +23,10 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'month' => 'required|integer|min:1|max:2',
+            'month' => 'required|integer|min:1|max:12',
             'year' => 'required|integer|min:4',
             'activities' => 'required|array|min:1',
-            'activities.*' => 'required|array|min:30|max:32',
+            'activities.*' => 'required|array|min:29|max:32',
             'activities.*.text' => 'required|string',
         ];
     }

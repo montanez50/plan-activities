@@ -1,4 +1,4 @@
-import { IconPencil, IconTrash, IconEye, IconArrowBadgeUp } from '@tabler/icons-react'
+import { IconPencil, IconTrash, IconEye, IconArrowBadgeUp, IconHammer, IconFileDownload } from '@tabler/icons-react'
 import { Link, useForm } from '@inertiajs/react'
 import Swal from 'sweetalert2'
 import { toast } from 'react-hot-toast'
@@ -45,9 +45,17 @@ export default function ActionButton({ type, title, url, id }) {
                 <Link href={url} className='bg-blue-100 px-3 py-1 rounded-lg border border-blue-100 hover:bg-blue-200 hover:border-blue-500 flex items-center gap-1 text-blue-500'>
                     <IconEye className='text-blue-500' strokeWidth={'1.2'} size={'20'}/> {title}
                 </Link>
+                : type == 'config'?
+                <Link href={url} className='bg-blue-100 px-3 py-1 rounded-lg border border-blue-100 hover:bg-blue-200 hover:border-blue-500 flex items-center gap-1 text-blue-500'>
+                    <IconHammer className='text-blue-500' strokeWidth={'1.2'} size={'20'}/> {title}
+                </Link>
                 : type == 'process'?
                 <Link href={url} className='bg-green-100 px-3 py-1 rounded-lg border border-green-100 hover:bg-green-200 hover:border-green-500 flex items-center gap-1 text-green-500'>
                     <IconArrowBadgeUp className='text-green-500' strokeWidth={'1.2'} size={'20'}/> {title}
+                </Link>
+                : type == 'file'?
+                <Link href={url} className='bg-green-100 px-3 py-1 rounded-lg border border-green-100 hover:bg-green-200 hover:border-green-500 flex items-center gap-1 text-green-500'>
+                    <IconFileDownload className='text-green-500' strokeWidth={'1.2'} size={'20'}/> {title}
                 </Link>
                 :
                 <Link href={url} className='bg-yellow-100 px-3 py-1 rounded-lg border border-yellow-100 hover:bg-yellow-200 hover:border-yellow-500 flex items-center gap-1 text-yellow-500'>

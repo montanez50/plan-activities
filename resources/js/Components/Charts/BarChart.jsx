@@ -45,12 +45,12 @@ export default function Bars({ activities, noPlanActivities }) {
             {
                 label: 'Actividades Planificadas',
                 data: activities,
-                backgroundColor: 'rgba(220, 252, 231, 0.5)'
+                backgroundColor: 'rgba(255, 99, 132, 0.5)'
             },
             {
-                label: 'Actividades no Planificadas',
+                label: 'Actividades No Planificadas',
                 data: noPlanActivities,
-                backgroundColor: 'rgba(254, 249, 195, 0.5)'
+                backgroundColor: 'rgba(53, 162, 235, 0.5)'
             }
         ]
     }

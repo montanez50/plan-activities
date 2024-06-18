@@ -133,6 +133,7 @@ class PlanificationController extends Controller
         ];
         $process = $processList[$status];
         $planifications = Planification::with(['user', 'details'])
+            ->select(['*', \DB::raw('CONCAT(month, "-", year) as period')])
             ->where('status', $status)
             ->when($request->search, fn($query) => $query->where('month', 'like', '%'. $request->search . '%')->orWhere('year', 'like', '%'. $request->search . '%'))
             ->latest()
@@ -148,13 +149,14 @@ class PlanificationController extends Controller
             abort(404);
         }
 
-        $activities = $planification->details;
+        $activities = $planification->details()->where('type', 'P')->get();
+        $noPlanActivities = $status == 'CR' ? $planification->details()->where('type', 'NP')->get() : [];
         $process = [
             'status' => $status,
             'label' =>  Planification::STATUS[$status],
         ];
 
-        return Inertia::render('Apps/Plan/Process', compact('planification', 'activities', 'process'));
+        return Inertia::render('Apps/Plan/Process', compact('planification', 'activities', 'process', 'noPlanActivities'));
     }
 
     public function updateStatus(Request $request, Planification $planification)

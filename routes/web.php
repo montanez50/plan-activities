@@ -7,6 +7,7 @@ use App\Http\Controllers\Apps\ProfileController;
 use App\Http\Controllers\Apps\RoleController;
 use App\Http\Controllers\Apps\UserController;
 use App\Http\Controllers\Apps\PlanificationController;
+use App\Models\Dependency;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -41,6 +42,9 @@ Route::group(['as' => 'apps.', 'prefix' => 'apps', 'middleware' => ['auth']], fu
     });
     // dependency route
     Route::resource('/dependencies', DependencyController::class);
+    // Alerts
+    Route::get('/dependency/{dependency}/alert', [DependencyController::class, 'alertForm'])->name('alert.form');
+    Route::post('/dependency/{dependency}/alert', [DependencyController::class, 'alertPost'])->name('alert.post');
 });
 
 Route::prefix('planification')->middleware('auth')->group(function () {

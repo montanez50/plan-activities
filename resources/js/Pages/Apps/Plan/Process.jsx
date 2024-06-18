@@ -23,6 +23,20 @@ const Activity = ({ id, numbers, item }) => {
     );
 }
 
+const NoPlanActivity = ({ id, numbers, item }) => {
+    return (
+        <tr>
+            <Table.Td scope="row">
+                {id + 1}
+            </Table.Td>
+            <Table.Td>
+                {item.name}
+            </Table.Td>
+            {numbers.map((data, i) =>  <MarkCell key={i} status={item.days_execute ? item.days_execute[data] : false} /> )}
+        </tr>
+    );
+}
+
 const parseInfo = (month, year = null) => { 
     const monthDays = [];
     const colorDays = [];
@@ -56,7 +70,7 @@ const parseInfo = (month, year = null) => {
 
 export default function Process() {
     // get data
-    const { planification, activities, process } = usePage().props;
+    const { planification, activities, process, noPlanActivities } = usePage().props;
 
     const month = planification.month;
     const {monthDays, colorDays, numbers, year} = parseInfo(month, planification.year);
@@ -134,6 +148,23 @@ export default function Process() {
                                     numbers={numbers}
                                 />
                             ))}
+                            {noPlanActivities.length ? 
+                                noPlanActivities.map((item, i) => (
+                                    <>
+                                        <tr>
+                                            <Table.Td className='bg-gray-100' colSpan={35}>ACTIVIDADES NO PLANIFICADAS</Table.Td>
+                                        </tr>
+                                        <NoPlanActivity
+                                            key={item.id ?? item}
+                                            id={i}
+                                            item={item}
+                                            numbers={numbers}
+                                        />
+                                    </>
+                            ))
+                            :
+                                ''
+                            }
                         </Table.Tbody>
                     </Table>
                     <div className='flex items-center gap-4 mt-4 p-2'>

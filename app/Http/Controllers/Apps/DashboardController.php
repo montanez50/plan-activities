@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Models\Planification;
-use App\Models\PlanificationDetail;
 use Spatie\Permission\Models\Permission;
 
 class DashboardController extends Controller
@@ -15,6 +14,7 @@ class DashboardController extends Controller
     /**
      * Handle the incoming request.
      */
+    // TODO Hacer dashboard por roles
     public function __invoke(Request $request)
     {
         // get users data
@@ -48,17 +48,24 @@ class DashboardController extends Controller
         $anuled_plans = Planification::where('status', 'AN')->count();
 
         // Actividades
-        $activities = Planification::select([
-                'planifications.id',
+        $activitiesQuery = Planification::select([
                 'planifications.month',
                 \DB::raw('CAST(SUM(IF(type = "P", 1, 0)) as SIGNED) as activities'),
                 \DB::raw('CAST(SUM(IF(type = "NP", 1, 0)) as SIGNED) as noPlanActivities'),
             ])
             ->join('planification_details as pd', 'pd.planification_id', '=', 'planifications.id')
             ->where('year', date('Y'))
+            ->whereIn('status', ['AP', 'CR'])
             ->orderBy('month')
-            ->groupBy('planifications.id')
-            ->get();
+            ->groupBy('planifications.month')
+            ->get()
+            ->groupBy('month')
+            ->toArray();
+        
+        $activities = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $activities[] = $activitiesQuery[$i][0] ?? [];
+        }
 
         // render view
         return inertia('Apps/Dashboard/Index',  compact(

@@ -65,6 +65,11 @@ export default function Index() {
                                             url={`/apps/users`}
                                             id={dependency.id}
                                         />
+                                        <ActionButton
+                                            type={'config'}
+                                            url={route('apps.alert.form', dependency)}
+                                            id={dependency.id}
+                                        />
                                     </div>
                                 </Table.Td>
                             </tr>

@@ -93,7 +93,7 @@ export default function Create() {
                                 label={'Dependencia Padre'}
                                 options={parentDependencies}
                                 value={parentDependencies.filter(e => e.value === data.dependency_id)[0]}
-                                onChange={e => setData('dependency_id', e)}
+                                onChange={e => setData('dependency_id', e.value)}
                                 errors={errors.dependency_id}
                             />
                         </div>
