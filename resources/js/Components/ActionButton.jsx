@@ -3,6 +3,7 @@ import { Link, useForm } from '@inertiajs/react'
 import Swal from 'sweetalert2'
 import { toast } from 'react-hot-toast'
 import React from 'react'
+import axios from 'axios'
 export default function ActionButton({ type, title, url, id }) {
 
     const { delete: destroy } = useForm();
@@ -35,6 +36,14 @@ export default function ActionButton({ type, title, url, id }) {
         })
     }
 
+    const showFile = async (url) => {
+        const response = await axios.get(
+            url, { responseType: "blob" }
+        );
+        const newUrl = window.URL.createObjectURL(response.data);
+        window.open(newUrl, "_blank");
+    }
+
     return (
         <>
             {type == 'delete'?
@@ -54,9 +63,9 @@ export default function ActionButton({ type, title, url, id }) {
                     <IconArrowBadgeUp className='text-green-500' strokeWidth={'1.2'} size={'20'}/> {title}
                 </Link>
                 : type == 'file'?
-                <Link href={url} className='bg-green-100 px-3 py-1 rounded-lg border border-green-100 hover:bg-green-200 hover:border-green-500 flex items-center gap-1 text-green-500'>
+                <button onClick={() => showFile(url)} className='bg-green-100 px-3 py-1 rounded-lg border border-green-100 hover:bg-green-200 hover:border-green-500 flex items-center gap-1 text-green-500'>
                     <IconFileDownload className='text-green-500' strokeWidth={'1.2'} size={'20'}/> {title}
-                </Link>
+                </button>
                 :
                 <Link href={url} className='bg-yellow-100 px-3 py-1 rounded-lg border border-yellow-100 hover:bg-yellow-200 hover:border-yellow-500 flex items-center gap-1 text-yellow-500'>
                     <IconPencil size={'20'} strokeWidth={'1.2'}/> {title}

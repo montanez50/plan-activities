@@ -64,6 +64,8 @@ Route::prefix('planification')->middleware('auth')->group(function () {
     Route::get('/process-list/{status}', [PlanificationController::class, 'processList'])->name('planification.process-list');
     Route::get('/process/{planification}/{status}', [PlanificationController::class, 'processForm'])->name('planification.process');
     Route::post('/process/{planification}', [PlanificationController::class, 'updateStatus'])->name('planification.update-status');
+    // Reportes
+    Route::get('/{planification}/pdf', [PlanificationController::class, 'planificationPdf'])->name('planification.pdf');
 });
 
 require __DIR__.'/auth.php';

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Plan\ExecuteRequest;
 use App\Models\PlanificationDetail;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -223,4 +224,27 @@ class PlanificationController extends Controller
 
         return to_route('planification.execute')->with(['message' => 'Planificacion ejecutada correctamente!']);
     }
+
+    public function planificationPdf(Planification $planification)
+    {
+        $mes = $planification->month;
+        $anio = $planification->year;
+        $totalDays = date('t', mktime(0, 0, 0, $mes, 1, $anio));
+        $days = [];
+        $week = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
+
+        for ($i = 1; $i <= $totalDays; $i++) {
+            $dia = date('N', mktime(0, 0, 0, $mes, $i, $anio));
+            $days[] = $week[$dia-1];
+        }
+
+        $activities = $planification->details()->where('type', 'P')->get();
+        $noPlanActivities = $planification->details()->where('type', 'NP')->get();
+
+        $pdf = Pdf::loadView('reports.planification', compact('planification', 'activities', 'noPlanActivities', 'days', 'totalDays'))
+            ->setPaper('tabloid', 'landscape');
+        return $pdf->download('reporte_test.pdf');
+        //return view('reports.planification', compact('planification', 'activities', 'noPlanActivities', 'days', 'totalDays'));
+    }
+
 }

@@ -79,7 +79,7 @@ export default function Index() {
                                             type={'view'}
                                             url={`/planification/${planification.id}`}
                                         />
-                                        {(planification.status !== 'AP' && planification.status !== 'CR') && (
+                                        {(planification.status !== 'AP' && planification.status !== 'CR') ? (
                                             <>
                                                 <ActionButton
                                                     url={`/planification/${planification.id}/edit`}
@@ -90,7 +90,12 @@ export default function Index() {
                                                     id={planification.id}
                                                 />
                                             </>
-                                        )}
+                                        ) :
+                                        <ActionButton
+                                            type={'file'}
+                                            url={route('planification.pdf', planification)}
+                                        />
+                                        }
                                     </div>
                                 </Table.Td>
                             </tr>
