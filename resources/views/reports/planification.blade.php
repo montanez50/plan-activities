@@ -104,8 +104,8 @@
                         <td class="day" rowspan="2">{{number_format($porcent, 1, ',', ' ')}}%</td>
                     </tr>
                     <tr>
-                        <td class="day">{{$exeFirst}}/{{$planification->month}}/{{$planification->year}}</td>
-                        <td class="day">{{$exeEnd}}/{{$planification->month}}/{{$planification->year}}</td>
+                        <td class="day">@if($exeFirst){{$exeFirst}}/{{$planification->month}}/{{$planification->year}}@endif</td>
+                        <td class="day">@if($exeEnd){{$exeEnd}}/{{$planification->month}}/{{$planification->year}}@endif</td>
                         <td class="day">{{count($exePlan)}}</td>
                         @foreach ($activity->days_execute as $key => $day)
                             <td

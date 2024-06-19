@@ -174,6 +174,7 @@ class PlanificationController extends Controller
     public function executeList(Request $request)
     {
         $planifications = Planification::with(['user', 'details'])
+            ->select(['*', \DB::raw('CONCAT(month, "-", year) as period')])
             ->where('status', 'AP')
             ->when($request->search, fn($query) => $query->where('month', 'like', '%'. $request->search . '%')->orWhere('year', 'like', '%'. $request->search . '%'))
             ->latest()
@@ -247,6 +248,54 @@ class PlanificationController extends Controller
             ->setPaper('tabloid', 'landscape');
         return $pdf->stream("planificacion($mes-$anio).pdf");
         //return view('reports.planification', compact('planification', 'activities', 'noPlanActivities', 'days', 'totalDays'));
+    }
+
+    public function dependencyPdf(Dependency $dependency, $year, $month)
+    {
+
+        $planifications = Planification::with('details')
+            ->join('users as u', 'u.id', 'planifications.user_id')
+            ->select('planifications.id', 'name', 'last_name', 'status')
+            ->whereIn('planifications.status', ['AP', 'CR'])
+            ->where('u.dependency_id', $dependency->id)
+            ->where('year', $year)
+            ->where('month', $month)
+            ->get();
+        
+        $formatPlanifications = [];
+        foreach($planifications as $planification){
+
+            $daysPlan = [];
+            $daysExec = [];
+            foreach($planification->details()->where('type', 'P')->get() as $activity){
+                $days = array_filter($activity->days);
+                $days = array_keys($days);
+                $daysPlan = array_merge($daysPlan, $days);
+
+                $days = array_filter($activity->days_execute);
+                $days = array_keys($days);
+                $daysExec = array_merge($daysExec, $days);
+            }
+
+            $formatPlanifications[] = [
+                'id' => $planification->id,
+                'name'       => "{$planification->name} {$planification->last_name}",
+                'status'     => ['AP' => 'Aprobado', 'CR' => 'Cerrado'][$planification->status],
+                'activities' => $planification->details()->where('type', 'P')->count(),
+                'noPlanActivities' => $planification->details()->where('type', 'NP')->count(),
+                'date_start' => reset($daysPlan)."/$month/$year",
+                'date_end' => end($daysPlan)."/$month/$year",
+                'real_date_start' => $daysExec ? reset($daysExec)."/$month/$year" : '',
+                'real_date_end' => $daysExec ? end($daysExec)."/$month/$year" : '',
+                'days' => count($daysPlan),
+                'real_days' => count($daysExec),
+            ];
+        }
+
+        $pdf = Pdf::loadView('reports.dependency-report', compact('dependency', 'month', 'year', 'formatPlanifications'))
+            ->setPaper('a4', 'landscape');
+        return $pdf->stream("dependencia($month-$year).pdf");
+        // return view('reports.dependency-report', compact('dependency', 'month', 'year', 'formatPlanifications'));
     }
 
     public function individualReports()

@@ -1,6 +1,7 @@
 import AppLayout from '@/Layouts/AppLayout'
 import { Head, usePage } from '@inertiajs/react'
 import moment from 'moment';
+import 'moment/locale/es';
 import { IconDatabaseOff, IconPlus, IconWallpaper } from '@tabler/icons-react'
 import Table from '@/Components/Table'
 import Pagination from '@/Components/Pagination'
@@ -10,6 +11,13 @@ import Button from '@/Components/Button'
 import ActionButton from '@/Components/ActionButton'
 
 export default function Index() {
+    moment.updateLocale('es', {
+        months: 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split('_'),
+        monthsShort: 'Ene._Feb._Mar._Abr._May._Jun._Jul._Ago._Sep._Oct._Nov._Dic.'.split('_'),
+        weekdays: 'Domingo_Lunes_Martes_Miércoles_Jueves_Viernes_Sábado'.split('_'),
+        weekdaysShort: 'Dom._Lun._Mar._Mié._Jue._Vie._Sáb.'.split('_'),
+        weekdaysMin: 'Do_Lu_Ma_Mi_Ju_Vi_Sá'.split('_')
+    });
 
     // destruct data from props
     const { planifications } = usePage().props;

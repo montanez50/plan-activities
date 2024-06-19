@@ -37,17 +37,7 @@ export default function DependencyReport() {
             toast.error('Complete todos los campos');
             return;
         }
-        axios.post(route('planification.get'), { user: dependency, year: year, month: month })
-        .then(response => {
-            if(response.data.data) {
-                setUrl(`/planification/${response.data.data}/pdf`);
-            } else {
-                toast.error('No hay resultados');
-            }
-        })
-        .catch(error => {
-            toast.error(error);
-        });
+        setUrl(`/planification/dependecy-report/${dependency}/${year}/${month}`);
     }
 
     return (

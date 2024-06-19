@@ -48,13 +48,17 @@ Route::group(['as' => 'apps.', 'prefix' => 'apps', 'middleware' => ['auth']], fu
 });
 Route::prefix('planification')->middleware('auth')->group(function () {
     // Reportes
+    // Individual PDF
     Route::get('/{planification}/pdf', [PlanificationController::class, 'planificationPdf'])->name('planification.pdf');
     Route::get('/individual-reports', [PlanificationController::class, 'individualReports'])->name('planification.invidual.reports');
+    // Dependency PDF
     Route::get('/dependecy-reports', [PlanificationController::class, 'dependencyReports'])->name('planification.dependecy.reports');
+    Route::get('/dependecy-report/{dependency}/{year}/{month}', [PlanificationController::class, 'dependencyPdf'])->name('planification.dependecy.report');
+    // Indicators
     Route::get('/individual-indicators', [PlanificationController::class, 'individualIndicators'])->name('planification.invidual.indicators');
     Route::get('/dependency-indicators', [PlanificationController::class, 'dependencyIndicators'])->name('planification.dependecy.indicators');
     Route::post('/get', [PlanificationController::class, 'getPlan'])->name('planification.get');
-    // Ejecutar
+    // Execute
     Route::get('/process/execute', [PlanificationController::class, 'executeList'])->name('planification.execute');
     Route::get('/process/execute/{planification}', [PlanificationController::class, 'executeForm'])->name('planification.executeForm');
     Route::post('/process/execute/{planification}', [PlanificationController::class, 'execute'])->name('planification.executePlan');
