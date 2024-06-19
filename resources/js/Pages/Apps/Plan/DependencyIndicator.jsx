@@ -3,10 +3,12 @@ import Card from '@/Components/Card'
 import SelectInput from '@/Components/Select'
 import AppLayout from '@/Layouts/AppLayout'
 import { Head, usePage } from '@inertiajs/react'
-import { IconAugmentedReality, IconChartBar, IconFile, IconSearch, IconUser } from '@tabler/icons-react'
+import { IconAugmentedReality, IconChartBar, IconChartPie, IconSearch, IconUser } from '@tabler/icons-react'
 import React, { useState } from 'react'
 import axios from 'axios';
 import toast from 'react-hot-toast'
+import Bars from '@/Components/Charts/BarTypeActivities';
+import Pies from '@/Components/Charts/PieType'
 
 export default function DependencyIndicator() {
 
@@ -30,17 +32,21 @@ export default function DependencyIndicator() {
     const [dependency, setDependency] = useState('');
     const [month, setMonth] = useState('');
     const [year, setYear] = useState('');
-    const [url, setUrl] = useState('');
+    const [num, setNum] = useState([]);
+    const [names, setNames] = useState([]);
+    const [porcents, setPorcents] = useState([]);
 
     const handleSearch = () => {
         if (!(dependency && year && month)) {
             toast.error('Complete todos los campos');
             return;
         }
-        axios.post(route('planification.get'), { user: dependency, year: year, month: month })
+        axios.post(route('planification.indicator.dep'), { dependency: dependency, year: year, month: month })
         .then(response => {
-            if(response.data.data) {
-                setUrl(`/planification/${response.data.data}/pdf`);
+            if(response.data) {
+                setNum(response.data.countActivities);
+                setNames(response.data.names);
+                setPorcents(response.data.porcents);
             } else {
                 toast.error('No hay resultados');
             }
@@ -61,7 +67,7 @@ export default function DependencyIndicator() {
                             type={'link'}
                             icon={<IconUser size={'20'} strokeWidth={'1.5'}/>}
                             className={'bg-white text-gray-700 border hover:border-sky-500'}
-                            href={'/planification/individual-reports'}
+                            href={'/planification/individual-indicators'}
                             added={true}
                         />
                     </div>
@@ -108,14 +114,25 @@ export default function DependencyIndicator() {
             </Card>
 
             <div className='mt-5'>
-                <Card
-                    title={'Ver Gráficos'}
-                    icon={<IconChartBar size={'20'} strokeWidth={'1.5'}/>}
-                >
-                    {url && (
-                        <iframe src={url} width="100%" height="530" allowFullScreen></iframe>
-                    )}
-                </Card>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+                    <div className='col-span-12 lg:col-span-2'>
+                        <Card
+                            title={'Porcentaje de cumplimiento (%)'}
+                            icon={<IconChartBar size={'20'} strokeWidth={'1.5'}/>}
+                        >
+                            <Bars names={names} porcents={porcents} />
+                        </Card>
+                    </div>
+                    <div className='col-span-12 lg:col-span-1'>
+                        <Card
+                            className='h-full'
+                            title={'Tipos de actividades'}
+                            icon={<IconChartPie size={'20'} strokeWidth={'1.5'}/>}
+                        >
+                            <Pies num={num} />
+                        </Card>
+                    </div>
+                </div>
             </div>
         </>
     )

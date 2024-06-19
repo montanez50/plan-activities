@@ -57,7 +57,10 @@ Route::prefix('planification')->middleware('auth')->group(function () {
     // Indicators
     Route::get('/individual-indicators', [PlanificationController::class, 'individualIndicators'])->name('planification.invidual.indicators');
     Route::get('/dependency-indicators', [PlanificationController::class, 'dependencyIndicators'])->name('planification.dependecy.indicators');
+    // methods
     Route::post('/get', [PlanificationController::class, 'getPlan'])->name('planification.get');
+    Route::post('/indicator', [PlanificationController::class, 'getIndicator'])->name('planification.indicator');
+    Route::post('/indicator-dependency', [PlanificationController::class, 'getIndicatorDependency'])->name('planification.indicator.dep');
     // Execute
     Route::get('/process/execute', [PlanificationController::class, 'executeList'])->name('planification.execute');
     Route::get('/process/execute/{planification}', [PlanificationController::class, 'executeForm'])->name('planification.executeForm');

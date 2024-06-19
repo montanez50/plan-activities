@@ -343,6 +343,90 @@ class PlanificationController extends Controller
         return response()->json(['data' => $plan ? $plan->id : false]);
     }
 
+    public function getIndicator(Request $request)
+    {
+        $data = $request->only('year', 'month', 'user');
+
+        $plan = Planification::where('year', $data['year'])
+            ->where('month', $data['month'])
+            ->where('user_id', $data['user'])
+            ->whereIn('status', ['AP', 'CR'])
+            ->first();
+
+        $porcent = [];
+        $name = [];
+        foreach($plan->details()->where('type', 'P')->get() as $activity){
+            $days = array_filter($activity->days);
+            $days = array_keys($days);
+
+            $daysExec = array_filter($activity->days_execute);
+            $daysExec = array_keys($daysExec);
+
+            $name[] = $activity->name;
+            $porcent[] = (float) number_format(((count($daysExec)/count($days))*100), 1, '.', ' ');
+        }
+        
+        $response = [
+            'countActivities' => [
+                $plan->details()->where('type', 'P')->count(),
+                $plan->details()->where('type', 'NP')->count()
+            ],
+            'names' => $name,
+            'porcents' => $porcent
+        ];
+
+        return response()->json($plan ? $response : false);
+    }
+
+    public function getIndicatorDependency(Request $request)
+    {
+        $data = $request->only('year', 'month', 'dependency');
+
+        $planifications = Planification::with('details')
+            ->join('users as u', 'u.id', 'planifications.user_id')
+            ->select('planifications.id', 'name', 'last_name', 'status')
+            ->whereIn('planifications.status', ['AP', 'CR'])
+            ->where('u.dependency_id', $data['dependency'])
+            ->where('year', $data['year'])
+            ->where('month', $data['month'])
+            ->get();
+
+        $planCount = 0;
+        $noPlanCount = 0;
+        $name = [];
+        $porcent = [];
+        foreach($planifications as $planification){
+
+            $daysPlan = [];
+            $daysExec = [];
+            foreach($planification->details()->where('type', 'P')->get() as $activity){
+                $days = array_filter($activity->days);
+                $days = array_keys($days);
+                $daysPlan = array_merge($daysPlan, $days);
+
+                $days = array_filter($activity->days_execute);
+                $days = array_keys($days);
+                $daysExec = array_merge($daysExec, $days);
+            }
+
+            $planCount += $planification->details()->where('type', 'P')->count();
+            $noPlanCount += $planification->details()->where('type', 'NP')->count();
+            $name[] = "{$planification->name} {$planification->last_name}";
+            $porcent[] = (float) number_format(((count($daysExec)/count($daysPlan))*100), 1, '.', ' ');
+        }
+        
+        $response = [
+            'countActivities' => [
+                $planCount,
+                $noPlanCount
+            ],
+            'names' => $name,
+            'porcents' => $porcent
+        ];
+
+        return response()->json($planifications ? $response : false);
+    }
+
     public function individualIndicators()
     {
         $years = Planification::select('year as value', 'year as label')

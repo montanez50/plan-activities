@@ -84,7 +84,7 @@ export default function Sidebar({ isSidebarOpen }) {
         <div className={`${isSidebarOpen ? 'w-[260px]' : 'w-[100px]'} bg-white min-h-screen overflow-y-auto hidden md:block relative z-10 border-r transition-all duration-300`}>
             {isSidebarOpen ?
                 <>
-                    <div className='flex justify-center items-center px-6 py-2 h-16'>
+                    <div className='flex justify-center items-center px-6 py-2 h-18'>
                         <div className='text-2xl font-bold text-gray-700 text-center leading-loose tracking-wider'>
                             SPCCEM
                         </div>

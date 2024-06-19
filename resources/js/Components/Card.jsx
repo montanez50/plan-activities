@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default function Card({title, icon, children}) {
+export default function Card({title, icon, children, className}) {
     return (
-        <div className='bg-white rounded-lg'>
+        <div className={`bg-white rounded-lg ${className ?? ''}`}>
             <div className='border-b px-6 py-3 rounded-t-lg'>
                 <div className='flex items-center gap-2'>
                     {icon}
