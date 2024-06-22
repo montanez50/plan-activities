@@ -36,6 +36,8 @@ class DependencyController extends Controller
         // get all dependencies data
         $dependencies = Dependency::query()
             ->with('user')
+            ->leftJoin('dependencies as pd', 'pd.id', '=', 'dependencies.parent_id')
+            ->select('dependencies.*', 'pd.name as parent_name')
             ->when($request->search, fn($query) => $query->where('name', 'like', '%'. $request->search . '%'))
             ->latest()
             ->paginate(10)
@@ -64,7 +66,7 @@ class DependencyController extends Controller
                 'id as value',
                 'name as label'
             ])
-            ->whereNull('parent_id')
+            // ->whereNull('parent_id')
             ->get();
 
         return Inertia::render('Apps/Dependencies/Create', compact('users', 'parentDependencies'));
@@ -114,7 +116,7 @@ class DependencyController extends Controller
                 'id as value',
                 'name as label'
             ])
-            ->whereNull('parent_id')
+            // ->whereNull('parent_id')
             ->where('id', '<>', $dependency->id)
             ->get();
 

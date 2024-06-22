@@ -44,6 +44,7 @@ export default function Index() {
                             <Table.Th>Nombre</Table.Th>
                             <Table.Th>Codigo Interno</Table.Th>
                             <Table.Th>Responsable</Table.Th>
+                            <Table.Th>Dependencia Padre</Table.Th>
                             <Table.Th>Acción</Table.Th>
                         </tr>
                     </Table.Thead>
@@ -55,6 +56,7 @@ export default function Index() {
                                 <Table.Td>{dependency.name}</Table.Td>
                                 <Table.Td>123456</Table.Td>
                                 <Table.Td>{dependency.user && `${dependency.user.name} ${dependency.user.last_name}`}</Table.Td>
+                                <Table.Td>{dependency.parent_id && `${dependency.parent_name}`}</Table.Td>
                                 <Table.Td>
                                     <div className='flex items-center gap-2'>
                                         <ActionButton

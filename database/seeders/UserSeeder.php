@@ -36,9 +36,9 @@ class UserSeeder extends Seeder
 
         // create new boos
         $user = User::create([
-            'name' => 'Boss',
+            'name' => 'Jefe',
             'last_name' => 'CEM',
-            'email' => 'boss@dev.com',
+            'email' => 'jefe@dev.com',
             'password' => bcrypt('password'),
             'dependency_id' => 1,
         ]);
@@ -52,9 +52,9 @@ class UserSeeder extends Seeder
 
         // create new employee
         $user = User::create([
-            'name' => 'Employee',
+            'name' => 'Empleado',
             'last_name' => 'CEM',
-            'email' => 'employee@dev.com',
+            'email' => 'empleado@dev.com',
             'password' => bcrypt('password'),
             'dependency_id' => 1,
         ]);
