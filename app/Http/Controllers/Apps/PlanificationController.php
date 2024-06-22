@@ -17,6 +17,36 @@ use Inertia\Inertia;
 class PlanificationController extends Controller
 {
     /**
+     * __construct
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        // Planificaciones
+        $this->middleware('permission:planifications-access')->only('index');
+        $this->middleware('permission:planifications-create')->only('create');
+        $this->middleware('permission:planifications-show')->only('show');
+        $this->middleware('permission:planifications-update')->only('edit');
+        $this->middleware('permission:planifications-delete')->only('destroy');
+        // Ejecutar
+        $this->middleware('permission:planifications-execute-access')->only('executeList');
+        $this->middleware('permission:planifications-execute')->only('executeForm');
+        // Control de procesos
+        $this->middleware('permission:control-review-access')->only('processList');
+        $this->middleware('permission:control-review')->only('processForm');
+        $this->middleware('permission:control-approve-access')->only('processList');
+        $this->middleware('permission:control-approve')->only('processForm');
+        $this->middleware('permission:control-close-access')->only('processList');
+        $this->middleware('permission:control-close')->only('processForm');
+        // Estadisticas
+        $this->middleware('permission:statistics-individual-report')->only('individualReports');
+        $this->middleware('permission:statistics-dependency-report')->only('dependencyReports');
+        $this->middleware('permission:statistics-individual-indicator')->only('individualIndicators');
+        $this->middleware('permission:statistics-dependency-indicator')->only('dependencyIndicators');
+    }
+
+    /**
      * Display a listing of the resource.
      */
     public function index(Request $request)

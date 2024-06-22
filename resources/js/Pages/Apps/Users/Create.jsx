@@ -134,7 +134,7 @@ export default function Create() {
                                         />
                                         <div className='font-semibold'>{role.name}</div>
                                     </div>
-                                    {role.name !== 'super-admin' ?
+                                    {role.name !== 'administrador' ?
                                         <div className='flex flex-wrap items-center gap-4 ml-5'>
                                             {role.permissions.map((permission, x) => (
                                                 <div className='text-sm text-gray-500 flex items-center gap-1' key={x}>

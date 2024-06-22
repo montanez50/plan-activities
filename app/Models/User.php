@@ -71,7 +71,7 @@ class User extends Authenticatable
 
     public function getSuperAdmin()
     {
-        return $this->hasRole('super-admin');
+        return $this->hasRole('administrador');
     }
 
     public function dependency(): BelongsTo

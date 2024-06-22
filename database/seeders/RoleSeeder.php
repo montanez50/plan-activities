@@ -15,7 +15,7 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         // get all permissions data where name like users
-        $user_permissions = Permission::where('name', 'like', '%users%')->get();
+        /*$user_permissions = Permission::where('name', 'like', '%users%')->get();
 
         // create new role
         $user_group = Role::create(['name' => 'users-access']);
@@ -39,9 +39,32 @@ class RoleSeeder extends Seeder
         $permission_group = Role::create(['name' => 'permission-access']);
 
         // assign a permissions to a role
-        $permission_group->givePermissionTo($permission_permissions);
+        $permission_group->givePermissionTo($permission_permissions);*/
+
+        //? Rol Empleado
+        $employee_permissions = Permission::where('name', 'like', '%planifications%')->get();
 
         // create new role
-        Role::create(['name' => 'super-admin']);
+        $employee_group = Role::create(['name' => 'empleado']);
+
+        // assign a permissions to a access role
+        $employee_group->givePermissionTo($employee_permissions);
+        $employee_group->givePermissionTo('dashboard-access');
+
+        //? Rol Jefe
+        $boss_control_permissions = Permission::where('name', 'like', '%control%')->get();
+        $boss_statistics_permissions = Permission::where('name', 'like', '%statistics%')->get();
+
+        // create new role
+        $boss_group = Role::create(['name' => 'jefe']);
+
+        // assign a permissions to a access role
+        $boss_group->givePermissionTo($boss_control_permissions);
+        $boss_group->givePermissionTo($boss_statistics_permissions);
+        $boss_group->givePermissionTo('dashboard-access');
+
+        //? Rol Administrador
+        // create new role
+        Role::create(['name' => 'administrador']);
     }
 }

@@ -35,29 +35,29 @@ export default function Sidebar({ isSidebarOpen }) {
         },
         {
             title: 'GESTIÓN DE PLANIFICACIÓN',
-            permissions: hasAnyPermission(['dashboard-access']),
+            permissions: hasAnyPermission(['planifications-access']),
             details: [
-                {title: 'Crear Planificación', href: '/planification/create', icon: <IconPaperclip strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['users-access'])},
-                {title: 'Planificaciones', href: '/planification/list', icon: <IconWallpaper strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['roles-access'])},
-                {title: 'Ejecutar', href: '/planification/process/execute', icon: <IconPencilCheck strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['permissions-access'])},
+                {title: 'Crear Planificación', href: '/planification/create', icon: <IconPaperclip strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['planifications-create'])},
+                {title: 'Planificaciones', href: '/planification/list', icon: <IconWallpaper strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['planifications-access'])},
+                {title: 'Ejecutar', href: '/planification/process/execute', icon: <IconPencilCheck strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['planifications-execute-access'])},
             ]
         },
         {
             title: 'CONTROL DE PROCESOS',
-            permissions: hasAnyPermission(['dashboard-access']),
+            permissions: hasAnyPermission(['control-access']),
             details: [
-                {title: 'Revisar Planificación', href: '/planification/process-list/PR', icon: <IconArrowBadgeDown strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['users-access'])},
-                {title: 'Aprobar Planificación', href: '/planification/process-list/RV', icon: <IconBadges strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['roles-access'])},
-                {title: 'Cerrar Planificación', href: '/planification/process-list/AP', icon: <IconBadgesOff strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['permissions-access'])},
-                {title: 'Alertas', href: '/apps/dependency/1/alert', icon: <IconAlarm strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['permissions-access'])},
+                {title: 'Revisar Planificación', href: '/planification/process-list/PR', icon: <IconArrowBadgeDown strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['control-review-access'])},
+                {title: 'Aprobar Planificación', href: '/planification/process-list/RV', icon: <IconBadges strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['control-approve-access'])},
+                {title: 'Cerrar Planificación', href: '/planification/process-list/AP', icon: <IconBadgesOff strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['control-close-access'])},
+                {title: 'Alertas', href: '/apps/dependency/1/alert', icon: <IconAlarm strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['control-alert'])},
             ]
         },
         {
             title: 'ESTADÍSTICAS',
-            permissions: hasAnyPermission(['dashboard-access']),
+            permissions: hasAnyPermission(['statistics-access']),
             details: [
-                {title: 'Reportes', href: '/planification/individual-reports', icon: <IconReport strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['users-access'])},
-                {title: 'Indicadores', href: '/planification/individual-indicators', icon: <IconChartDonut strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['roles-access'])},
+                {title: 'Reportes', href: '/planification/individual-reports', icon: <IconReport strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['statistics-individual-report'])},
+                {title: 'Indicadores', href: '/planification/individual-indicators', icon: <IconChartDonut strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['statistics-individual-indicator'])},
             ]
         },
         {
@@ -72,7 +72,7 @@ export default function Sidebar({ isSidebarOpen }) {
         },
         {
             title: 'SOPORTE',
-            permissions: hasAnyPermission(['users-access']) || hasAnyPermission(['roles-access']) || hasAnyPermission(['permissions-access']),
+            permissions: hasAnyPermission(['support-access']) || hasAnyPermission(['roles-access']) || hasAnyPermission(['permissions-access']),
             details: [
                 {title: 'Respaldo', href: '/apps/users', icon: <IconUsers strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['users-access'])},
                 {title: 'Logs', href: '/apps/roles', icon: <IconUserCheck strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['roles-access'])},
@@ -105,7 +105,7 @@ export default function Sidebar({ isSidebarOpen }) {
                                     </div>
                                     :
                                     link.permissions === true &&
-                                    <div className='uppercase text-xs font-semibold py-2 text-gray-700'>
+                                    <div className='uppercase text-xs font-semibold py-2 text-gray-700 px-2'>
                                         {link.title}
                                     </div>
                                 }

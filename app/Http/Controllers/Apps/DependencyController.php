@@ -13,6 +13,22 @@ use Inertia\Inertia;
 class DependencyController extends Controller
 {
     /**
+     * __construct
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        // Dependency
+        $this->middleware('permission:dependencies-access')->only('index');
+        $this->middleware('permission:dependencies-create')->only('create');
+        $this->middleware('permission:dependencies-update')->only('edit');
+        $this->middleware('permission:dependencies-delete')->only('destroy');
+        // Alert
+        $this->middleware('permission:control-alert')->only('alertForm');
+    }
+
+    /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
@@ -139,7 +155,7 @@ class DependencyController extends Controller
     {
         ConfigAlert::updateOrCreate([ 'dependency_id' => $dependency->id ], $request->all());
 
-        if(auth()->user()->hasRole('super-admin')) {
+        if(auth()->user()->hasRole('administrador')) {
             return to_route('apps.dependencies.index');
         }
 

@@ -53,7 +53,7 @@ export default function Index() {
                                 <Table.Td>{++i + (roles.current_page-1) * roles.per_page}</Table.Td>
                                 <Table.Td>{role.name}</Table.Td>
                                 <Table.Td>
-                                    {role.name !== 'super-admin' ?
+                                    {role.name !== 'administrador' ?
                                         <div className='flex flex-wrap gap-x-3 gap-y-2 items-center'>
                                             {role.permissions.map((permission, x) => (
                                                 <div className='px-3 py-0.5 bg-sky-100 text-sky-500 rounded-xl flex items-center gap-1' key={x}>

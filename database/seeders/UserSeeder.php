@@ -14,14 +14,47 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        //? Admin
         // get admin role
-        $role = Role::where('name', 'super-admin')->first();
+        $role = Role::where('name', 'administrador')->first();
 
         // create new admin
         $user = User::create([
             'name' => 'Admin',
-            'last_name' => 'Admin',
+            'last_name' => 'CEM',
             'email' => 'admin@dev.com',
+            'password' => bcrypt('password'),
+            'dependency_id' => 1,
+        ]);
+
+        // assign a role to user
+        $user->assignRole($role);
+
+        //? Jefe
+        // get boos role
+        $role = Role::where('name', 'jefe')->first();
+
+        // create new boos
+        $user = User::create([
+            'name' => 'Boss',
+            'last_name' => 'CEM',
+            'email' => 'boss@dev.com',
+            'password' => bcrypt('password'),
+            'dependency_id' => 1,
+        ]);
+
+        // assign a role to user
+        $user->assignRole($role);
+
+        //? Empleado
+        // get employee role
+        $role = Role::where('name', 'empleado')->first();
+
+        // create new employee
+        $user = User::create([
+            'name' => 'Employee',
+            'last_name' => 'CEM',
+            'email' => 'employee@dev.com',
             'password' => bcrypt('password'),
             'dependency_id' => 1,
         ]);
