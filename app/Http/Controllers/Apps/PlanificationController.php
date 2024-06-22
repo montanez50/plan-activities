@@ -205,7 +205,7 @@ class PlanificationController extends Controller
 
         $isJefe = Auth::user()->hasRole('jefe');
         $dependency = Dependency::where('user_id', Auth::user()->id)->first();
-        $dependencies = $isJefe ? Dependency::where('id', $dependency->id ?? '')->orWhere('parent_id', $dependency->id)->get()->pluck('id') : [];
+        $dependencies = $isJefe ? Dependency::where('id', $dependency ? $dependency->id : '')->orWhere('parent_id', $dependency ? $dependency->id : '')->get()->pluck('id') : [];
 
         $planifications = Planification::with(['user', 'details'])
             ->join('users as u', 'u.id', '=', 'planifications.user_id')
@@ -385,7 +385,7 @@ class PlanificationController extends Controller
         
         $isJefe = Auth::user()->hasRole('jefe');
         $dependency = Dependency::where('user_id', Auth::user()->id)->first();
-        $dependencies = $isJefe ? Dependency::where('id', $dependency->id ?? '')->orWhere('parent_id', $dependency->id)->get()->pluck('id') : [];
+        $dependencies = $isJefe ? Dependency::where('id', $dependency ? $dependency->id : '')->orWhere('parent_id', $dependency ? $dependency->id : '')->get()->pluck('id') : [];
 
         $users = User::select([
                 'id as value',
@@ -407,7 +407,7 @@ class PlanificationController extends Controller
 
         $isJefe = Auth::user()->hasRole('jefe');
         $dependency = Dependency::where('user_id', Auth::user()->id)->first();
-        $dependencies = $isJefe ? Dependency::where('id', $dependency->id ?? '')->orWhere('parent_id', $dependency->id)->get()->pluck('id') : [];
+        $dependencies = $isJefe ? Dependency::where('id', $dependency ? $dependency->id : '')->orWhere('parent_id', $dependency ? $dependency->id : '')->get()->pluck('id') : [];
 
         $dependencies = Dependency::select([
                 'id as value',
@@ -534,7 +534,7 @@ class PlanificationController extends Controller
         
         $isJefe = Auth::user()->hasRole('jefe');
         $dependency = Dependency::where('user_id', Auth::user()->id)->first();
-        $dependencies = $isJefe ? Dependency::where('id', $dependency->id ?? '')->orWhere('parent_id', $dependency->id)->get()->pluck('id') : [];
+        $dependencies = $isJefe ? Dependency::where('id', $dependency ? $dependency->id : '')->orWhere('parent_id', $dependency ? $dependency->id : '')->get()->pluck('id') : [];
 
         $users = User::select([
                 'id as value',
@@ -556,7 +556,7 @@ class PlanificationController extends Controller
 
         $isJefe = Auth::user()->hasRole('jefe');
         $dependency = Dependency::where('user_id', Auth::user()->id)->first();
-        $dependencies = $isJefe ? Dependency::where('id', $dependency->id ?? '')->orWhere('parent_id', $dependency->id)->get()->pluck('id') : [];
+        $dependencies = $isJefe ? Dependency::where('id', $dependency ? $dependency->id : '')->orWhere('parent_id', $dependency ? $dependency->id : '')->get()->pluck('id') : [];
 
         $dependencies = Dependency::select([
                 'id as value',
