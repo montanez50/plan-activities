@@ -91,7 +91,7 @@ export default function Sidebar({ isSidebarOpen }) {
                     <div className='w-full p-3 flex items-center gap-4 border-b bg-sky-50 border-sky-100 border-t'>
                         <img src={auth.user.avatar} className='w-12 h-12 rounded-full border border-sky-500'/>
                         <div className='flex flex-col gap-0.5'>
-                            <div className='text-gray-700 text-sm'>{auth.user.name}</div>
+                            <div className='text-gray-700 text-sm'>{auth.user.name} {auth.user.last_name}</div>
                             <div className='text-gray-400 text-xs'>{auth.user.email}</div>
                         </div>
                     </div>

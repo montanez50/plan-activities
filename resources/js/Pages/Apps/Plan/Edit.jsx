@@ -70,6 +70,9 @@ const Activity = ({ id, numbers, item, handleRemove, changeActivity }) => {
 }
 
 const MonthSelector = ({ month, handleChange }) => {
+    // get month data
+    const { availableMonths } = usePage().props;
+
     const months = [
         {value: 1, label: 'Enero'},
         {value: 2, label: 'Febrero'},
@@ -85,12 +88,14 @@ const MonthSelector = ({ month, handleChange }) => {
         {value: 12, label: 'Diciembre'},
     ];
 
+    const avMonths = months.filter(data => availableMonths.includes(data.value));
+
     return (
         <div className='my-2'>
             <SelectInput
                 label={'Mes'}
-                options={months}
-                value={months.filter(data => data.value == month)[0]}
+                options={avMonths}
+                value={avMonths.filter(data => data.value == month)[0]}
                 onChange={handleChange}
             />
         </div>

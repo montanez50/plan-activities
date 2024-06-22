@@ -70,8 +70,22 @@ class PlanificationController extends Controller
      */
     public function create()
     {
-        // TODO: crear parametros para los periodos
-        return Inertia::render('Apps/Plan/Create');
+        //? Calculos de periodos disponibles
+        $actualMonth = date('n');
+        $nextMonth = date('n', strtotime('+1 month'));
+
+        $availableMonths = [];
+        $isActualExist = Planification::where('month', $actualMonth)->where('year', date('Y'))->count() > 0;
+        if (!$isActualExist) {
+            $availableMonths[] = (integer) $actualMonth;
+        }
+
+        $isNextExist = Planification::where('month', $actualMonth)->where('year', date('Y'))->count() > 0;
+        if (!$isNextExist) {
+            $availableMonths[] = (integer) $nextMonth;
+        }
+
+        return Inertia::render('Apps/Plan/Create', compact('availableMonths'));
     }
 
     /**
@@ -112,8 +126,28 @@ class PlanificationController extends Controller
      */
     public function edit(Planification $planification)
     {
+        //? Calculos de periodos disponibles
+        $actualMonth = date('n');
+        $nextMonth = date('n', strtotime('+1 month'));
+
+        $availableMonths = [ $planification->month ];
+        if ($planification->year == date('Y')) {
+            // Periodo actual
+            $isActualExist = Planification::where('month', $actualMonth)->where('year', date('Y'))->count() > 0;
+            if (!$isActualExist) {
+                $availableMonths[] = (integer) $actualMonth;
+            }
+
+            // Periodo siguiente
+            $isNextExist = Planification::where('month', $actualMonth)->where('year', date('Y'))->count() > 0;
+            if (!$isNextExist) {
+                $availableMonths[] = (integer) $nextMonth;
+            }
+        }
+
+        //? Actividades
         $activities = $planification->details;
-        return Inertia::render('Apps/Plan/Edit', compact('planification', 'activities'));
+        return Inertia::render('Apps/Plan/Edit', compact('planification', 'activities', 'availableMonths'));
     }
 
     /**
