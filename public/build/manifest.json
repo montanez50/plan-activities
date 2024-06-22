@@ -1,235 +1,632 @@
 {
-  "_ActionButton-987cb1fd.js": {
-    "file": "assets/ActionButton-987cb1fd.js",
+  "_ActionButton-321d9a2c.js": {
+    "file": "assets/ActionButton-321d9a2c.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AppLayout-dedf3cbe.js",
-      "_createReactComponent-762429e4.js"
+      "_AppLayout-cc157e47.js",
+      "_IconTrash-05d0a7be.js",
+      "_createReactComponent-a8208e3e.js",
+      "_IconArrowBadgeUp-0bab2865.js"
     ]
   },
-  "_AppLayout-dedf3cbe.js": {
-    "file": "assets/AppLayout-dedf3cbe.js",
+  "_AppLayout-cc157e47.js": {
+    "file": "assets/AppLayout-cc157e47.js",
     "imports": [
       "resources/js/app.jsx",
-      "_createReactComponent-762429e4.js"
+      "_createReactComponent-a8208e3e.js"
     ]
   },
-  "_AuthLayout-742a99a0.js": {
-    "file": "assets/AuthLayout-742a99a0.js",
+  "_AuthLayout-2a19bb89.js": {
+    "file": "assets/AuthLayout-2a19bb89.js",
     "imports": [
-      "_createReactComponent-762429e4.js",
+      "_createReactComponent-a8208e3e.js",
       "resources/js/app.jsx"
     ]
   },
-  "_Button-fdc24431.js": {
-    "file": "assets/Button-fdc24431.js",
-    "imports": [
-      "resources/js/app.jsx"
-    ]
-  },
-  "_IconCheck-577b1e33.js": {
-    "file": "assets/IconCheck-577b1e33.js",
-    "imports": [
-      "_createReactComponent-762429e4.js"
-    ]
-  },
-  "_IconPencilX-e7dbf19b.js": {
-    "file": "assets/IconPencilX-e7dbf19b.js",
-    "imports": [
-      "_createReactComponent-762429e4.js"
-    ]
-  },
-  "_IconPlus-1f8dff00.js": {
-    "file": "assets/IconPlus-1f8dff00.js",
-    "imports": [
-      "_createReactComponent-762429e4.js"
-    ]
-  },
-  "_IconPointFilled-63906df0.js": {
-    "file": "assets/IconPointFilled-63906df0.js",
-    "imports": [
-      "_createReactComponent-762429e4.js"
-    ]
-  },
-  "_Input-81a2a475.js": {
-    "file": "assets/Input-81a2a475.js",
+  "_Button-429df1c9.js": {
+    "file": "assets/Button-429df1c9.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_MultiSelect-9ed89c86.js": {
-    "file": "assets/MultiSelect-9ed89c86.js",
+  "_Card-a17e4b6a.js": {
+    "file": "assets/Card-a17e4b6a.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_Search-91aad80c.js": {
-    "file": "assets/Search-91aad80c.js",
+  "_IconArrowBadgeUp-0bab2865.js": {
+    "file": "assets/IconArrowBadgeUp-0bab2865.js",
     "imports": [
-      "_createReactComponent-762429e4.js",
+      "_createReactComponent-a8208e3e.js"
+    ]
+  },
+  "_IconCheck-4a07b155.js": {
+    "file": "assets/IconCheck-4a07b155.js",
+    "imports": [
+      "_createReactComponent-a8208e3e.js"
+    ]
+  },
+  "_IconFile-68db03ec.js": {
+    "file": "assets/IconFile-68db03ec.js",
+    "imports": [
+      "_createReactComponent-a8208e3e.js"
+    ]
+  },
+  "_IconPencilPlus-69ec0e00.js": {
+    "file": "assets/IconPencilPlus-69ec0e00.js",
+    "imports": [
+      "_createReactComponent-a8208e3e.js"
+    ]
+  },
+  "_IconPencilX-173fb6bd.js": {
+    "file": "assets/IconPencilX-173fb6bd.js",
+    "imports": [
+      "_createReactComponent-a8208e3e.js"
+    ]
+  },
+  "_IconPlus-f84e897e.js": {
+    "file": "assets/IconPlus-f84e897e.js",
+    "imports": [
+      "_createReactComponent-a8208e3e.js"
+    ]
+  },
+  "_IconPointFilled-d9d68322.js": {
+    "file": "assets/IconPointFilled-d9d68322.js",
+    "imports": [
+      "_createReactComponent-a8208e3e.js"
+    ]
+  },
+  "_IconSearch-41c2d221.js": {
+    "file": "assets/IconSearch-41c2d221.js",
+    "imports": [
+      "_createReactComponent-a8208e3e.js"
+    ]
+  },
+  "_IconTrash-05d0a7be.js": {
+    "file": "assets/IconTrash-05d0a7be.js",
+    "imports": [
+      "_createReactComponent-a8208e3e.js"
+    ]
+  },
+  "_IconUser-2081d137.js": {
+    "file": "assets/IconUser-2081d137.js",
+    "imports": [
+      "_createReactComponent-a8208e3e.js"
+    ]
+  },
+  "_Input-554d95c0.js": {
+    "file": "assets/Input-554d95c0.js",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_MultiSelect-ea46ba4a.js": {
+    "file": "assets/MultiSelect-ea46ba4a.js",
+    "imports": [
       "resources/js/app.jsx",
-      "_AppLayout-dedf3cbe.js"
+      "_react-select.esm-8b7c4e16.js"
     ]
   },
-  "_createReactComponent-762429e4.js": {
-    "file": "assets/createReactComponent-762429e4.js",
+  "_PieType-ae8828a8.js": {
+    "file": "assets/PieType-ae8828a8.js",
+    "imports": [
+      "_createReactComponent-a8208e3e.js",
+      "resources/js/app.jsx",
+      "_index-275b9efb.js"
+    ]
+  },
+  "_Search-c8ce9415.js": {
+    "file": "assets/Search-c8ce9415.js",
+    "imports": [
+      "_createReactComponent-a8208e3e.js",
+      "resources/js/app.jsx",
+      "_AppLayout-cc157e47.js",
+      "_IconSearch-41c2d221.js"
+    ]
+  },
+  "_Select-7b2120fa.js": {
+    "file": "assets/Select-7b2120fa.js",
+    "imports": [
+      "resources/js/app.jsx",
+      "_react-select.esm-8b7c4e16.js"
+    ]
+  },
+  "_Table-8bfe4792.js": {
+    "file": "assets/Table-8bfe4792.js",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_createReactComponent-a8208e3e.js": {
+    "file": "assets/createReactComponent-a8208e3e.js",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_index-275b9efb.js": {
+    "file": "assets/index-275b9efb.js",
+    "imports": [
+      "_createReactComponent-a8208e3e.js",
+      "resources/js/app.jsx"
+    ]
+  },
+  "_moment-a9aaa855.js": {
+    "file": "assets/moment-a9aaa855.js"
+  },
+  "_react-select.esm-8b7c4e16.js": {
+    "file": "assets/react-select.esm-8b7c4e16.js",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
   "resources/js/Pages/Apps/Dashboard/Index.jsx": {
-    "file": "assets/Index-98f1084b.js",
+    "file": "assets/Index-33ddb5e6.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AppLayout-dedf3cbe.js",
-      "_createReactComponent-762429e4.js"
+      "_Card-a17e4b6a.js",
+      "_AppLayout-cc157e47.js",
+      "_index-275b9efb.js",
+      "_createReactComponent-a8208e3e.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Apps/Dashboard/Index.jsx"
   },
-  "resources/js/Pages/Apps/Permissions/Index.jsx": {
-    "file": "assets/Index-a1a00f9a.js",
+  "resources/js/Pages/Apps/Dependencies/Alert.jsx": {
+    "file": "assets/Alert-964f7fed.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AppLayout-dedf3cbe.js",
-      "_Search-91aad80c.js",
-      "_createReactComponent-762429e4.js"
+      "_Button-429df1c9.js",
+      "_Card-a17e4b6a.js",
+      "_Select-7b2120fa.js",
+      "_AppLayout-cc157e47.js",
+      "_IconPencilPlus-69ec0e00.js",
+      "_IconPencilX-173fb6bd.js",
+      "_react-select.esm-8b7c4e16.js",
+      "_createReactComponent-a8208e3e.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Apps/Dependencies/Alert.jsx"
+  },
+  "resources/js/Pages/Apps/Dependencies/Create.jsx": {
+    "file": "assets/Create-0dbc2ec9.js",
+    "imports": [
+      "resources/js/app.jsx",
+      "_Button-429df1c9.js",
+      "_Card-a17e4b6a.js",
+      "_Input-554d95c0.js",
+      "_Select-7b2120fa.js",
+      "_AppLayout-cc157e47.js",
+      "_IconPencilPlus-69ec0e00.js",
+      "_IconPencilX-173fb6bd.js",
+      "_react-select.esm-8b7c4e16.js",
+      "_createReactComponent-a8208e3e.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Apps/Dependencies/Create.jsx"
+  },
+  "resources/js/Pages/Apps/Dependencies/Edit.jsx": {
+    "file": "assets/Edit-ff4a053a.js",
+    "imports": [
+      "resources/js/app.jsx",
+      "_AppLayout-cc157e47.js",
+      "_Card-a17e4b6a.js",
+      "_Input-554d95c0.js",
+      "_Select-7b2120fa.js",
+      "_Button-429df1c9.js",
+      "_IconPencilPlus-69ec0e00.js",
+      "_IconPencilX-173fb6bd.js",
+      "_createReactComponent-a8208e3e.js",
+      "_react-select.esm-8b7c4e16.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Apps/Dependencies/Edit.jsx"
+  },
+  "resources/js/Pages/Apps/Dependencies/Index.jsx": {
+    "file": "assets/Index-86fc64ce.js",
+    "imports": [
+      "resources/js/app.jsx",
+      "_AppLayout-cc157e47.js",
+      "_Table-8bfe4792.js",
+      "_Search-c8ce9415.js",
+      "_Button-429df1c9.js",
+      "_ActionButton-321d9a2c.js",
+      "_IconPlus-f84e897e.js",
+      "_createReactComponent-a8208e3e.js",
+      "_IconSearch-41c2d221.js",
+      "_IconTrash-05d0a7be.js",
+      "_IconArrowBadgeUp-0bab2865.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Apps/Dependencies/Index.jsx"
+  },
+  "resources/js/Pages/Apps/Permissions/Index.jsx": {
+    "file": "assets/Index-afeb49c2.js",
+    "imports": [
+      "resources/js/app.jsx",
+      "_AppLayout-cc157e47.js",
+      "_Table-8bfe4792.js",
+      "_Search-c8ce9415.js",
+      "_createReactComponent-a8208e3e.js",
+      "_IconSearch-41c2d221.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Apps/Permissions/Index.jsx"
   },
-  "resources/js/Pages/Apps/Profile/Index.jsx": {
-    "file": "assets/Index-bfada6a5.js",
+  "resources/js/Pages/Apps/Plan/Create.jsx": {
+    "file": "assets/Create-06434d36.js",
     "imports": [
       "resources/js/app.jsx",
-      "_Input-81a2a475.js",
-      "_Button-fdc24431.js",
-      "_AppLayout-dedf3cbe.js",
-      "_createReactComponent-762429e4.js"
+      "_Button-429df1c9.js",
+      "_Input-554d95c0.js",
+      "_Select-7b2120fa.js",
+      "_AppLayout-cc157e47.js",
+      "_Table-8bfe4792.js",
+      "_IconPlus-f84e897e.js",
+      "_IconPencilPlus-69ec0e00.js",
+      "_IconTrash-05d0a7be.js",
+      "_react-select.esm-8b7c4e16.js",
+      "_createReactComponent-a8208e3e.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Apps/Plan/Create.jsx"
+  },
+  "resources/js/Pages/Apps/Plan/DependencyIndicator.jsx": {
+    "file": "assets/DependencyIndicator-af6ea41a.js",
+    "imports": [
+      "resources/js/app.jsx",
+      "_Button-429df1c9.js",
+      "_Card-a17e4b6a.js",
+      "_Select-7b2120fa.js",
+      "_AppLayout-cc157e47.js",
+      "_PieType-ae8828a8.js",
+      "_IconUser-2081d137.js",
+      "_IconSearch-41c2d221.js",
+      "_index-275b9efb.js",
+      "_react-select.esm-8b7c4e16.js",
+      "_createReactComponent-a8208e3e.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Apps/Plan/DependencyIndicator.jsx"
+  },
+  "resources/js/Pages/Apps/Plan/DependencyReport.jsx": {
+    "file": "assets/DependencyReport-6049042f.js",
+    "imports": [
+      "resources/js/app.jsx",
+      "_Button-429df1c9.js",
+      "_Card-a17e4b6a.js",
+      "_Select-7b2120fa.js",
+      "_AppLayout-cc157e47.js",
+      "_IconUser-2081d137.js",
+      "_IconSearch-41c2d221.js",
+      "_IconFile-68db03ec.js",
+      "_react-select.esm-8b7c4e16.js",
+      "_createReactComponent-a8208e3e.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Apps/Plan/DependencyReport.jsx"
+  },
+  "resources/js/Pages/Apps/Plan/Edit.jsx": {
+    "file": "assets/Edit-a778a5c5.js",
+    "imports": [
+      "resources/js/app.jsx",
+      "_Button-429df1c9.js",
+      "_Input-554d95c0.js",
+      "_Select-7b2120fa.js",
+      "_AppLayout-cc157e47.js",
+      "_Table-8bfe4792.js",
+      "_IconPlus-f84e897e.js",
+      "_IconPencilPlus-69ec0e00.js",
+      "_IconTrash-05d0a7be.js",
+      "_react-select.esm-8b7c4e16.js",
+      "_createReactComponent-a8208e3e.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Apps/Plan/Edit.jsx"
+  },
+  "resources/js/Pages/Apps/Plan/Execute.jsx": {
+    "file": "assets/Execute-95f6ed6a.js",
+    "imports": [
+      "resources/js/app.jsx",
+      "_Button-429df1c9.js",
+      "_Input-554d95c0.js",
+      "_AppLayout-cc157e47.js",
+      "_Table-8bfe4792.js",
+      "_IconPlus-f84e897e.js",
+      "_IconPencilPlus-69ec0e00.js",
+      "_IconTrash-05d0a7be.js",
+      "_createReactComponent-a8208e3e.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Apps/Plan/Execute.jsx"
+  },
+  "resources/js/Pages/Apps/Plan/ExecuteList.jsx": {
+    "file": "assets/ExecuteList-6c425620.js",
+    "imports": [
+      "resources/js/app.jsx",
+      "_AppLayout-cc157e47.js",
+      "_moment-a9aaa855.js",
+      "_Table-8bfe4792.js",
+      "_Search-c8ce9415.js",
+      "_ActionButton-321d9a2c.js",
+      "_createReactComponent-a8208e3e.js",
+      "_IconSearch-41c2d221.js",
+      "_IconTrash-05d0a7be.js",
+      "_IconArrowBadgeUp-0bab2865.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Apps/Plan/ExecuteList.jsx"
+  },
+  "resources/js/Pages/Apps/Plan/Index.jsx": {
+    "file": "assets/Index-12b5a300.js",
+    "imports": [
+      "resources/js/app.jsx",
+      "_AppLayout-cc157e47.js",
+      "_moment-a9aaa855.js",
+      "_Table-8bfe4792.js",
+      "_Search-c8ce9415.js",
+      "_Button-429df1c9.js",
+      "_ActionButton-321d9a2c.js",
+      "_IconPlus-f84e897e.js",
+      "_createReactComponent-a8208e3e.js",
+      "_IconSearch-41c2d221.js",
+      "_IconTrash-05d0a7be.js",
+      "_IconArrowBadgeUp-0bab2865.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Apps/Plan/Index.jsx"
+  },
+  "resources/js/Pages/Apps/Plan/IndividualIndicator.jsx": {
+    "file": "assets/IndividualIndicator-fbd1d8a7.js",
+    "imports": [
+      "resources/js/app.jsx",
+      "_Button-429df1c9.js",
+      "_Card-a17e4b6a.js",
+      "_Select-7b2120fa.js",
+      "_AppLayout-cc157e47.js",
+      "_PieType-ae8828a8.js",
+      "_IconUser-2081d137.js",
+      "_IconSearch-41c2d221.js",
+      "_index-275b9efb.js",
+      "_react-select.esm-8b7c4e16.js",
+      "_createReactComponent-a8208e3e.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Apps/Plan/IndividualIndicator.jsx"
+  },
+  "resources/js/Pages/Apps/Plan/IndividualReport.jsx": {
+    "file": "assets/IndividualReport-cc270bc9.js",
+    "imports": [
+      "resources/js/app.jsx",
+      "_Button-429df1c9.js",
+      "_Card-a17e4b6a.js",
+      "_Select-7b2120fa.js",
+      "_AppLayout-cc157e47.js",
+      "_IconUser-2081d137.js",
+      "_IconSearch-41c2d221.js",
+      "_IconFile-68db03ec.js",
+      "_react-select.esm-8b7c4e16.js",
+      "_createReactComponent-a8208e3e.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Apps/Plan/IndividualReport.jsx"
+  },
+  "resources/js/Pages/Apps/Plan/Process.jsx": {
+    "file": "assets/Process-ec30c2b0.js",
+    "imports": [
+      "resources/js/app.jsx",
+      "_Button-429df1c9.js",
+      "_AppLayout-cc157e47.js",
+      "_Table-8bfe4792.js",
+      "_IconArrowBadgeUp-0bab2865.js",
+      "_IconPencilPlus-69ec0e00.js",
+      "_IconPencilX-173fb6bd.js",
+      "_createReactComponent-a8208e3e.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Apps/Plan/Process.jsx"
+  },
+  "resources/js/Pages/Apps/Plan/ProcessList.jsx": {
+    "file": "assets/ProcessList-4f16725a.js",
+    "imports": [
+      "resources/js/app.jsx",
+      "_AppLayout-cc157e47.js",
+      "_moment-a9aaa855.js",
+      "_Table-8bfe4792.js",
+      "_Search-c8ce9415.js",
+      "_ActionButton-321d9a2c.js",
+      "_IconArrowBadgeUp-0bab2865.js",
+      "_createReactComponent-a8208e3e.js",
+      "_IconSearch-41c2d221.js",
+      "_IconTrash-05d0a7be.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Apps/Plan/ProcessList.jsx"
+  },
+  "resources/js/Pages/Apps/Plan/Show.jsx": {
+    "file": "assets/Show-3be7ee2e.js",
+    "imports": [
+      "resources/js/app.jsx",
+      "_Button-429df1c9.js",
+      "_AppLayout-cc157e47.js",
+      "_Table-8bfe4792.js",
+      "_createReactComponent-a8208e3e.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Apps/Plan/Show.jsx"
+  },
+  "resources/js/Pages/Apps/Profile/Index.jsx": {
+    "file": "assets/Index-49393d25.js",
+    "imports": [
+      "resources/js/app.jsx",
+      "_Card-a17e4b6a.js",
+      "_Input-554d95c0.js",
+      "_Button-429df1c9.js",
+      "_AppLayout-cc157e47.js",
+      "_IconUser-2081d137.js",
+      "_createReactComponent-a8208e3e.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Apps/Profile/Index.jsx"
   },
   "resources/js/Pages/Apps/Roles/Create.jsx": {
-    "file": "assets/Create-5e0744d1.js",
+    "file": "assets/Create-60f6925b.js",
     "imports": [
       "resources/js/app.jsx",
-      "_Button-fdc24431.js",
-      "_Input-81a2a475.js",
-      "_MultiSelect-9ed89c86.js",
-      "_AppLayout-dedf3cbe.js",
-      "_IconPencilX-e7dbf19b.js",
-      "_createReactComponent-762429e4.js"
+      "_Button-429df1c9.js",
+      "_Card-a17e4b6a.js",
+      "_Input-554d95c0.js",
+      "_MultiSelect-ea46ba4a.js",
+      "_AppLayout-cc157e47.js",
+      "_IconPencilPlus-69ec0e00.js",
+      "_IconPencilX-173fb6bd.js",
+      "_react-select.esm-8b7c4e16.js",
+      "_createReactComponent-a8208e3e.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Apps/Roles/Create.jsx"
   },
   "resources/js/Pages/Apps/Roles/Edit.jsx": {
-    "file": "assets/Edit-b7f7432f.js",
+    "file": "assets/Edit-1700980e.js",
     "imports": [
       "resources/js/app.jsx",
-      "_Button-fdc24431.js",
-      "_Input-81a2a475.js",
-      "_MultiSelect-9ed89c86.js",
-      "_AppLayout-dedf3cbe.js",
-      "_IconPencilX-e7dbf19b.js",
-      "_createReactComponent-762429e4.js"
+      "_Button-429df1c9.js",
+      "_Card-a17e4b6a.js",
+      "_Input-554d95c0.js",
+      "_MultiSelect-ea46ba4a.js",
+      "_AppLayout-cc157e47.js",
+      "_IconPencilPlus-69ec0e00.js",
+      "_IconPencilX-173fb6bd.js",
+      "_react-select.esm-8b7c4e16.js",
+      "_createReactComponent-a8208e3e.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Apps/Roles/Edit.jsx"
   },
   "resources/js/Pages/Apps/Roles/Index.jsx": {
-    "file": "assets/Index-98f583e1.js",
+    "file": "assets/Index-273c1131.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AppLayout-dedf3cbe.js",
-      "_Search-91aad80c.js",
-      "_Button-fdc24431.js",
-      "_ActionButton-987cb1fd.js",
-      "_createReactComponent-762429e4.js",
-      "_IconCheck-577b1e33.js"
+      "_AppLayout-cc157e47.js",
+      "_Table-8bfe4792.js",
+      "_Search-c8ce9415.js",
+      "_Button-429df1c9.js",
+      "_ActionButton-321d9a2c.js",
+      "_createReactComponent-a8208e3e.js",
+      "_IconCheck-4a07b155.js",
+      "_IconSearch-41c2d221.js",
+      "_IconTrash-05d0a7be.js",
+      "_IconArrowBadgeUp-0bab2865.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Apps/Roles/Index.jsx"
   },
   "resources/js/Pages/Apps/Users/Create.jsx": {
-    "file": "assets/Create-ab374b8c.js",
+    "file": "assets/Create-2125df3e.js",
     "imports": [
       "resources/js/app.jsx",
-      "_Button-fdc24431.js",
-      "_Input-81a2a475.js",
-      "_AppLayout-dedf3cbe.js",
-      "_IconPointFilled-63906df0.js",
-      "_IconPencilX-e7dbf19b.js",
-      "_createReactComponent-762429e4.js"
+      "_Button-429df1c9.js",
+      "_Card-a17e4b6a.js",
+      "_Input-554d95c0.js",
+      "_Select-7b2120fa.js",
+      "_AppLayout-cc157e47.js",
+      "_IconPointFilled-d9d68322.js",
+      "_IconPencilPlus-69ec0e00.js",
+      "_IconPencilX-173fb6bd.js",
+      "_react-select.esm-8b7c4e16.js",
+      "_createReactComponent-a8208e3e.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Apps/Users/Create.jsx"
   },
   "resources/js/Pages/Apps/Users/Edit.jsx": {
-    "file": "assets/Edit-f53f8436.js",
+    "file": "assets/Edit-9c2b9a14.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AppLayout-dedf3cbe.js",
-      "_Input-81a2a475.js",
-      "_Button-fdc24431.js",
-      "_IconPointFilled-63906df0.js",
-      "_IconPencilX-e7dbf19b.js",
-      "_createReactComponent-762429e4.js"
+      "_AppLayout-cc157e47.js",
+      "_Card-a17e4b6a.js",
+      "_Input-554d95c0.js",
+      "_Select-7b2120fa.js",
+      "_Button-429df1c9.js",
+      "_IconPointFilled-d9d68322.js",
+      "_IconPencilPlus-69ec0e00.js",
+      "_IconPencilX-173fb6bd.js",
+      "_createReactComponent-a8208e3e.js",
+      "_react-select.esm-8b7c4e16.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Apps/Users/Edit.jsx"
   },
   "resources/js/Pages/Apps/Users/Index.jsx": {
-    "file": "assets/Index-086487ae.js",
+    "file": "assets/Index-2cb21458.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AppLayout-dedf3cbe.js",
-      "_Search-91aad80c.js",
-      "_Button-fdc24431.js",
-      "_ActionButton-987cb1fd.js",
-      "_IconPlus-1f8dff00.js",
-      "_IconCheck-577b1e33.js",
-      "_createReactComponent-762429e4.js"
+      "_AppLayout-cc157e47.js",
+      "_Table-8bfe4792.js",
+      "_Search-c8ce9415.js",
+      "_Button-429df1c9.js",
+      "_ActionButton-321d9a2c.js",
+      "_IconPlus-f84e897e.js",
+      "_IconCheck-4a07b155.js",
+      "_createReactComponent-a8208e3e.js",
+      "_IconSearch-41c2d221.js",
+      "_IconTrash-05d0a7be.js",
+      "_IconArrowBadgeUp-0bab2865.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Apps/Users/Index.jsx"
   },
   "resources/js/Pages/Auth/Login.jsx": {
-    "file": "assets/Login-c41c3599.js",
+    "file": "assets/Login-75c62b96.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AuthLayout-742a99a0.js",
-      "_Button-fdc24431.js",
-      "_IconCheck-577b1e33.js",
-      "_createReactComponent-762429e4.js"
+      "_AuthLayout-2a19bb89.js",
+      "_Button-429df1c9.js",
+      "_IconCheck-4a07b155.js",
+      "_createReactComponent-a8208e3e.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Auth/Login.jsx"
   },
   "resources/js/Pages/Auth/Register.jsx": {
-    "file": "assets/Register-0ea53de7.js",
+    "file": "assets/Register-100b2f26.js",
     "imports": [
       "resources/js/app.jsx",
-      "_AuthLayout-742a99a0.js",
-      "_Button-fdc24431.js",
-      "_createReactComponent-762429e4.js",
-      "_IconPlus-1f8dff00.js"
+      "_AuthLayout-2a19bb89.js",
+      "_Button-429df1c9.js",
+      "_createReactComponent-a8208e3e.js",
+      "_IconPlus-f84e897e.js"
     ],
     "isDynamicEntry": true,
     "src": "resources/js/Pages/Auth/Register.jsx"
   },
   "resources/js/app.css": {
-    "file": "assets/app-7f73f043.css",
+    "file": "assets/app-6f542b6f.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.jsx": {
     "css": [
-      "assets/app-7f73f043.css"
+      "assets/app-6f542b6f.css"
     ],
     "dynamicImports": [
       "resources/js/Pages/Apps/Dashboard/Index.jsx",
+      "resources/js/Pages/Apps/Dependencies/Alert.jsx",
+      "resources/js/Pages/Apps/Dependencies/Create.jsx",
+      "resources/js/Pages/Apps/Dependencies/Edit.jsx",
+      "resources/js/Pages/Apps/Dependencies/Index.jsx",
       "resources/js/Pages/Apps/Permissions/Index.jsx",
+      "resources/js/Pages/Apps/Plan/Create.jsx",
+      "resources/js/Pages/Apps/Plan/DependencyIndicator.jsx",
+      "resources/js/Pages/Apps/Plan/DependencyReport.jsx",
+      "resources/js/Pages/Apps/Plan/Edit.jsx",
+      "resources/js/Pages/Apps/Plan/Execute.jsx",
+      "resources/js/Pages/Apps/Plan/ExecuteList.jsx",
+      "resources/js/Pages/Apps/Plan/Index.jsx",
+      "resources/js/Pages/Apps/Plan/IndividualIndicator.jsx",
+      "resources/js/Pages/Apps/Plan/IndividualReport.jsx",
+      "resources/js/Pages/Apps/Plan/Process.jsx",
+      "resources/js/Pages/Apps/Plan/ProcessList.jsx",
+      "resources/js/Pages/Apps/Plan/Show.jsx",
       "resources/js/Pages/Apps/Profile/Index.jsx",
       "resources/js/Pages/Apps/Roles/Create.jsx",
       "resources/js/Pages/Apps/Roles/Edit.jsx",
@@ -240,7 +637,7 @@
       "resources/js/Pages/Auth/Login.jsx",
       "resources/js/Pages/Auth/Register.jsx"
     ],
-    "file": "assets/app-a8716644.js",
+    "file": "assets/app-fbac857a.js",
     "isEntry": true,
     "src": "resources/js/app.jsx"
   }
