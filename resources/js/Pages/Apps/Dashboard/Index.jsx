@@ -122,7 +122,7 @@ export default function Index() {
                                     <div className={`flex flex-row gap-4 items-center ${i === 0 ? 'pb-2' : 'py-2'}`} key={i}>
                                         <img src={user.avatar} className='w-12 h-12 rounded-full'/>
                                         <div className=''>
-                                            <span className='font-semibold text-sm'>{user.name}</span>
+                                            <span className='font-semibold text-sm'>{user.name} {user.last_name}</span>
                                             <p className='text-xs text-gray-400'>{user.email}</p>
                                         </div>
                                     </div>

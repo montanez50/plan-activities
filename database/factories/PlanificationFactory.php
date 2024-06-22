@@ -18,7 +18,7 @@ class PlanificationFactory extends Factory
     {
         return [
             'year' => fake()->dateTime()->format('Y'),
-            'month' => fake()->dateTime()->format('j'),
+            'month' => rand(1, 12),
         ];
     }
 }

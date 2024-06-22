@@ -113,7 +113,7 @@ export default function Index() {
                                     <div className='flex justify-center items-center text-center mb-2'>
                                         <IconDatabaseOff className='w-10 h-10 text-gray-400' strokeWidth={'1.2'}/>
                                     </div>
-                                    <span className='text-gray-500'>datos de usuarios</span> <span className='text-rose-500 underline underline-offset-2'>no encontrados.</span>
+                                    <span className='text-gray-500'>datos de planificaciones</span> <span className='text-rose-500 underline underline-offset-2'>no encontrados.</span>
                                 </>
                             }/>
                         }

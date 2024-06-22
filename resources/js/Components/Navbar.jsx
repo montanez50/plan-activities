@@ -36,28 +36,52 @@ export default function Navbar({ toggleSidebar }) {
     // define array links
     const links = [
         {
-            title : 'Dashboard',
+            title : 'Inicio',
             active: url.startsWith('/apps/dashboard') ? true : false,
             details : [
-                { title: 'Inicio', href: '/apps/dashboard', active: url.startsWith('/apps/dashboard') ? true : false },
+                { title: 'Dashboard', href: '/apps/dashboard', active: url.startsWith('/apps/dashboard') ? true : false },
             ]
         },
         {
             title: 'Gestión de Usuarios',
-            active: url.startsWith('/apps/users') ? true : false || url.startsWith('/apps/roles') ? true : false || url.startsWith('/apps/permissions') ? true : false,
+            active: url.startsWith('/apps/users') ? true : false || url.startsWith('/apps/roles') ? true : false || url.startsWith('/apps/permissions') ? true : false || url.startsWith('/apps/dependencies') ? true : false,
             details: [
-                { title: 'Data Users', href: '/apps/users', active: url.startsWith('/apps/users') ? true : false },
-                { title: 'Data Roles', href: '/apps/roles', active: url.startsWith('/apps/roles') ? true : false },
-                { title: 'Data Permissions', href: '/apps/permissions', active: url.startsWith('/apps/permissions') ? true : false },
+                { title: 'Usuarios', href: '/apps/users', active: url.startsWith('/apps/users') ? true : false },
+                { title: 'Roles', href: '/apps/roles', active: url.startsWith('/apps/roles') ? true : false },
+                { title: 'Permisos', href: '/apps/permissions', active: url.startsWith('/apps/permissions') ? true : false },
+                { title: 'Dependencias', href: '/apps/dependencies', active: url.startsWith('/apps/dependencies') ? true : false },
             ]
         },
         {
-            title : 'Planificaciones',
-            active: url.startsWith('/planification') ? true : false,
+            title : 'Gestión de Planificación',
+            active: url.startsWith('/planification/create') ? true : false || url.startsWith('/planification/list') ? true : false || url.startsWith('/planification/process/execute') ? true : false,
             details : [
-                { title: 'Planificaciones', href: '/planification', active: url.startsWith('/apps/dashboard') ? true : false },
+                { title: 'Crear Planificación', href: '/planification/create', active: url.startsWith('/planification/create') ? true : false },
+                { title: 'Planificaciones', href: '/planification/list', active: url.startsWith('/planification/list') ? true : false },
+                { title: 'Ejecutar', href: '/planification/process/execute', active: url.startsWith('/planification/process/execute') ? true : false },
             ]
         },
+        {
+            title : 'Control de Procesos',
+            active: url.startsWith('/planification/process-') ? true : false,
+            details : [
+                { title: 'Revisar Planificación', href: '/planification/process-list/PR', active: url.startsWith('/planification/process-list/PR') ? true : false },
+                { title: 'Aprobar Planificación', href: '/planification/process-list/RV', active: url.startsWith('/planification/process-list/RV') ? true : false },
+                { title: 'Cerrar Planificación', href: '/planification/process-list/AP', active: url.startsWith('/planification/process-list/AP') ? true : false },
+                { title: 'Alertas', href: '/apps/dependency/1/alert', active: url.startsWith('/apps/dependency/1/alert') ? true : false },
+            ]
+        },
+        {
+            title : 'Estadisticas',
+            active: url.startsWith('/planification/individual-') ? true : false || url.startsWith('/planification/dependency-') ? true : false,
+            details : [
+                { title: 'Reporte Individual', href: '/planification/individual-reports', active: url.startsWith('/planification/individual-reports') ? true : false },
+                { title: 'Reporte por Dependencia', href: '/planification/dependency-reports', active: url.startsWith('/planification/dependency-reports') ? true : false },
+                { title: 'Indicador Individual', href: '/planification/individual-indicators', active: url.startsWith('/planification/individual-indicators') ? true : false },
+                { title: 'Indicador por Dependencia', href: '/planification/dependency-indicators', active: url.startsWith('/planification/dependency-indicators') ? true : false },
+            ]
+        },
+        // TODO Falta soporte
         {
             title: 'Otros',
             active: url.startsWith('/apps/profile') ? true : false,

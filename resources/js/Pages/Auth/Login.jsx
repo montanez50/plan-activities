@@ -23,13 +23,10 @@ export default function Login() {
     <>
         <Head title='Login'/>
         <AuthCard>
+            <h1 className='text-xl font-bold mb-2 text-black text-center'>PESAM CEM</h1>
             <div className="flex justify-center items-center">
                 <img src="/logo_CEM.png" className='w-[50%] rounded-lg' />
             </div>
-            <h1 className='text-xl font-bold mb-2 text-black'>Login</h1>
-            <p className='text-gray-500 text-xs mb-5'>
-                Bienvenido, ingresa tu correo y contraseña para continuar.
-            </p>
             <form onSubmit={handleSubmit}>
                 <div className='mb-4'>
                     <InputGroup

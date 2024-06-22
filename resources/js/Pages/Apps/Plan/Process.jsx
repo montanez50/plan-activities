@@ -126,14 +126,14 @@ export default function Process() {
                                 <Table.Th rowSpan={2} scope="col">#</Table.Th>
                                 <Table.Th rowSpan={2} scope="col">Actividades</Table.Th>
                                 {monthDays.map((data, i) => (
-                                    <Table.ThNumber key={i} scope="col" className={` py-3 ${data === 'S' || data === 'D' ? 'bg-blue-600 dark:text-white' : ''}`}>
+                                    <Table.ThNumber key={i} scope="col" className={` py-3 ${data === 'S' || data === 'D' ? 'bg-blue-500 dark:text-white' : 'bg-gray-100'}`}>
                                         {data}
                                     </Table.ThNumber>
                                 ))}
                             </tr>
                             <tr>
                                 {numbers.map((data, i) => (
-                                    <Table.ThNumber key={i} scope="col" className={` py-3 ${colorDays.includes(data) ? 'bg-blue-600 dark:text-white' : ''}`}>
+                                    <Table.ThNumber key={i} scope="col" className={` py-3 ${colorDays.includes(data) ? 'bg-blue-500 dark:text-white' : 'bg-gray-100'}`}>
                                         {data}
                                     </Table.ThNumber>
                                 ))}
@@ -149,18 +149,20 @@ export default function Process() {
                                 />
                             ))}
                             {noPlanActivities.length ? 
+                                <tr>
+                                    <Table.Td className='bg-gray-100' colSpan={35}>ACTIVIDADES NO PLANIFICADAS</Table.Td>
+                                </tr>
+                                :
+                                ''
+                            }
+                            {noPlanActivities.length ? 
                                 noPlanActivities.map((item, i) => (
-                                    <>
-                                        <tr>
-                                            <Table.Td className='bg-gray-100' colSpan={35}>ACTIVIDADES NO PLANIFICADAS</Table.Td>
-                                        </tr>
-                                        <NoPlanActivity
-                                            key={item.id ?? item}
-                                            id={i}
-                                            item={item}
-                                            numbers={numbers}
-                                        />
-                                    </>
+                                    <NoPlanActivity
+                                        key={item.id ?? item}
+                                        id={i}
+                                        item={item}
+                                        numbers={numbers}
+                                    />
                             ))
                             :
                                 ''

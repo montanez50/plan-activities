@@ -54,7 +54,7 @@ export default function Index() {
                 </div>
                 <div className='w-full lg:w-3/4'>
                     <Card
-                        title={'Profile'}
+                        title={'Perfil'}
                         icon={<IconUser strokeWidth={'1.5'} size={'20'}/>}
                     >
                         <form onSubmit={handleForm}>

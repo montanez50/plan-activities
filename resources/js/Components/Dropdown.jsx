@@ -66,13 +66,13 @@ export default function Dropdown({ auth, isMobile }) {
                             <div className='flex flex-col gap-1.5 divide-y'>
                                 <Menu.Item>
                                     <Link href="/apps/profile" className='px-3 py-1.5 text-sm text-gray-700 flex items-center gap-2 hover:text-sky-500'>
-                                        <IconUserCog strokeWidth={'1.5'} size={'20'}/> Profile
+                                        <IconUserCog strokeWidth={'1.5'} size={'20'}/> Perfil
                                     </Link>
                                 </Menu.Item>
                                 <Menu.Item>
                                     <button onClick={logout} className='px-3 py-1.5 text-sm text-gray-700 flex items-center gap-2 hover:text-sky-500'>
                                         <IconLogout strokeWidth={'1.5'} size={'20'}/>
-                                        Logout
+                                        Cerrar Sesión
                                     </button>
                                 </Menu.Item>
                             </div>
@@ -122,7 +122,7 @@ export default function Dropdown({ auth, isMobile }) {
                             <button
                                 onClick={logout}
                                 className='flex items-center font-medium gap-x-3.5 py-2 px-2.5 text-gray-500 hover:border-l-2 hover:border-l-sky-200 hover:text-sky-500 capitalize hover:cursor-pointer text-sm'>
-                                <IconLogout size={'20'} strokeWidth={'1.5'}/> Logout
+                                <IconLogout size={'20'} strokeWidth={'1.5'}/> Cerrar Sesión
                             </button>
                         </div>
                     </div>

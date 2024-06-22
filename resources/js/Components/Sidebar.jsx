@@ -86,7 +86,7 @@ export default function Sidebar({ isSidebarOpen }) {
                 <>
                     <div className='flex justify-center items-center px-6 py-2 h-18'>
                         <div className='text-2xl font-bold text-gray-700 text-center leading-loose tracking-wider'>
-                            SPCCEM
+                            PESAM CEM
                         </div>
                     </div>
                     <div className='w-full p-3 flex items-center gap-4 border-b bg-sky-50 border-sky-100 border-t'>
