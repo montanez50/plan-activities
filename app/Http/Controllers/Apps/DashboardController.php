@@ -6,7 +6,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use App\Models\Dependency;
 use App\Models\Planification;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 
 class DashboardController extends Controller
@@ -17,6 +19,13 @@ class DashboardController extends Controller
     // TODO Hacer dashboard por roles
     public function __invoke(Request $request)
     {
+        //? Permisos
+        $isEmpleado = Auth::user()->hasRole('empleado');
+        $isJefe = Auth::user()->hasRole('jefe');
+        $dependency = Dependency::where('user_id', Auth::user()->id)->first();
+        $dependencies = $isJefe ? Dependency::where('id', $dependency->id ?? '')->orWhere('parent_id', $dependency->id)->get()->pluck('id') : [];
+
+        //? Datos del dashboard
         // get users data
         $users = User::query()
             ->limit(4)
@@ -33,19 +42,39 @@ class DashboardController extends Controller
         $permissions_count = Permission::count();
 
         // Planificaciones Preparadas
-        $prepared_plans = Planification::where('status', 'PR')->count();
+        $prepared_plans = Planification::where('status', 'PR')
+            ->join('users as u', 'u.id', '=', 'planifications.user_id')
+            ->when($isJefe, fn($query) => $query->whereIn('u.dependency_id', $dependencies))
+            ->when($isEmpleado, fn($query) => $query->where('user_id', Auth::user()->id))
+            ->count();
 
         // Planificaciones Revisadas
-        $revised_plans = Planification::where('status', 'RV')->count();
+        $revised_plans = Planification::where('status', 'RV')
+            ->join('users as u', 'u.id', '=', 'planifications.user_id')
+            ->when($isJefe, fn($query) => $query->whereIn('u.dependency_id', $dependencies))
+            ->when($isEmpleado, fn($query) => $query->where('user_id', Auth::user()->id))
+            ->count();
 
         // Planificaciones Ejecución
-        $approved_plans = Planification::where('status', 'AP')->count();
+        $approved_plans = Planification::where('status', 'AP')
+            ->join('users as u', 'u.id', '=', 'planifications.user_id')
+            ->when($isJefe, fn($query) => $query->whereIn('u.dependency_id', $dependencies))
+            ->when($isEmpleado, fn($query) => $query->where('user_id', Auth::user()->id))
+            ->count();
 
         // Planificaciones Ejecución
-        $closed_plans = Planification::where('status', 'CR')->count();
+        $closed_plans = Planification::where('status', 'CR')
+            ->join('users as u', 'u.id', '=', 'planifications.user_id')
+            ->when($isJefe, fn($query) => $query->whereIn('u.dependency_id', $dependencies))
+            ->when($isEmpleado, fn($query) => $query->where('user_id', Auth::user()->id))
+            ->count();
 
         // Planificaciones Anuladas
-        $anuled_plans = Planification::where('status', 'AN')->count();
+        $anuled_plans = Planification::where('status', 'AN')
+            ->join('users as u', 'u.id', '=', 'planifications.user_id')
+            ->when($isJefe, fn($query) => $query->whereIn('u.dependency_id', $dependencies))
+            ->when($isEmpleado, fn($query) => $query->where('user_id', Auth::user()->id))
+            ->count();
 
         // Actividades
         $activitiesQuery = Planification::select([
@@ -54,6 +83,9 @@ class DashboardController extends Controller
                 \DB::raw('CAST(SUM(IF(type = "NP", 1, 0)) as SIGNED) as noPlanActivities'),
             ])
             ->join('planification_details as pd', 'pd.planification_id', '=', 'planifications.id')
+            ->join('users as u', 'u.id', '=', 'planifications.user_id')
+            ->when($isJefe, fn($query) => $query->whereIn('u.dependency_id', $dependencies))
+            ->when($isEmpleado, fn($query) => $query->where('planifications.user_id', Auth::user()->id))
             ->where('year', date('Y'))
             ->whereIn('status', ['AP', 'CR'])
             ->orderBy('month')

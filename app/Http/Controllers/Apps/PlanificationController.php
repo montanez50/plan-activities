@@ -247,9 +247,12 @@ class PlanificationController extends Controller
 
     public function executeList(Request $request)
     {
+        $isEmpleado = Auth::user()->hasRole('empleado');
+
         $planifications = Planification::with(['user', 'details'])
             ->select(['*', \DB::raw('CONCAT(month, "-", year) as period')])
             ->where('status', 'AP')
+            ->when($isEmpleado, fn($query) => $query->where('user_id', Auth::user()->id))
             ->when($request->search, fn($query) => $query->where('month', 'like', '%'. $request->search . '%')->orWhere('year', 'like', '%'. $request->search . '%'))
             ->latest()
             ->paginate(10)
