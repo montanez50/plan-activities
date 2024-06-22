@@ -52,12 +52,15 @@ class PlanificationController extends Controller
     public function index(Request $request)
     {
         $userId = Auth::user()->id;
+        $isEmpleado = Auth::user()->hasRole('empleado');
+
         $planifications = Planification::with(['user', 'details'])
             ->select(['*', \DB::raw('CONCAT(month, "-", year) as period')])
-            ->where('user_id', $userId)
+            ->when($isEmpleado, fn($query) => $query->where('user_id', $userId))
             ->when($request->search, fn($query) => $query->where('month', 'like', '%'. $request->search . '%')->orWhere('year', 'like', '%'. $request->search . '%'))
             ->latest()
-            ->paginate(10)->withQueryString();
+            ->paginate(10)
+            ->withQueryString();
 
         return Inertia::render('Apps/Plan/Index', compact('planifications'));
     }
@@ -165,9 +168,16 @@ class PlanificationController extends Controller
             ]
         ];
         $process = $processList[$status];
+
+        $isJefe = Auth::user()->hasRole('jefe');
+        $dependency = Dependency::where('user_id', Auth::user()->id)->first();
+        $dependencies = $isJefe ? Dependency::where('id', $dependency->id ?? '')->orWhere('parent_id', $dependency->id)->get()->pluck('id') : [];
+
         $planifications = Planification::with(['user', 'details'])
-            ->select(['*', \DB::raw('CONCAT(month, "-", year) as period')])
+            ->join('users as u', 'u.id', '=', 'planifications.user_id')
+            ->select(['planifications.*', \DB::raw('CONCAT(month, "-", year) as period')])
             ->where('status', $status)
+            ->when($isJefe, fn($query) => $query->whereIn('u.dependency_id', $dependencies))
             ->when($request->search, fn($query) => $query->where('month', 'like', '%'. $request->search . '%')->orWhere('year', 'like', '%'. $request->search . '%'))
             ->latest()
             ->paginate(10)->withQueryString();
@@ -335,11 +345,17 @@ class PlanificationController extends Controller
             ->groupBy('year')
             ->orderBy('year', 'DESC')
             ->get();
+        
+        $isJefe = Auth::user()->hasRole('jefe');
+        $dependency = Dependency::where('user_id', Auth::user()->id)->first();
+        $dependencies = $isJefe ? Dependency::where('id', $dependency->id ?? '')->orWhere('parent_id', $dependency->id)->get()->pluck('id') : [];
 
         $users = User::select([
                 'id as value',
                 \DB::raw('CONCAT(name, " ", last_name) as label')
-            ])->get();
+            ])
+            ->when($isJefe, fn($query) => $query->whereIn('dependency_id', $dependencies))
+            ->get();
 
         return Inertia::render('Apps/Plan/IndividualReport', compact('years', 'users'));
     }
@@ -352,10 +368,16 @@ class PlanificationController extends Controller
             ->orderBy('year', 'DESC')
             ->get();
 
+        $isJefe = Auth::user()->hasRole('jefe');
+        $dependency = Dependency::where('user_id', Auth::user()->id)->first();
+        $dependencies = $isJefe ? Dependency::where('id', $dependency->id ?? '')->orWhere('parent_id', $dependency->id)->get()->pluck('id') : [];
+
         $dependencies = Dependency::select([
                 'id as value',
                 'name as label'
-            ])->get();
+            ])
+            ->when($isJefe, fn($query) => $query->whereIn('id', $dependencies))
+            ->get();
 
         return Inertia::render('Apps/Plan/DependencyReport', compact('years', 'dependencies'));
     }
@@ -472,11 +494,17 @@ class PlanificationController extends Controller
             ->groupBy('year')
             ->orderBy('year', 'DESC')
             ->get();
+        
+        $isJefe = Auth::user()->hasRole('jefe');
+        $dependency = Dependency::where('user_id', Auth::user()->id)->first();
+        $dependencies = $isJefe ? Dependency::where('id', $dependency->id ?? '')->orWhere('parent_id', $dependency->id)->get()->pluck('id') : [];
 
         $users = User::select([
                 'id as value',
                 \DB::raw('CONCAT(name, " ", last_name) as label')
-            ])->get();
+            ])
+            ->when($isJefe, fn($query) => $query->whereIn('dependency_id', $dependencies))
+            ->get();
 
         return Inertia::render('Apps/Plan/IndividualIndicator', compact('years', 'users'));
     }
@@ -489,10 +517,16 @@ class PlanificationController extends Controller
             ->orderBy('year', 'DESC')
             ->get();
 
+        $isJefe = Auth::user()->hasRole('jefe');
+        $dependency = Dependency::where('user_id', Auth::user()->id)->first();
+        $dependencies = $isJefe ? Dependency::where('id', $dependency->id ?? '')->orWhere('parent_id', $dependency->id)->get()->pluck('id') : [];
+
         $dependencies = Dependency::select([
                 'id as value',
                 'name as label'
-            ])->get();
+            ])
+            ->when($isJefe, fn($query) => $query->whereIn('id', $dependencies))
+            ->get();
 
         return Inertia::render('Apps/Plan/DependencyIndicator', compact('years', 'dependencies'));
     }
