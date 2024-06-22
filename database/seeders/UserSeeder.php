@@ -20,11 +20,11 @@ class UserSeeder extends Seeder
 
         // create new admin
         $user = User::create([
-            'name' => 'Admin',
-            'last_name' => 'CEM',
-            'email' => 'admin@dev.com',
+            'name' => 'José',
+            'last_name' => 'García',
+            'email' => 'jgarcia@cem.com',
             'password' => bcrypt('password'),
-            'dependency_id' => 1,
+            'dependency_id' => 8,
         ]);
 
         // assign a role to user
@@ -36,11 +36,11 @@ class UserSeeder extends Seeder
 
         // create new boos
         $user = User::create([
-            'name' => 'Jefe',
-            'last_name' => 'CEM',
-            'email' => 'jefe@dev.com',
+            'name' => 'María',
+            'last_name' => 'Guzman',
+            'email' => 'mguzman@dev.com',
             'password' => bcrypt('password'),
-            'dependency_id' => 1,
+            'dependency_id' => 11,
         ]);
 
         // assign a role to user
@@ -52,9 +52,9 @@ class UserSeeder extends Seeder
 
         // create new employee
         $user = User::create([
-            'name' => 'Empleado',
-            'last_name' => 'CEM',
-            'email' => 'empleado@dev.com',
+            'name' => 'Daniela',
+            'last_name' => 'Mendoza',
+            'email' => 'dmendoza@cem.com',
             'password' => bcrypt('password'),
             'dependency_id' => 1,
         ]);
