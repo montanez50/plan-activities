@@ -7,6 +7,7 @@ use App\Http\Controllers\Apps\ProfileController;
 use App\Http\Controllers\Apps\RoleController;
 use App\Http\Controllers\Apps\UserController;
 use App\Http\Controllers\Apps\PlanificationController;
+use App\Http\Controllers\Apps\SupportController;
 use App\Models\Dependency;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -78,5 +79,7 @@ Route::prefix('planification')->middleware('auth')->group(function () {
     Route::get('/process/{planification}/{status}', [PlanificationController::class, 'processForm'])->name('planification.process');
     Route::post('/process/{planification}', [PlanificationController::class, 'updateStatus'])->name('planification.update-status');
 });
+
+Route::get('/our_backup_database', [SupportController::class, 'backupDatabase'])->name('backup.atabase');
 
 require __DIR__.'/auth.php';

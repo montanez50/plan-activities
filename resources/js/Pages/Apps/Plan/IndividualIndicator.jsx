@@ -44,6 +44,7 @@ export default function IndividualIndicator() {
         axios.post(route('planification.indicator'), { user: user, year: year, month: month })
         .then(response => {
             if(response.data) {
+                console.log(response.data);
                 setNum(response.data.countActivities);
                 setNames(response.data.names);
                 setPorcents(response.data.porcents);

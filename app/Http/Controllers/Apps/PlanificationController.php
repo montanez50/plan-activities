@@ -352,6 +352,10 @@ class PlanificationController extends Controller
             ->where('user_id', $data['user'])
             ->whereIn('status', ['AP', 'CR'])
             ->first();
+        
+        if (empty($plan)) {
+            return response()->json(false);
+        }
 
         $porcent = [];
         $name = [];
@@ -390,6 +394,10 @@ class PlanificationController extends Controller
             ->where('year', $data['year'])
             ->where('month', $data['month'])
             ->get();
+
+        if (count($planifications) == 0) {
+            return response()->json(false);
+        }
 
         $planCount = 0;
         $noPlanCount = 0;
