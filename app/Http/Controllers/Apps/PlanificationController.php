@@ -75,12 +75,12 @@ class PlanificationController extends Controller
         $nextMonth = date('n', strtotime('+1 month'));
 
         $availableMonths = [];
-        $isActualExist = Planification::where('month', $actualMonth)->where('year', date('Y'))->count() > 0;
+        $isActualExist = Planification::where('month', $actualMonth)->where('year', date('Y'))->where('user', Auth::user()->id)->count() > 0;
         if (!$isActualExist) {
             $availableMonths[] = (integer) $actualMonth;
         }
 
-        $isNextExist = Planification::where('month', $actualMonth)->where('year', date('Y'))->count() > 0;
+        $isNextExist = Planification::where('month', $nextMonth)->where('year', date('Y'))->where('user', Auth::user()->id)->count() > 0;
         if (!$isNextExist) {
             $availableMonths[] = (integer) $nextMonth;
         }
@@ -133,13 +133,13 @@ class PlanificationController extends Controller
         $availableMonths = [ $planification->month ];
         if ($planification->year == date('Y')) {
             // Periodo actual
-            $isActualExist = Planification::where('month', $actualMonth)->where('year', date('Y'))->count() > 0;
+            $isActualExist = Planification::where('month', $actualMonth)->where('year', date('Y'))->where('user', Auth::user()->id)->count() > 0;
             if (!$isActualExist) {
                 $availableMonths[] = (integer) $actualMonth;
             }
 
             // Periodo siguiente
-            $isNextExist = Planification::where('month', $actualMonth)->where('year', date('Y'))->count() > 0;
+            $isNextExist = Planification::where('month', $actualMonth)->where('year', date('Y'))->where('user', Auth::user()->id)->count() > 0;
             if (!$isNextExist) {
                 $availableMonths[] = (integer) $nextMonth;
             }
