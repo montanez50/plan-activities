@@ -3,7 +3,6 @@ import hasAnyPermission from '@/Utils/Permissions'
 import { 
     IconComponents, 
     IconLayout2, 
-    IconUserBolt, 
     IconUserCheck, 
     IconUsers, 
     IconPaperclip, 

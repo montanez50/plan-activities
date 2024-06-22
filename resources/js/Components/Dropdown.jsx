@@ -3,7 +3,24 @@ import LinkItem from './LinkItem'
 import hasAnyPermission from '@/Utils/Permissions'
 import { Menu, Transition  } from '@headlessui/react'
 import { Link } from '@inertiajs/react'
-import { IconLogout, IconX, IconLayout2, IconUserBolt, IconUserCheck, IconUsers, IconUserCog  } from '@tabler/icons-react'
+import {
+    IconLogout, 
+    IconX, 
+    IconLayout2, 
+    IconUserCheck,
+    IconUserCog,
+    IconUsers, 
+    IconPaperclip, 
+    IconWallpaper, 
+    IconPencilCheck ,
+    IconArrowBadgeDown,
+    IconBadges,
+    IconBadgesOff,
+    IconAlarm,
+    IconAugmentedReality,
+    IconChartDonut,
+    IconReport
+} from '@tabler/icons-react'
 import { useForm } from '@inertiajs/react'
 export default function Dropdown({ auth, isMobile }) {
 
@@ -19,16 +36,52 @@ export default function Dropdown({ auth, isMobile }) {
             title : 'INICIO',
             permissions: hasAnyPermission(['dashboard-access']),
             details : [
-                {title: 'Dashboard', href: '/apps/dashboard', icon: <IconLayout2 strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['dashboard-access'])},
+                {title: 'Inicio', href: '/apps/dashboard', icon: <IconLayout2 strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['dashboard-access'])},
+            ]
+        },
+        {
+            title: 'GESTIÓN DE PLANIFICACIÓN',
+            permissions: hasAnyPermission(['planifications-access']),
+            details: [
+                {title: 'Crear Planificación', href: '/planification/create', icon: <IconPaperclip strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['planifications-create'])},
+                {title: 'Planificaciones', href: '/planification/list', icon: <IconWallpaper strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['planifications-access'])},
+                {title: 'Ejecutar', href: '/planification/process/execute', icon: <IconPencilCheck strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['planifications-execute-access'])},
+            ]
+        },
+        {
+            title: 'CONTROL DE PROCESOS',
+            permissions: hasAnyPermission(['control-access']),
+            details: [
+                {title: 'Revisar Planificación', href: '/planification/process-list/PR', icon: <IconArrowBadgeDown strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['control-review-access'])},
+                {title: 'Aprobar Planificación', href: '/planification/process-list/RV', icon: <IconBadges strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['control-approve-access'])},
+                {title: 'Cerrar Planificación', href: '/planification/process-list/AP', icon: <IconBadgesOff strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['control-close-access'])},
+                {title: 'Alertas', href: '/apps/dependency/1/alert', icon: <IconAlarm strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['control-alert'])},
+            ]
+        },
+        {
+            title: 'ESTADÍSTICAS',
+            permissions: hasAnyPermission(['statistics-access']),
+            details: [
+                {title: 'Reportes', href: '/planification/individual-reports', icon: <IconReport strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['statistics-individual-report'])},
+                {title: 'Indicadores', href: '/planification/individual-indicators', icon: <IconChartDonut strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['statistics-individual-indicator'])},
             ]
         },
         {
             title: 'GESTIÓN DE USUARIOS',
             permissions: hasAnyPermission(['users-access']) || hasAnyPermission(['roles-access']) || hasAnyPermission(['permissions-access']),
             details: [
-                {title: 'Users', href: '/apps/users', icon: <IconUsers strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['users-access'])},
-                {title: 'Roles', href: '/apps/roles', icon: <IconUserCheck strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['roles-access'])},
-                {title: 'Permissions', href: '/apps/permissions', icon: <IconUserBolt strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['permissions-access'])},
+                {title: 'Usuarios', href: '/apps/users', icon: <IconUsers strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['users-access'])},
+                // {title: 'Roles', href: '/apps/roles', icon: <IconUserCheck strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['roles-access'])},
+                // {title: 'Permisos', href: '/apps/permissions', icon: <IconUserBolt strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['permissions-access'])},
+                {title: 'Dependencias', href: '/apps/dependencies', icon: <IconAugmentedReality strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['permissions-access'])},
+            ]
+        },
+        {
+            title: 'SOPORTE',
+            permissions: hasAnyPermission(['support-access']) || hasAnyPermission(['roles-access']) || hasAnyPermission(['permissions-access']),
+            details: [
+                {title: 'Respaldo', href: '/apps/users', icon: <IconUsers strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['users-access'])},
+                {title: 'Logs', href: '/apps/roles', icon: <IconUserCheck strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['roles-access'])},
             ]
         },
         {
