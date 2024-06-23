@@ -30,7 +30,7 @@ export default function Index() {
                     </div>
                     <div className='w-full'>
                         <Search
-                            url={'/apps/users'}
+                            url={'/apps/dependencies'}
                             placeholder={'Buscar dependencias por su nombre...'}
                         />
                     </div>
@@ -53,7 +53,7 @@ export default function Index() {
                             dependencies.data.map((dependency, i) => (
                             <tr key={i}>
                                 <Table.Td>{++i + (dependencies.current_page-1) * dependencies.per_page}</Table.Td>
-                                <Table.Td>{dependency.name} {dependency.id}</Table.Td>
+                                <Table.Td>{dependency.name}</Table.Td>
                                 <Table.Td>{dependency.internal_code}</Table.Td>
                                 <Table.Td>{dependency.user && `${dependency.user.name} ${dependency.user.last_name}`}</Table.Td>
                                 <Table.Td>{dependency.parent_id && `${dependency.parent_name}`}</Table.Td>
