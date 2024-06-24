@@ -73,7 +73,7 @@ export default function Sidebar({ isSidebarOpen }) {
             title: 'SOPORTE',
             permissions: hasAnyPermission(['support-access']) || hasAnyPermission(['roles-access']) || hasAnyPermission(['permissions-access']),
             details: [
-                {title: 'Respaldo', href: '/apps/users', icon: <IconUsers strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['users-access'])},
+                {title: 'Respaldo', href: '/backups', icon: <IconUsers strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['users-access'])},
                 {title: 'Logs', href: '/log-viewer', icon: <IconUserCheck strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['roles-access']), blank: true},
             ]
         },

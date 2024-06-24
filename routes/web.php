@@ -47,6 +47,7 @@ Route::group(['as' => 'apps.', 'prefix' => 'apps', 'middleware' => ['auth']], fu
     Route::get('/dependency/{dependency}/alert', [DependencyController::class, 'alertForm'])->name('alert.form');
     Route::post('/dependency/{dependency}/alert', [DependencyController::class, 'alertPost'])->name('alert.post');
 });
+
 Route::prefix('planification')->middleware('auth')->group(function () {
     // Reportes
     // Individual PDF
@@ -80,6 +81,9 @@ Route::prefix('planification')->middleware('auth')->group(function () {
     Route::post('/process/{planification}', [PlanificationController::class, 'updateStatus'])->name('planification.update-status');
 });
 
-Route::get('/our_backup_database', [SupportController::class, 'backupDatabase'])->name('backup.atabase');
+Route::get('/backups', [SupportController::class, 'index'])->name('backups.index');
+Route::get('/backups/generate', [SupportController::class, 'generate'])->name('backups.generate');
+Route::post('/backups/restore', [SupportController::class, 'restore'])->name('backups.restore');
+Route::get('/backups/monitor', [SupportController::class, 'generate'])->name('backups.monitor');
 
 require __DIR__.'/auth.php';
