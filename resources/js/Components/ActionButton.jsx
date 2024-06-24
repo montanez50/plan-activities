@@ -16,13 +16,13 @@ export default function ActionButton({ type, title, url, id }) {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: '¡Sí, bórralo!',
+            confirmButtonText: 'Sí',
             cancelButtonText: 'No'
         }).then((result) => {
             if (result.isConfirmed) {
                 destroy(`${url}/${id}`, {
                     onSuccess: () => {
-                        toast.success('Data successfully deleted!',{
+                        toast.success('Datos elminados correctamente!',{
                             icon: '👏',
                             style: {
                                 borderRadius: '10px',

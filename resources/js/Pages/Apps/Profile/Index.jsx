@@ -27,7 +27,7 @@ export default function Index() {
 
         post(`/apps/profile/${user.id}`, {
             onSuccess: () => {
-                toast.success('Data successfully updated!',{
+                toast.success('Datos actualizados correctamente!',{
                     icon: '👏',
                     style: {
                         borderRadius: '10px',
@@ -60,7 +60,7 @@ export default function Index() {
                         <form onSubmit={handleForm}>
                             <div className='mb-4'>
                                 <Input
-                                    label={'Name'}
+                                    label={'Nombre'}
                                     type={'text'}
                                     value={data.name}
                                     onChange={e => setData('name', e.target.value)}
@@ -69,7 +69,7 @@ export default function Index() {
                             </div>
                             <div className='mb-4'>
                                 <Input
-                                    label={'Email'}
+                                    label={'Correo'}
                                     type={'email'}
                                     value={data.email}
                                     onChange={e => setData('email', e.target.value)}
@@ -86,7 +86,7 @@ export default function Index() {
                             </div>
                             <div className='mb-4'>
                                 <Input
-                                    label={'Password'}
+                                    label={'Contraseña'}
                                     type={'password'}
                                     value={data.password}
                                     onChange={e => setData('password', e.target.value)}
@@ -95,7 +95,7 @@ export default function Index() {
                             </div>
                             <div className='flex'>
                                 <Button
-                                    label={'Update Profile'}
+                                    label={'Actualizar Perfil'}
                                     icon={<IconPencilCheck strokeWidth={'1.5'} size={'20'}/>}
                                     className={'bg-teal-200 text-teal-500 border border-teal-300 hover:border-teal-500'}
                                 />
