@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class, 
             DependencySeeder::class, 
             UserSeeder::class, 
-            PlanificationSeeder::class
+            // PlanificationSeeder::class
         ]);
     }
 }

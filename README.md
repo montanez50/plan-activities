@@ -1,75 +1,37 @@
-## INERTIA REACT STARTER KIT
-Project ini saya bangun sebagai starter kit saya dalam pembuatan aplikasi dan tech yang saya gunakan :
-- Larvel 10
-- Inertia.js
-- React.Js
-- Tailwind Css
+# Bienvenido a PESAM CEM
 
-## INSTALASI PROJECT
+El sistema **PESAM CEM** es un sistema de gestión de actividades, que nos permite planificar, ejecutar y obtener reportes de las actividades realizadas en el mes, también cuenta con sistema de notificaciones para el aviso de constante de alertas, registro de logs y manejo de respaldos.
 
-Pastikan `git` sudah terinstall, kemudian jalankan semua perintah dibawah ini :
-```
-1. clone repository
-2. copy .env.example rename menjadi .env kemudian atur database di .env
-3. composer install
-4. php artisan key:generate
-5. npm install
-6. npm run dev
-7. php artisan migrate --seed
-```
+## Requisitos de Instalación
 
-## AKUN SUPER ADMIN
+ - PHP versión 8.1 o mayor
+ - Node JS versión 18 o mayor
+ - Base de datos MySQL 8 o mayor
+ - Servidor de correo
+ - Extensiones de php necesarias para Laravel
 
-```
-email : admin@dev.com
-password : password
-```
+## Instrucciones de instalación
 
-## FITUR APLIKASI
-- Terdapat `module dashboard` untuk menampilkan data overview aplikasi
-- Terdapat `module users` untuk menampilkan data users (Create, Read, Update, Delete)
-- Terdapat `module roles` untuk menampilkan data roles (Create, Read, Update, Delete)
-- Terdapat `module permissions` untuk menampilkan data permissions (Read)
-- Design layout halaman menggunakan tailwind css
-- Responsive design hingga mobile view
-  
+ 1. Clona el repositorio `git clone git@github.com:montanez50/plan-activities.git`
+ 2. Ingresa a la carpeta del proyecto `cd plan-activities`
+ 3. Instala las dependencias de Composer `composer install`
+ 4. Instala la dependencias de Javascript `npm install`
+ 5. Completa las variables de entorno en el archivo .env
+ 6. Genera la llave del sistema `php artisan key:generate`
+ 7. Genera las migraciones y seeders `php artisan migrate --seed`
+ 8. Ejecuta `php artisan key:generate`
 
-## OVERVIEW APLIKASI
-<table>
-  <tr>
-        <td> 
-            <img src="https://imgur.com/si6hT7R.png" alt="login">
-        </td>
-        <td>
-            <img src="https://imgur.com/58xFK5a.png" alt="register">
-        </td>
-   </tr>
-    <tr>    
-        <td>
-            <img src="https://imgur.com/DHH16C0.png" alt="dashboard">
-        </td>
-        <td>
-             <img src="https://imgur.com/eTdAO3V.png" alt="users">
-        </td>
-    </tr>
-    <tr>
-        <td> 
-            <img src="https://imgur.com/Mk3ipGO.png" alt="roles">
-        </td>
-        <td>
-           <img src="https://imgur.com/cjJP1UI.png" alt="permissions">
-        </td>
-   </tr> 
-   <tr>
-       <td>
-           <img src="https://imgur.com/i6ewQZw.png" alt="mobile">
-       </td>
-        <td>
-           <img src="https://imgur.com/uiu8nMb.png" alt="mobile-1">
-       </td>
-   </tr>
-</table>
+Para ejecutar el proyecto solo basta con ejecutar `php artisan serve` y `npm run dev` en el ambiente de desarrollo o `nom run build` en producción.
 
+## Tecnologías utilizadas
 
-## LISENSI
-Aplikasi ini bersifat open source dapat digunakan oleh siapa pun dengan syarat tidak untuk di perjual belikan.
+ - Laravel 10
+ - InertiaJS
+ - ReactJS
+ - ViteJS
+ - MySQL
+
+## Usuario Administrador
+
+correo: admin@cem.com
+contraseña: password
