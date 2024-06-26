@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Opcodes\LogViewer\Facades\LogViewer;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,5 +27,9 @@ class AppServiceProvider extends ServiceProvider
         if(config('app.env') === 'production') {
             $this->app['request']?->server?->set('HTTPS', true);
         }
+
+        LogViewer::auth(function ($request) {
+            return $request->user() && $request->user()->hasRole('administrador');
+        });
     }
 }
