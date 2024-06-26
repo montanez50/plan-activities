@@ -69,6 +69,7 @@ class SupportController extends Controller
         $process = new Process(['php', base_path('artisan'), 'backup:list']);
         $process->run();
         $output = $process->getOutput();
+        $output = explode("Unhealthy backup destinations", $output)[0];
 
         $backupInfo = explode("\n", $output);
 
