@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('planification_details', function (Blueprint $table) {
-            $table->json('days_execute')->default(new Expression('(JSON_ARRAY())'))->after('days');
+            $table->json('days_execute')->default('[]')->after('days'); // ->default(new Expression('(JSON_ARRAY())'))
         });               
     }
 
