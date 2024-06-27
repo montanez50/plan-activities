@@ -56,7 +56,7 @@ class DependencyController extends Controller
             ->pluck('user_id');
         $users = User::select([
                 'id as value',
-                \DB::raw('CONCAT(name, " ", last_name) as label')
+                \DB::raw("CONCAT(name, ' ', last_name) as label")
             ])
             ->whereNotIn('id', $responsibleUsers)
             ->get();
@@ -106,7 +106,7 @@ class DependencyController extends Controller
             ->pluck('user_id');
         $users = User::select([
                 'id as value',
-                \DB::raw('CONCAT(name, " ", last_name) as label')
+                \DB::raw("CONCAT(name, ' ', last_name) as label")
             ])
             ->whereNotIn('id', $responsibleUsers)
             ->get();

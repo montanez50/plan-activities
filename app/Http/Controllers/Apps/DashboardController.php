@@ -77,10 +77,11 @@ class DashboardController extends Controller
             ->count();
 
         // Actividades
+        $db = env('DB_CONNECTION') == 'pgsql' ? 'INTEGER' : 'SIGNED';
         $activitiesQuery = Planification::select([
                 'planifications.month',
-                \DB::raw("CAST(SUM(IF(type = 'P', 1, 0)) as INTEGER) as activities"), // SIGNED
-                \DB::raw("CAST(SUM(IF(type = 'NP', 1, 0)) as INTEGER) as noPlanActivities"), // SIGNED
+                \DB::raw("CAST(SUM(CASE WHEN type = 'P' THEN 1 ELSE 0 END) AS $db) AS activities"),
+                \DB::raw("CAST(SUM(CASE WHEN type = 'NP' THEN 1 ELSE 0 END) AS $db) AS noPlanActivities"),
             ])
             ->join('planification_details as pd', 'pd.planification_id', '=', 'planifications.id')
             ->join('users as u', 'u.id', '=', 'planifications.user_id')
