@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('planification_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('planification_id')->constrained();
-            $table->json('days')->default(new Expression('(JSON_ARRAY())'));
+            $table->json('days')->default('[]'); // ->default(new Expression('(JSON_ARRAY())'))
             $table->timestamps();
         });
     }
