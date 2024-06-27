@@ -55,7 +55,7 @@ class PlanificationController extends Controller
         $isEmpleado = Auth::user()->hasRole('empleado');
 
         $planifications = Planification::with(['user', 'details'])
-            ->select(['*', \DB::raw('CONCAT(month, "-", year) as period')])
+            ->select(['*', \DB::raw("CONCAT(month, '-', year) as period")])
             ->when($isEmpleado, fn($query) => $query->where('user_id', $userId))
             ->when($request->search, fn($query) => $query->where('month', 'like', '%'. $request->search . '%')->orWhere('year', 'like', '%'. $request->search . '%'))
             ->latest()

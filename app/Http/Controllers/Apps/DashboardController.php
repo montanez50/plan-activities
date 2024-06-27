@@ -79,8 +79,8 @@ class DashboardController extends Controller
         // Actividades
         $activitiesQuery = Planification::select([
                 'planifications.month',
-                \DB::raw("CAST(SUM(IF(type = 'P', 1, 0)) as SIGNED) as activities"),
-                \DB::raw("CAST(SUM(IF(type = 'NP', 1, 0)) as SIGNED) as noPlanActivities"),
+                \DB::raw("CAST(SUM(IF(type = 'P', 1, 0)) as INTEGER) as activities"), // SIGNED
+                \DB::raw("CAST(SUM(IF(type = 'NP', 1, 0)) as INTEGER) as noPlanActivities"), // SIGNED
             ])
             ->join('planification_details as pd', 'pd.planification_id', '=', 'planifications.id')
             ->join('users as u', 'u.id', '=', 'planifications.user_id')
