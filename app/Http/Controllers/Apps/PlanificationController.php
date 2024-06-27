@@ -209,7 +209,7 @@ class PlanificationController extends Controller
 
         $planifications = Planification::with(['user', 'details'])
             ->join('users as u', 'u.id', '=', 'planifications.user_id')
-            ->select(['planifications.*', \DB::raw('CONCAT(month, "-", year) as period')])
+            ->select(['planifications.*', \DB::raw("CONCAT(month, '-', year) as period")])
             ->where('status', $status)
             ->when($isJefe, fn($query) => $query->whereIn('u.dependency_id', $dependencies))
             ->when($request->search, fn($query) => $query->where('month', 'like', '%'. $request->search . '%')->orWhere('year', 'like', '%'. $request->search . '%'))
@@ -250,7 +250,7 @@ class PlanificationController extends Controller
         $isEmpleado = Auth::user()->hasRole('empleado');
 
         $planifications = Planification::with(['user', 'details'])
-            ->select(['*', \DB::raw('CONCAT(month, "-", year) as period')])
+            ->select(['*', \DB::raw("CONCAT(month, '-', year) as period")])
             ->where('status', 'AP')
             ->when($isEmpleado, fn($query) => $query->where('user_id', Auth::user()->id))
             ->when($request->search, fn($query) => $query->where('month', 'like', '%'. $request->search . '%')->orWhere('year', 'like', '%'. $request->search . '%'))
@@ -389,7 +389,7 @@ class PlanificationController extends Controller
 
         $users = User::select([
                 'id as value',
-                \DB::raw('CONCAT(name, " ", last_name) as label')
+                \DB::raw("CONCAT(name, ' ', last_name) as label")
             ])
             ->when($isJefe, fn($query) => $query->whereIn('dependency_id', $dependencies))
             ->get();
@@ -538,7 +538,7 @@ class PlanificationController extends Controller
 
         $users = User::select([
                 'id as value',
-                \DB::raw('CONCAT(name, " ", last_name) as label')
+                \DB::raw("CONCAT(name, ' ', last_name) as label")
             ])
             ->when($isJefe, fn($query) => $query->whereIn('dependency_id', $dependencies))
             ->get();
