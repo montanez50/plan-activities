@@ -24,7 +24,7 @@ use Inertia\Inertia;
 */
 
 // route login page
-Route::get('/', fn() => inertia('Auth/Login'));
+Route::get('/', fn() => inertia('Auth/Login'))->middleware('guest');
 
 // route apps group
 Route::group(['as' => 'apps.', 'prefix' => 'apps', 'middleware' => ['auth']], function(){
@@ -81,9 +81,11 @@ Route::prefix('planification')->middleware('auth')->group(function () {
     Route::post('/process/{planification}', [PlanificationController::class, 'updateStatus'])->name('planification.update-status');
 });
 
-Route::get('/backups', [SupportController::class, 'index'])->name('backups.index');
-Route::get('/backups/generate', [SupportController::class, 'generate'])->name('backups.generate');
-Route::post('/backups/restore', [SupportController::class, 'restore'])->name('backups.restore');
-Route::get('/backups/monitor', [SupportController::class, 'generate'])->name('backups.monitor');
+Route::middleware(['auth', 'can:support-backup'])->group(function () {
+    Route::get('/backups', [SupportController::class, 'index'])->name('backups.index');
+    Route::get('/backups/generate', [SupportController::class, 'generate'])->name('backups.generate');
+    Route::post('/backups/restore', [SupportController::class, 'restore'])->name('backups.restore');
+    Route::get('/backups/monitor', [SupportController::class, 'generate'])->name('backups.monitor');
+});
 
 require __DIR__.'/auth.php';
