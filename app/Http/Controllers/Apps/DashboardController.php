@@ -23,7 +23,7 @@ class DashboardController extends Controller
         $isEmpleado = Auth::user()->hasRole('empleado');
         $isJefe = Auth::user()->hasRole('jefe');
         $dependency = Dependency::where('user_id', Auth::user()->id)->first();
-        $dependencies = $isJefe ? Dependency::where('id', $dependency ? $dependency->id : '')->orWhere('parent_id', $dependency ? $dependency->id : '')->get()->pluck('id') : [];
+        $dependencies = $isJefe ? Dependency::where('id', $dependency ? $dependency->id : 0)->orWhere('parent_id', $dependency ? $dependency->id : 0)->get()->pluck('id') : [];
 
         //? Datos del dashboard
         // get users data
