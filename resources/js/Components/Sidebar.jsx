@@ -22,6 +22,7 @@ export default function Sidebar({ isSidebarOpen }) {
 
     // destruct auth from props
     const { auth } = usePage().props;
+    const myDep = !auth.super ? (auth.respDep ? auth.respDep.id : 0) : 8;
 
     // define array links
     const links = [
@@ -48,7 +49,7 @@ export default function Sidebar({ isSidebarOpen }) {
                 {title: 'Revisar Planificación', href: '/planification/process-list/PR', icon: <IconArrowBadgeDown strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['control-review-access'])},
                 {title: 'Aprobar Planificación', href: '/planification/process-list/RV', icon: <IconBadges strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['control-approve-access'])},
                 {title: 'Cerrar Planificación', href: '/planification/process-list/AP', icon: <IconBadgesOff strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['control-close-access'])},
-                {title: 'Alertas', href: '/apps/dependency/1/alert', icon: <IconAlarm strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['control-alert'])},
+                {title: 'Alertas', href: `/apps/dependency/${myDep}/alert`, icon: <IconAlarm strokeWidth={'1.5'} size={'20'}/>, permissions: hasAnyPermission(['control-alert'])},
             ]
         },
         {

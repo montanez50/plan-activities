@@ -8,6 +8,7 @@ use App\Models\ConfigAlert;
 use App\Models\Dependency;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class DependencyController extends Controller
@@ -148,6 +149,11 @@ class DependencyController extends Controller
 
     public function alertForm(Dependency $dependency)
     {
+        $user = Auth::user();
+        if (!$user->hasRole('administrador') && $dependency->user_id !== $user->id) {
+            abort(404);
+        }
+
         $config = ConfigAlert::where('dependency_id', $dependency->id)->first();
         return Inertia::render('Apps/Dependencies/Alert', compact('config', 'dependency'));
     }

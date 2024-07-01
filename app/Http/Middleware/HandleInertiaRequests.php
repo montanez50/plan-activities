@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Dependency;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
@@ -36,6 +37,7 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
                 'permissions' => $request->user() ? $request->user()->getPermissions() : [],
                 'super' => $request->user() ? $request->user()->getSuperAdmin() : false,
+                'respDep' => $request->user() ? Dependency::where('user_id', $request->user()->id)->first() : false,
             ],
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),
