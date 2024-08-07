@@ -42,7 +42,7 @@ export default function Create() {
 
         post('/apps/users', {
             onSuccess: () => {
-                toast.success('Data successfully created!',{
+                toast.success('Usuario creado correctamente!',{
                     icon: '👏',
                     style: {
                         borderRadius: '10px',

@@ -43,7 +43,7 @@ export default function Edit() {
 
         post(`/apps/users/${user.id}`, {
             onSuccess: () => {
-                toast.success('Data successfully updated!',{
+                toast.success('Usuario modificado correctamente!',{
                     icon: '👏',
                     style: {
                         borderRadius: '10px',
