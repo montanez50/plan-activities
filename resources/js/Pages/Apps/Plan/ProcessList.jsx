@@ -23,9 +23,9 @@ export default function ProcessList() {
     // Estatus
     const status = {
         "PR": {"color": "blue-500", "label": "Preparado"},
-        "RV": {"color": "yellow-500", "label": "Revisado"},
-        "AP": {"color": "green-500", "label": "Aprobado"},
-        "CR": {"color": "gray-200", "label": "Cerrado"},
+        "RV": {"color": "yellow-500", "label": "Revisado", "prev": "PR"},
+        "AP": {"color": "green-500", "label": "Aprobado", "prev": "RV"},
+        "CR": {"color": "gray-200", "label": "Cerrado", "prev": "AP"},
         "AN": {"color": "red-500", "label": "Anulado"},
     };
 
@@ -36,7 +36,7 @@ export default function ProcessList() {
                 <div className='flex flex-row items-center md:justify-between gap-5'>
                     <div className='w-full'>
                         <Search
-                            url={'/planification'}
+                            url={`/planification/process-list/${status[process.status].prev}`}
                             placeholder={'Buscar planificación...'}
                         />
                     </div>

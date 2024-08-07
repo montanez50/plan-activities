@@ -39,7 +39,7 @@ class DependencyController extends Controller
             ->with('user')
             ->leftJoin('dependencies as pd', 'pd.id', '=', 'dependencies.parent_id')
             ->select('dependencies.*', 'pd.name as parent_name')
-            ->when($request->search, fn($query) => $query->where('name', 'like', '%'. $request->search . '%'))
+            ->when($request->search, fn($query) => $query->where('dependencies.name', 'like', '%'. $request->search . '%'))
             ->paginate(10)
             ->withQueryString();
         

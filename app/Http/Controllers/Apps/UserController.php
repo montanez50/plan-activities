@@ -37,7 +37,7 @@ class UserController extends Controller
                     $query->select('name');
                 }]);
             }, 'dependency'])
-            ->when($request->search, fn($query) => $query->where('name', 'like', '%'. $request->search . '%'))
+            ->when($request->search, fn($query) => $query->where('users.name', 'like', '%'. $request->search . '%'))
             ->latest()
             ->paginate(10)->withQueryString();
 

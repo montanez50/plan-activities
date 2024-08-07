@@ -36,7 +36,7 @@ export default function ExecuteList() {
                 <div className='flex flex-row items-center md:justify-between gap-5'>
                     <div className='w-full'>
                         <Search
-                            url={'/planification'}
+                            url={'/planification/process/execute'}
                             placeholder={'Buscar planificación...'}
                         />
                     </div>
