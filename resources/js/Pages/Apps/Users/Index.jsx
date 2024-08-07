@@ -55,7 +55,7 @@ export default function Index() {
                                 <Table.Td>{++i + (users.current_page-1) * users.per_page}</Table.Td>
                                 <Table.Td>{user.name} {user.last_name}</Table.Td>
                                 <Table.Td>{user.email}</Table.Td>
-                                <Table.Td>{user.dependency.name}</Table.Td>
+                                <Table.Td>{user.dependency && user.dependency.name}</Table.Td>
                                 <Table.Td>
                                     <div className='flex flex-wrap gap-x-3 gap-y-2 items-center'>
                                         {user.roles.map((role, x) => (

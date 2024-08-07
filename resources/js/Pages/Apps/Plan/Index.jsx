@@ -24,11 +24,11 @@ export default function Index() {
 
     // Estatus
     const status = {
-        "PR": {"color": "blue", "label": "Preparado"},
-        "RV": {"color": "yellow", "label": "Revisado"},
-        "AP": {"color": "green", "label": "Aprobado"},
-        "CR": {"color": "gray", "label": "Cerrado"},
-        "AN": {"color": "red", "label": "Anulado"},
+        "PR": {"color": "blue-500", "label": "Preparado"},
+        "RV": {"color": "yellow-500", "label": "Revisado"},
+        "AP": {"color": "green-500", "label": "Aprobado"},
+        "CR": {"color": "gray-200", "label": "Cerrado"},
+        "AN": {"color": "red-500", "label": "Anulado"},
     };
 
     return (
@@ -76,34 +76,38 @@ export default function Index() {
                                 <Table.Td>{planification.details.length}</Table.Td>
                                 <Table.Td>
                                     <div className="flex items-center">
-                                        <div className={`h-2.5 w-2.5 rounded-full bg-${status[planification.status].color}-500 me-2`}></div>{status[planification.status].label}
+                                        <div className={`h-2.5 w-2.5 rounded-full bg-${status[planification.status].color} me-2`}></div>{status[planification.status].label}
                                     </div>
                                 </Table.Td>
-                                <Table.Td>{planification.user.name}</Table.Td>
+                                <Table.Td>{planification.user.name} {planification.user.last_name}</Table.Td>
                                 <Table.Td>{moment(planification.created_at).format('MMMM Do YYYY')}</Table.Td>
                                 <Table.Td>
                                     <div className='flex items-center gap-2'>
-                                        <ActionButton
-                                            type={'view'}
-                                            url={`/planification/${planification.id}`}
-                                        />
-                                        {(planification.status !== 'AP' && planification.status !== 'CR') ? (
+                                        {planification.status !== 'AN' && (
                                             <>
                                                 <ActionButton
-                                                    url={`/planification/${planification.id}/edit`}
+                                                    type={'view'}
+                                                    url={`/planification/${planification.id}`}
                                                 />
+                                                {(planification.status !== 'AP' && planification.status !== 'CR') ? (
+                                                    <>
+                                                        <ActionButton
+                                                            url={`/planification/${planification.id}/edit`}
+                                                        />
+                                                        <ActionButton
+                                                            type={'delete'}
+                                                            url={`/planification`}
+                                                            id={planification.id}
+                                                        />
+                                                    </>
+                                                ) :
                                                 <ActionButton
-                                                    type={'delete'}
-                                                    url={`/planification`}
-                                                    id={planification.id}
+                                                    type={'file'}
+                                                    url={route('planification.pdf', planification)}
                                                 />
+                                                }  
                                             </>
-                                        ) :
-                                        <ActionButton
-                                            type={'file'}
-                                            url={route('planification.pdf', planification)}
-                                        />
-                                        }
+                                        )}
                                     </div>
                                 </Table.Td>
                             </tr>

@@ -73,7 +73,7 @@ export default function Index() {
                         </CardOverview>
                         <CardOverview
                             title={'Planificaciones anuladas'}
-                            subtitle={'Total de planificaciones en estado de cerrado'}
+                            subtitle={'Total de planificaciones en estado de anulado'}
                             color={'bg-red-100 text-red-700'}
                             icon={<IconBadgesOff size={'20'} strokeWidth={'1.5'}/>}
                             className={'shadow-sky-300'}
