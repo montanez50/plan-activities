@@ -7,12 +7,17 @@ use App\Models\Planification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Plan\ExecuteRequest;
+use App\Mail\CreatePlanification;
+use App\Mail\ExecutePlanification;
+use App\Models\ConfigAlert;
 use App\Models\Dependency;
 use App\Models\PlanificationDetail;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
+use PSpell\Config;
 
 class PlanificationController extends Controller
 {
@@ -116,6 +121,12 @@ class PlanificationController extends Controller
         });
 
         $planification->details()->createMany($formatActivities);
+
+        $user = auth()->user();
+        $config = ConfigAlert::where('dependency_id', $user->dependency->id)->first();
+        if (!empty($config->create_notification)) {
+            Mail::send(new CreatePlanification($user));   
+        }
 
         return to_route('planification.index')->with(['message' => 'Planificacion creada correctamente!']);
     }
@@ -316,7 +327,13 @@ class PlanificationController extends Controller
         });
 
         $planification->details()->where('type', 'NP')->delete();
-        $planification->details()->createMany($formatNoPlanActivities);        
+        $planification->details()->createMany($formatNoPlanActivities);
+
+        $user = auth()->user();
+        $config = ConfigAlert::where('dependency_id', $user->dependency->id)->first();
+        if (!empty($config->update_notification)) {
+            Mail::send(new ExecutePlanification($user));   
+        }
 
         return to_route('planification.execute')->with(['message' => 'Planificacion ejecutada correctamente!']);
     }

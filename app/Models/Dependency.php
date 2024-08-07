@@ -27,4 +27,9 @@ class Dependency extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function config(): BelongsTo
+    {
+        return $this->belongsTo(ConfigAlert::class);
+    }
 }
